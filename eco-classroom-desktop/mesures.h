@@ -1,13 +1,15 @@
 #ifndef MESURES_H
 #define MESURES_H
 
+#include <QDateTime>
+
 class Mesures
 {
   private:
-    double humidite;
-    double co2;
-    double temperature;
-    long   horodatage;
+    int       co2;
+    double    temperature;
+    int       humidite;
+    QDateTime horodatage;
 
   public:
     Mesures();
