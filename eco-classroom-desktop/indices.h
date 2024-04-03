@@ -22,8 +22,8 @@ enum IndiceQualiteAir
  */
 enum IndiceTHI
 {
-    Inconnu = -4,
-    Froid   = -3,
+    InconnuTHI = -4,
+    Froid      = -3,
     Frais,
     LegerementFrais,
     Neutre,

@@ -1,0 +1,5 @@
+class SalleEco
+!!!136106.cpp!!!	SalleEco(in idSalle : QString, in nom : QString, in description : QString, in superficie : double, inout parent : QObject = nullptr)
+    qDebug() << Q_FUNC_INFO << idSalle << nom << description << superficie;
+!!!136234.cpp!!!	~SalleEco()
+    qDebug() << Q_FUNC_INFO << idSalle << nom << description << superficie;

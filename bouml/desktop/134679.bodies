@@ -1,5 +1,42 @@
 class IHMEcoClassroom
 !!!134807.cpp!!!	IHMEcoClassroom(inout parent : QWidget = nullptr)
     qDebug() << Q_FUNC_INFO;
+    baseDeDonnees->connecter();
+    recupererSalles();
 !!!134935.cpp!!!	~IHMEcoClassroom()
+    BaseDeDonnees::detruireInstance();
     qDebug() << Q_FUNC_INFO;
+!!!135978.cpp!!!	recupererSalles() : void
+    qDebug() << Q_FUNC_INFO;
+    salles.clear();
+
+    QVector<QStringList> sallesBaseDeDonnees;
+    QString              requete = "SELECT idSalle, nom, description, superficie FROM Salle";
+    bool                 retour;
+
+    retour = baseDeDonnees->recuperer(requete, sallesBaseDeDonnees);
+    if(retour)
+    {
+        qDebug() << Q_FUNC_INFO << sallesBaseDeDonnees;
+        for(int i = 0; i < sallesBaseDeDonnees.size(); ++i)
+        {
+            // qDebug() << Q_FUNC_INFO << sallesBaseDeDonnees[i];
+            salles[sallesBaseDeDonnees[i][SalleEco::TableSalle::CHAMP_NOM]] = new SalleEco(
+              sallesBaseDeDonnees[i][SalleEco::TableSalle::CHAMP_IDSALLE],
+              sallesBaseDeDonnees[i][SalleEco::TableSalle::CHAMP_NOM],
+              sallesBaseDeDonnees[i][SalleEco::TableSalle::CHAMP_DESCRIPTION],
+              sallesBaseDeDonnees[i][SalleEco::TableSalle::CHAMP_SUPERFICIE].toDouble(),
+              this);
+        }
+    }
+
+    qDebug() << Q_FUNC_INFO << "salles" << salles;
+    qDebug() << Q_FUNC_INFO << "Nb salles" << salles.size();
+
+    // Exemple pour parcourir une QMap
+    QMapIterator<QString, SalleEco*> sallesEco(salles);
+    while(sallesEco.hasNext())
+    {
+        sallesEco.next();
+        qDebug() << Q_FUNC_INFO << "SalleEco" << sallesEco.key();
+    }

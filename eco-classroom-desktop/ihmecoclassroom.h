@@ -26,6 +26,7 @@
 #define VERSION "0.1"
 
 class SalleEco;
+class BaseDeDonnees;
 
 /**
  * @class IHMEcoClassroom
@@ -37,7 +38,8 @@ class IHMEcoClassroom : public QWidget
     Q_OBJECT
 
   private:
-    QMap<QString, SalleEco*> salles; //!< Les salles
+    QMap<QString, SalleEco*> salles;        //!< Les salles
+    BaseDeDonnees*           baseDeDonnees; //!< l'association vers la classe BaseDeDonnees
 
   public:
     IHMEcoClassroom(QWidget* parent = nullptr);
@@ -46,6 +48,7 @@ class IHMEcoClassroom : public QWidget
   signals:
 
   public slots:
+    void recupererSalles();
 };
 
 #endif // IHMECOCLASSROOM_H
