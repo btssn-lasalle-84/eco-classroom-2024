@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `Salle` (
 	`idSalle`	int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`nom`	varchar(32),
 	`description`	varchar(255),
-	`superficie`	int DEFAULT '0',
+	`superficie`	DOUBLE DEFAULT '0',
 	`idIndiceConfortTHI`	int DEFAULT '-4',
     `idIndiceInconfortIADI`	int DEFAULT '0',
 	`idIndiceQualiteAir`	int DEFAULT '0',
@@ -201,19 +201,19 @@ ALTER TABLE `MesureCo2`
 
 -- --------------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS `EtatPResence` (
-	`idEtatPResence`	int AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS `EtatPresence` (
+	`idEtatPresence`	int AUTO_INCREMENT PRIMARY KEY,
 	`idSalle`	int NOT NULL,
 	`presence`	SMALLINT UNSIGNED NOT NULL,
 	`horodatage`	DATETIME NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-ALTER TABLE `EtatPResence`
+ALTER TABLE `EtatPresence`
   ADD UNIQUE KEY `horodatage` (`horodatage`),
-  ADD KEY `EtatPResence_fk_1` (`idSalle`);
+  ADD KEY `EtatPresence_fk_1` (`idSalle`);
 
-ALTER TABLE `EtatPResence`
-  ADD CONSTRAINT `EtatPResence_fk_1` FOREIGN KEY (`idSalle`) REFERENCES `Salle` (`idSalle`) ON DELETE CASCADE;
+ALTER TABLE `EtatPresence`
+  ADD CONSTRAINT `EtatPresence_fk_1` FOREIGN KEY (`idSalle`) REFERENCES `Salle` (`idSalle`) ON DELETE CASCADE;
 
 -- --------------------------------------------------------
 

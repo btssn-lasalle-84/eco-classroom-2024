@@ -12,7 +12,22 @@ class SalleEco : public QObject
 {
     Q_OBJECT
 
+  public:
+    /**
+     * @enum TableSalle
+     * @brief Les différents champs de la table Salle
+     */
+    enum TableSalle
+    {
+        CHAMP_IDSALLE = 0,
+        CHAMP_NOM,
+        CHAMP_DESCRIPTION,
+        CHAMP_SUPERFICIE
+        // @todo à complèter
+    };
+
   private:
+    QString           idSalle;
     QString           nom;
     QString           description;
     double            superficie;
@@ -25,6 +40,12 @@ class SalleEco : public QObject
 
   public:
     explicit SalleEco(QObject* parent = nullptr);
+    explicit SalleEco(QString  idSalle,
+                      QString  nom,
+                      QString  description,
+                      double   superficie,
+                      QObject* parent = nullptr);
+    ~SalleEco();
 
   signals:
 };
