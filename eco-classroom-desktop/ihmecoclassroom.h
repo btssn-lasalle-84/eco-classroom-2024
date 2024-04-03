@@ -10,6 +10,8 @@
  */
 
 #include <QtWidgets>
+#include <QMap>
+#include <QString>
 
 /**
  * @def NOM_APPLICATION
@@ -23,6 +25,8 @@
  */
 #define VERSION "0.1"
 
+class SalleEco;
+
 /**
  * @class IHMEcoClassroom
  * @brief Déclaration de la classe IHMEcoClassroom
@@ -33,6 +37,8 @@ class IHMEcoClassroom : public QWidget
     Q_OBJECT
 
   private:
+    QMap<QString, SalleEco*> salles; //!< Les salles
+
   public:
     IHMEcoClassroom(QWidget* parent = nullptr);
     ~IHMEcoClassroom();

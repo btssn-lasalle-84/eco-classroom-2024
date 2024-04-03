@@ -8,16 +8,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    ecoclassroom.cpp \
     etats.cpp \
     main.cpp \
     ihmecoclassroom.cpp \
-    mesures.cpp
+    mesures.cpp \
+    salleeco.cpp
 
 HEADERS += \
-    ecoclassroom.h \
     etats.h \
     ihmecoclassroom.h \
-    mesures.h
+    indices.h \
+    mesures.h \
+    salleeco.h
 
 CONFIG(release, debug|release):DEFINES+=QT_NO_DEBUG_OUTPUT

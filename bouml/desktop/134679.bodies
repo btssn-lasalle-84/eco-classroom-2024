@@ -1,0 +1,5 @@
+class IHMEcoClassroom
+!!!134807.cpp!!!	IHMEcoClassroom(inout parent : QWidget = nullptr)
+    qDebug() << Q_FUNC_INFO;
+!!!134935.cpp!!!	~IHMEcoClassroom()
+    qDebug() << Q_FUNC_INFO;

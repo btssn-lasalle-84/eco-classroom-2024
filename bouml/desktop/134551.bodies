@@ -1,0 +1,5 @@
+class Etats
+!!!134551.cpp!!!	Etats()
+    qDebug() << Q_FUNC_INFO << "horodatage" << horodatage.toString("hh:mm:ss");
+!!!134679.cpp!!!	~Etats()
+    qDebug() << Q_FUNC_INFO;
