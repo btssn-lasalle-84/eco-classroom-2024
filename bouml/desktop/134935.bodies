@@ -1,0 +1,5 @@
+class Mesures
+!!!135063.cpp!!!	Mesures()
+    qDebug() << Q_FUNC_INFO << "horodatage" << horodatage.toString("hh:mm:ss");
+!!!135191.cpp!!!	~Mesures()
+    qDebug() << Q_FUNC_INFO;
