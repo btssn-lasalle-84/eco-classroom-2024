@@ -23,8 +23,12 @@ IHMEcoClassroom::IHMEcoClassroom(QWidget* parent) :
 {
     qDebug() << Q_FUNC_INFO;
     baseDeDonnees->connecter();
+
     recupererSalles();
-    creerTableauIHM();
+    creerTableauSallesEco();
+    afficherSallesEco();
+
+    showMaximized();
 }
 
 /**
@@ -66,41 +70,61 @@ void IHMEcoClassroom::recupererSalles()
     }
 
     qDebug() << Q_FUNC_INFO << "salles" << salles;
-    qDebug() << Q_FUNC_INFO << "Nb salles" << salles.size();
+}
 
-    // Exemple pour parcourir une QMap
+void IHMEcoClassroom::creerTableauSallesEco()
+{
+    QStringList labelsColonnes;
+    labelsColonnes << "Salle"
+                   << "Disponibilité"
+                   << "Qualité d'air"
+                   << "Confort Thermique"
+                   << "Fenêtres"
+                   << "Lumières";
+    tableauSallesEco = new QTableWidget(this);
+
+    // Personnalisation du QTableWidget
+    tableauSallesEco->setColumnCount(labelsColonnes.count());
+    tableauSallesEco->setHorizontalHeaderLabels(labelsColonnes);
+    tableauSallesEco->setRowCount(0);
+    // Cache la numérotation des lignes
+    tableauSallesEco->verticalHeader()->setHidden(true);
+    // Prend toute la largeur de la fenêtre
+    tableauSallesEco->setMinimumWidth(width());
+    // Largeur automatique des colonnes sur toute la largeur
+    QHeaderView* headerView = tableauSallesEco->horizontalHeader();
+    headerView->setSectionResizeMode(QHeaderView::Stretch);
+    // Pas de scroll
+    // tableauSallesEco->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    // tableauSallesEco->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    // Positionnement du QTableWidget
+    QVBoxLayout* layout = new QVBoxLayout();
+    layout->addWidget(tableauSallesEco);
+    setLayout(layout);
+}
+
+void IHMEcoClassroom::ajouterSalleEcoTableau(const SalleEco& salle)
+{
+    qDebug() << Q_FUNC_INFO << "nom" << salle.getNom();
+
+    tableauSallesEco->setRowCount(tableauSallesEco->rowCount() + 1);
+
+    QTableWidgetItem* elementNom = new QTableWidgetItem(salle.getNom());
+    elementNom->setFlags(Qt::ItemIsEnabled);
+    elementNom->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1, COLONNE_SALLE_NOM, elementNom);
+
+    // @todo ajouter les éléments des autres colonnes
+}
+
+void IHMEcoClassroom::afficherSallesEco()
+{
+    qDebug() << Q_FUNC_INFO << "Nb salles" << salles.size();
     QMapIterator<QString, SalleEco*> sallesEco(salles);
     while(sallesEco.hasNext())
     {
         sallesEco.next();
-        qDebug() << Q_FUNC_INFO << "SalleEco" << sallesEco.key();
+        ajouterSalleEcoTableau(*sallesEco.value());
     }
-}
-
-void IHMEcoClassroom::creerTableauIHM()
-{
-    tableauIHM = new QTableWidget(this);
-    tableauIHM->setRowCount(10);
-    tableauIHM->setColumnCount(6);
-
-    QStringList labels;
-    labels << "Salle"
-           << "Disponibilité"
-           << "Qualité d'air"
-           << "Confort Thermique"
-           << "Fenêtres"
-           << "Lumières";
-
-    tableauIHM->setHorizontalHeaderLabels(labels);
-
-    tableauIHM->setColumnWidth(0, 100);
-    tableauIHM->setColumnWidth(1, 100);
-    tableauIHM->setColumnWidth(2, 200);
-    tableauIHM->setColumnWidth(3, 200);
-    tableauIHM->setColumnWidth(4, 150);
-    tableauIHM->setColumnWidth(5, 150);
-
-    QVBoxLayout* layout = new QVBoxLayout(this);
-    layout->addWidget(tableauIHM);
-    setLayout(layout);
 }

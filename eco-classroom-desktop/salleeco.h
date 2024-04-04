@@ -47,6 +47,9 @@ class SalleEco : public QObject
                       QObject* parent = nullptr);
     ~SalleEco();
 
+    QString getNom() const;
+    // @todo ajouter accesseurs/mutateurs get/set
+
   signals:
 };
 

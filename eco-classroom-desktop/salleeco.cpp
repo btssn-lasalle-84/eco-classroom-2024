@@ -21,3 +21,8 @@ SalleEco::~SalleEco()
 {
     qDebug() << Q_FUNC_INFO << idSalle << nom << description << superficie;
 }
+
+QString SalleEco::getNom() const
+{
+    return nom;
+}

@@ -3,3 +3,5 @@ class SalleEco
     qDebug() << Q_FUNC_INFO << idSalle << nom << description << superficie;
 !!!136234.cpp!!!	~SalleEco()
     qDebug() << Q_FUNC_INFO << idSalle << nom << description << superficie;
+!!!143146.cpp!!!	getNom() : QString
+    return nom;
