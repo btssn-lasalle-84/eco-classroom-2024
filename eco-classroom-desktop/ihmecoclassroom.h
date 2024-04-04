@@ -41,6 +41,9 @@ class IHMEcoClassroom : public QWidget
     QMap<QString, SalleEco*> salles;        //!< Les salles
     BaseDeDonnees*           baseDeDonnees; //!< l'association vers la classe BaseDeDonnees
 
+    QTableWidget* tableauIHM;
+    void          creerTableauIHM();
+
   public:
     IHMEcoClassroom(QWidget* parent = nullptr);
     ~IHMEcoClassroom();

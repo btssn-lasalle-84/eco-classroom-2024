@@ -57,7 +57,7 @@ enum IndiceConfinement
     Moyen,
     Eleve,
     TresElev,
-    Extrême
+    Extreme
 };
 
 #endif // INDICES_H

@@ -24,6 +24,7 @@ IHMEcoClassroom::IHMEcoClassroom(QWidget* parent) :
     qDebug() << Q_FUNC_INFO;
     baseDeDonnees->connecter();
     recupererSalles();
+    creerTableauIHM();
 }
 
 /**
@@ -74,4 +75,32 @@ void IHMEcoClassroom::recupererSalles()
         sallesEco.next();
         qDebug() << Q_FUNC_INFO << "SalleEco" << sallesEco.key();
     }
+}
+
+void IHMEcoClassroom::creerTableauIHM()
+{
+    tableauIHM = new QTableWidget(this);
+    tableauIHM->setRowCount(10);
+    tableauIHM->setColumnCount(6);
+
+    QStringList labels;
+    labels << "Salle"
+           << "Disponibilité"
+           << "Qualité d'air"
+           << "Confort Thermique"
+           << "Fenêtres"
+           << "Lumières";
+
+    tableauIHM->setHorizontalHeaderLabels(labels);
+
+    tableauIHM->setColumnWidth(0, 100);
+    tableauIHM->setColumnWidth(1, 100);
+    tableauIHM->setColumnWidth(2, 200);
+    tableauIHM->setColumnWidth(3, 200);
+    tableauIHM->setColumnWidth(4, 150);
+    tableauIHM->setColumnWidth(5, 150);
+
+    QVBoxLayout* layout = new QVBoxLayout(this);
+    layout->addWidget(tableauIHM);
+    setLayout(layout);
 }
