@@ -80,7 +80,8 @@ void IHMEcoClassroom::creerTableauSallesEco()
                    << "Qualité d'air"
                    << "Confort Thermique"
                    << "Fenêtres"
-                   << "Lumières";
+                   << "Lumières"
+                   << "Interventions";
     tableauSallesEco = new QTableWidget(this);
 
     // Personnalisation du QTableWidget

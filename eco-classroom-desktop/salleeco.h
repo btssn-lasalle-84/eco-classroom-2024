@@ -30,8 +30,8 @@ class SalleEco : public QObject
     QString           idSalle;
     QString           nom;
     QString           description;
-    double            superficie;
-    int               indiceCo2;
+    unsigned int      superficie;
+    int               indiceCO2;
     int               indiceIADI;
     int               indiceTHI;
     int               indiceConfinement;
@@ -40,14 +40,31 @@ class SalleEco : public QObject
 
   public:
     explicit SalleEco(QObject* parent = nullptr);
-    explicit SalleEco(QString  idSalle,
-                      QString  nom,
-                      QString  description,
-                      double   superficie,
-                      QObject* parent = nullptr);
+    explicit SalleEco(QString      idSalle,
+                      QString      nom,
+                      QString      description,
+                      unsigned int superficie,
+                      QObject*     parent = nullptr);
     ~SalleEco();
 
-    QString getNom() const;
+    QString      getIDSalle() const;
+    QString      getNom() const;
+    QString      getDescription() const;
+    unsigned int getSuperficie() const;
+    int          getIndiceCO2() const;
+    int          getIndiceIADI() const;
+    int          getIndiceTHI() const;
+    int          getIndiceConfinement() const;
+
+    void setIDSalle(QString idSalle);
+    void setNom(QString nom);
+    void setDescription(QString description);
+    void setSuperficie(unsigned int superficie);
+    void setIndiceCO2(int indiceCO2);
+    void setIndiceIADI(int indiceIADI);
+    void setIndiceTHI(int indiceTHI);
+    void setIndiceConfinement(int indiceConfinement);
+
     // @todo ajouter accesseurs/mutateurs get/set
 
   signals:
