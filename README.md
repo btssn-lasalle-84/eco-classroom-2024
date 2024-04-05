@@ -8,10 +8,21 @@
   - [Présentation](#présentation)
   - [Fonctionnalités](#fonctionnalités)
   - [Documentation du code](#documentation-du-code)
+  - [Tickets Jira](#tickets-jira)
   - [Diagramme de classes](#diagramme-de-classes)
+    - [EcoClassroom-desktop (C++/Qt)](#ecoclassroom-desktopcqt)
+  - [Diagramme de cas d'utilisation](#diagramme-de-cas-dutilisation)
+    - [Quizzy-desktop (C++/Qt)](#quizzy-desktopcqt)
   - [Protocole](#protocole)
+  - [Itérations](#itérations)
+    - [Itération 1](#itération-1)
+    - [Itération 2](#itération-2)
+    - [Itération 3](#itération-3)
   - [Screenshots](#screenshots)
   - [Historique des versions](#historique-des-versions)
+    - [Version 0.1](#version-01)
+      - [Desktop](#desktop)
+  - [Recette](#recette)
   - [Auteurs](#auteurs)
 
 ---
@@ -29,16 +40,63 @@ Les informations seront accessibles à partir d’une tablette ou d’une applic
 
 https://btssn-lasalle-84.github.io/eco-classroom-2024/
 
+
+## Tickets Jira
+
+![Tickets jira](images/tickets_jira.png)
 ## Diagramme de classes
 
+### EcoClassroom-desktop (C++/Qt)
+
+![Diagramme de classe](images/diagramme_classes.png)
+## Diagramme de cas d'utilisation
+
+### Quizzy-desktop (C++/Qt)
+
+![Diagramme cas d'utilisation](images/diagramme_cas_utilisations.png)
 
 ## Protocole
+
+## Itérations
+
+### Itération 1
+
+- **Affichage IHM** : L'utilisateur peut avoir un aperçu des salles dans un tableau.
+- **Connexion base de données** : L'application est relié à la base de données.
+- **Calcul des indices** : Les indices sont calculés et affichés dans l'IHM.
+
+### Itération 2
+
+- **Filtrer les salles** : L'utilisateur peut effectuer une recherche avec des critères précis.
+- **Affichage d'une salle spécifique** : L'utilisateur peut visualiser une salle spécifique.
+- **Communiquer avec les modules** : L'application communique avec les différents modules.
+
+### Itération 3
+
+- **Editer une salle** : L'utilisateur peut éditer des informations sur une salle spécifique.
+- **Signalement dépassement de seuils** : L'application affiche les dépassements de seuils des salles.
+
 
 
 ## Screenshots
 
-
 ## Historique des versions
+
+### Version 0.1
+
+#### Desktop
+
+- Afficher un tableau de l'ensemble des salles
+- Relié à la base de données
+
+## Recette
+
+| Fonctionnalités   | Oui | Non |
+|--------------------|-----|-----|
+| Affichage IHM principale  |  X  |     |
+| Récuperer l'ensemble des salles |  X  |   |
+| Calcul des indices         |    |   X  |
+
 
 
 ## Auteurs
