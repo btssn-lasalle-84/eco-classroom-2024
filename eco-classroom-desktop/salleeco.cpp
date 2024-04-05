@@ -6,11 +6,11 @@ SalleEco::SalleEco(QObject* parent) : QObject(parent)
 {
 }
 
-SalleEco::SalleEco(QString      idSalle,
-                   QString      nom,
-                   QString      description,
-                   unsigned int superficie,
-                   QObject*     parent) :
+SalleEco::SalleEco(QString  idSalle,
+                   QString  nom,
+                   QString  description,
+                   double   superficie,
+                   QObject* parent) :
     QObject(parent),
     idSalle(idSalle), nom(nom), description(description), superficie(superficie)
 {
@@ -22,7 +22,7 @@ SalleEco::~SalleEco()
     qDebug() << Q_FUNC_INFO << idSalle << nom << description << superficie;
 }
 
-QString SalleEco::getIDSalle() const
+QString SalleEco::getIdSalle() const
 {
     return idSalle;
 }
@@ -37,7 +37,7 @@ QString SalleEco::getDescription() const
     return description;
 }
 
-unsigned int SalleEco::getSuperficie() const
+double SalleEco::getSuperficie() const
 {
     return superficie;
 }
@@ -77,7 +77,7 @@ void SalleEco::setDescription(QString description)
     this->description = description;
 }
 
-void SalleEco::setSuperficie(unsigned int superficie)
+void SalleEco::setSuperficie(double superficie)
 {
     this->superficie = superficie;
 }

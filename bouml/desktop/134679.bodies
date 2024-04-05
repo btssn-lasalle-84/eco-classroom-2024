@@ -6,7 +6,8 @@ class IHMEcoClassroom
                    << "Qualité d'air"
                    << "Confort Thermique"
                    << "Fenêtres"
-                   << "Lumières";
+                   << "Lumières"
+                   << "Interventions";
     tableauSallesEco = new QTableWidget(this);
 
     // Personnalisation du QTableWidget
@@ -31,12 +32,14 @@ class IHMEcoClassroom
 !!!142890.cpp!!!	ajouterSalleEcoTableau(in salle : SalleEco) : void
     qDebug() << Q_FUNC_INFO << "nom" << salle.getNom();
 
+    tableauSallesEco->setRowCount(tableauSallesEco->rowCount() + 1);
+
     QTableWidgetItem* elementNom = new QTableWidgetItem(salle.getNom());
     elementNom->setFlags(Qt::ItemIsEnabled);
     elementNom->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-
-    tableauSallesEco->setRowCount(tableauSallesEco->rowCount() + 1);
     tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1, COLONNE_SALLE_NOM, elementNom);
+
+    // @todo ajouter les éléments des autres colonnes
 !!!143018.cpp!!!	afficherSallesEco() : void
     qDebug() << Q_FUNC_INFO << "Nb salles" << salles.size();
     QMapIterator<QString, SalleEco*> sallesEco(salles);

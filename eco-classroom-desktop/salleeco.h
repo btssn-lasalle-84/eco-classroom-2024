@@ -30,7 +30,7 @@ class SalleEco : public QObject
     QString           idSalle;
     QString           nom;
     QString           description;
-    unsigned int      superficie;
+    double            superficie;
     int               indiceCO2;
     int               indiceIADI;
     int               indiceTHI;
@@ -40,32 +40,32 @@ class SalleEco : public QObject
 
   public:
     explicit SalleEco(QObject* parent = nullptr);
-    explicit SalleEco(QString      idSalle,
-                      QString      nom,
-                      QString      description,
-                      unsigned int superficie,
-                      QObject*     parent = nullptr);
+    explicit SalleEco(QString  idSalle,
+                      QString  nom,
+                      QString  description,
+                      double   superficie,
+                      QObject* parent = nullptr);
     ~SalleEco();
 
-    QString      getIDSalle() const;
-    QString      getNom() const;
-    QString      getDescription() const;
-    unsigned int getSuperficie() const;
-    int          getIndiceCO2() const;
-    int          getIndiceIADI() const;
-    int          getIndiceTHI() const;
-    int          getIndiceConfinement() const;
+    QString getIdSalle() const;
+    QString getNom() const;
+    QString getDescription() const;
+    double  getSuperficie() const;
+    int     getIndiceCO2() const;
+    int     getIndiceIADI() const;
+    int     getIndiceTHI() const;
+    int     getIndiceConfinement() const;
 
     void setIDSalle(QString idSalle);
     void setNom(QString nom);
     void setDescription(QString description);
-    void setSuperficie(unsigned int superficie);
+    void setSuperficie(double superficie);
     void setIndiceCO2(int indiceCO2);
     void setIndiceIADI(int indiceIADI);
     void setIndiceTHI(int indiceTHI);
     void setIndiceConfinement(int indiceConfinement);
 
-    // @todo ajouter accesseurs/mutateurs get/set
+    // @todo ajouter accesseurs/mutateurs get/set pour les mesures et les états
 
   signals:
 };

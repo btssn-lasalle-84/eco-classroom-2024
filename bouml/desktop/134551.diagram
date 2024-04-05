@@ -10,24 +10,24 @@ classcanvas 128151 class_ref 135063 // SalleEco
 end
 classcanvas 128279 class_ref 134935 // Mesures
   classdiagramsettings member_max_width 0 end
-  xyz 21 734 2000
+  xyz 21 1050 2000
 end
 classcanvas 128407 class_ref 134551 // Etats
   classdiagramsettings member_max_width 0 end
-  xyz 831 734 2000
+  xyz 831 1050 2000
 end
 relationcanvas 128535 relation_ref 134807 // <unidirectional association>
-  from ref 128151 z 2001 stereotype "<<QVector>>" xyz 242.5 679 3000 to ref 128279
-  role_a_pos 239 701 3000 no_role_b
+  from ref 128151 z 2001 stereotype "<<QVector>>" xyz 191 995 3000 to ref 128279
+  role_a_pos 217 1024 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128663 relation_ref 134935 // <unidirectional association>
-  from ref 128151 z 2001 stereotype "<<QVector>>" xyz 729 679 3000 to ref 128407
-  role_a_pos 795 716 3000 no_role_b
+  from ref 128151 z 2001 stereotype "<<QVector>>" xyz 782 995 3000 to ref 128407
+  role_a_pos 884 1024 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128791 relation_ref 135063 // <unidirectional association>
-  from ref 128023 z 2001 stereotype "<<QMap>>" xyz 496 265.5 3000 to ref 128151
+  from ref 128023 z 2001 stereotype "<<QMap>>" xyz 496 265 3000 to ref 128151
   role_a_pos 552 317 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
