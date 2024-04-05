@@ -41,6 +41,26 @@ class IHMEcoClassroom : public QWidget
     QMap<QString, SalleEco*> salles;        //!< Les salles
     BaseDeDonnees*           baseDeDonnees; //!< l'association vers la classe BaseDeDonnees
 
+    QTableWidget* tableauSallesEco;
+    void          creerTableauSallesEco();
+    void          ajouterSalleEcoTableau(const SalleEco& salle);
+    void          afficherSallesEco();
+
+    /**
+     * @enum ColonneTableauSallesEco
+     * @brief Définit les différentes colonne du tableau tableauSallesEco
+     */
+    enum ColonneTableauSallesEco
+    {
+        COLONNE_SALLE_NOM,               //!< Le nom de la salle
+        COLONNE_SALLE_DISPONIBILITE,     //!< La disponibilité de la salle
+        COLONNE_SALLE_QUALITE_AIR,       //!< La qualité de l'air
+        COLONNE_SALLE_CONFORT_THERMIQUE, //!< Le confort thermique
+        COLONNE_SALLE_FENETRES,          //!< L'état des fenétres
+        COLONNE_SALLE_LUMIERES,          //!< L'état des lumières
+        NB_COLONNES_TABLEAU
+    };
+
   public:
     IHMEcoClassroom(QWidget* parent = nullptr);
     ~IHMEcoClassroom();

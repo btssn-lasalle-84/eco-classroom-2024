@@ -3,3 +3,35 @@ class SalleEco
     qDebug() << Q_FUNC_INFO << idSalle << nom << description << superficie;
 !!!136234.cpp!!!	~SalleEco()
     qDebug() << Q_FUNC_INFO << idSalle << nom << description << superficie;
+!!!149674.cpp!!!	getIdSalle() : QString
+    return idSalle;
+!!!143146.cpp!!!	getNom() : QString
+    return nom;
+!!!149802.cpp!!!	getDescription() : QString
+    return description;
+!!!149930.cpp!!!	getSuperficie() : double
+    return superficie;
+!!!150058.cpp!!!	getIndiceCO2() : int
+    return indiceCO2;
+!!!150186.cpp!!!	getIndiceIADI() : int
+    return indiceIADI;
+!!!150314.cpp!!!	getIndiceTHI() : int
+    return indiceTHI;
+!!!150442.cpp!!!	getIndiceConfinement() : int
+    return indiceConfinement;
+!!!150570.cpp!!!	setIDSalle(in idSalle : QString) : void
+    this->idSalle = idSalle;
+!!!150698.cpp!!!	setNom(in nom : QString) : void
+    this->nom = nom;
+!!!150826.cpp!!!	setDescription(in description : QString) : void
+    this->description = description;
+!!!150954.cpp!!!	setSuperficie(in superficie : double) : void
+    this->superficie = superficie;
+!!!151082.cpp!!!	setIndiceCO2(in indiceCO2 : int) : void
+    this->indiceCO2 = indiceCO2;
+!!!151210.cpp!!!	setIndiceIADI(in indiceIADI : int) : void
+    this->indiceIADI = indiceIADI;
+!!!151338.cpp!!!	setIndiceTHI(in indiceTHI : int) : void
+    this->indiceTHI = indiceTHI;
+!!!151466.cpp!!!	setIndiceConfinement(in indiceConfinement : int) : void
+    this->indiceConfinement = indiceConfinement;

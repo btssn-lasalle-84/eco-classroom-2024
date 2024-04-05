@@ -31,7 +31,7 @@ class SalleEco : public QObject
     QString           nom;
     QString           description;
     double            superficie;
-    int               indiceCo2;
+    int               indiceCO2;
     int               indiceIADI;
     int               indiceTHI;
     int               indiceConfinement;
@@ -46,6 +46,26 @@ class SalleEco : public QObject
                       double   superficie,
                       QObject* parent = nullptr);
     ~SalleEco();
+
+    QString getIdSalle() const;
+    QString getNom() const;
+    QString getDescription() const;
+    double  getSuperficie() const;
+    int     getIndiceCO2() const;
+    int     getIndiceIADI() const;
+    int     getIndiceTHI() const;
+    int     getIndiceConfinement() const;
+
+    void setIDSalle(QString idSalle);
+    void setNom(QString nom);
+    void setDescription(QString description);
+    void setSuperficie(double superficie);
+    void setIndiceCO2(int indiceCO2);
+    void setIndiceIADI(int indiceIADI);
+    void setIndiceTHI(int indiceTHI);
+    void setIndiceConfinement(int indiceConfinement);
+
+    // @todo ajouter accesseurs/mutateurs get/set pour les mesures et les états
 
   signals:
 };
