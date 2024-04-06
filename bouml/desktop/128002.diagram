@@ -5,26 +5,26 @@ classcanvas 128002 class_ref 128002 // Utilisateur
   xyz 5 9 2000
 end
 usecasecanvas 128130 usecase_ref 128002 // Visualisation de l'ensemble des salles
-  xyzwh 182 24 3005 64 32 label_xy 103 9
+  xyzwh 242 26 3005 64 32 label_xy 163 7
 end
 usecasecanvas 129282 usecase_ref 128514 // Dialoguer avec les modules
-  xyzwh 457 24 3005 64 32 label_xy 399 56
+  xyzwh 558 26 3005 64 32 label_xy 500 58
 end
 usecasecanvas 129410 usecase_ref 128642 // Effectuer un filtrage
-  xyzwh 289 169 3005 64 32 label_xy 258 201
+  xyzwh 391 169 3005 64 32 label_xy 342 201
 end
 usecasecanvas 129538 usecase_ref 128770 // Visualiser une salle spécifique
-  xyzwh 118 169 3005 64 32 label_xy 52 201
+  xyzwh 140 169 3005 64 32 label_xy 52 201
 end
 line 128258 ---- decenter_begin 492
   from ref 128002 z 2006 to ref 128130
 simplerelationcanvas 135682 simplerelation_ref 134658
-  from ref 129410 z 3006 stereotype "<<extend>>" xyz 226.5 111.5 3000 to ref 128130
+  from ref 129410 z 3006 stereotype "<<extend>>" xyz 307.5 112 3000 to ref 128130
 end
 simplerelationcanvas 135810 simplerelation_ref 134786
-  from ref 129538 z 3006 stereotype "<<extend>>" xyz 140.5 111.5 3000 to ref 128130
+  from ref 129538 z 3006 stereotype "<<extend>>" xyz 180 112 3000 to ref 128130
 end
 simplerelationcanvas 136194 simplerelation_ref 134914
-  from ref 128130 z 3006 stereotype "<<include>>" xyz 310 39 3000 to ref 129282
+  from ref 128130 z 3006 stereotype "<<include>>" xyz 390.5 41 3000 to ref 129282
 end
 end

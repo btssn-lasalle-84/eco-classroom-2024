@@ -7,12 +7,10 @@
 - [Le projet eco-classroom 2024](#le-projet-eco-classroom-2024)
   - [Présentation](#présentation)
   - [Fonctionnalités](#fonctionnalités)
+    - [Desktop (C++/Qt)](#desktopcqt)
   - [Documentation du code](#documentation-du-code)
-  - [Tickets Jira](#tickets-jira)
   - [Diagramme de classes](#diagramme-de-classes)
     - [EcoClassroom-desktop (C++/Qt)](#ecoclassroom-desktopcqt)
-  - [Diagramme de cas d'utilisation](#diagramme-de-cas-dutilisation)
-    - [Quizzy-desktop (C++/Qt)](#quizzy-desktopcqt)
   - [Protocole](#protocole)
   - [Itérations](#itérations)
     - [Itération 1](#itération-1)
@@ -35,25 +33,19 @@ Les informations seront accessibles à partir d’une tablette ou d’une applic
 
 ## Fonctionnalités
 
+### Desktop (C++/Qt)
+
+![Diagramme cas d'utilisation](images/diagramme_cas_utilisations_v0.1.png)
 
 ## Documentation du code
 
 https://btssn-lasalle-84.github.io/eco-classroom-2024/
 
-
-## Tickets Jira
-
-![Tickets jira](images/tickets_jira.png)
 ## Diagramme de classes
 
 ### EcoClassroom-desktop (C++/Qt)
 
-![Diagramme de classe](images/diagramme_classes.png)
-## Diagramme de cas d'utilisation
-
-### Quizzy-desktop (C++/Qt)
-
-![Diagramme cas d'utilisation](images/diagramme_cas_utilisations.png)
+![Diagramme de classe](images/diagramme_classes_v0.1.png)
 
 ## Protocole
 
@@ -61,24 +53,24 @@ https://btssn-lasalle-84.github.io/eco-classroom-2024/
 
 ### Itération 1
 
-- **Affichage IHM** : L'utilisateur peut avoir un aperçu des salles dans un tableau.
-- **Connexion base de données** : L'application est relié à la base de données.
-- **Calcul des indices** : Les indices sont calculés et affichés dans l'IHM.
+- **Visualiser l'ensemble des salles** : L'utilisateur peut avoir un aperçu des salles dans un tableau
+- **Connecter la base de données** : L'application est associée à la base de données
 
 ### Itération 2
 
-- **Filtrer les salles** : L'utilisateur peut effectuer une recherche avec des critères précis.
-- **Affichage d'une salle spécifique** : L'utilisateur peut visualiser une salle spécifique.
-- **Communiquer avec les modules** : L'application communique avec les différents modules.
+- **Filtrer les salles** : L'utilisateur peut effectuer une recherche avec des critères précis
+- **Affichage d'une salle spécifique** : L'utilisateur peut visualiser une salle spécifique
+- **Calculer les indices** : Les indices sont calculés et affichés dans l'IHM
+- **Communiquer avec les modules** : L'application communique avec les différents modules
 
 ### Itération 3
 
-- **Editer une salle** : L'utilisateur peut éditer des informations sur une salle spécifique.
-- **Signalement dépassement de seuils** : L'application affiche les dépassements de seuils des salles.
-
-
+- **Editer une salle** : L'utilisateur peut éditer des informations sur une salle spécifique
+- **Signalement dépassement de seuils** : L'application affiche les dépassements de seuils des salles
 
 ## Screenshots
+
+![](images/screenshot_desktop_v0.1.png)
 
 ## Historique des versions
 
@@ -89,20 +81,20 @@ https://btssn-lasalle-84.github.io/eco-classroom-2024/
 - Afficher un tableau de l'ensemble des salles
 - Relié à la base de données
 
+![Tickets jira](images/tickets_jira_v0.1.png)
+
 ## Recette
 
-| Fonctionnalités   | Oui | Non |
-|--------------------|-----|-----|
-| Affichage IHM principale  |  X  |     |
-| Récuperer l'ensemble des salles |  X  |   |
-| Calcul des indices         |    |   X  |
-
-
+| Fonctionnalités                 | Oui | Non |
+|---------------------------------|:---:|:---:|
+| Affichage IHM principale        |  X  |     |
+| Récuperer l'ensemble des salles |  X  |     |
+| Calcul des indices              |     |  X  |
 
 ## Auteurs
 
-- Étudiant IR : VIGNAL Thomas <<thomasvignal.btssn@gmail.com>>
-- Étudiant IR : VALOBRA Enzo <<valobra.enzo@gmail.com>>
+- Étudiant IR (Desktop) : VIGNAL Thomas <<thomasvignal.btssn@gmail.com>>
+- Étudiant IR (Mobile) : VALOBRA Enzo <<valobra.enzo@gmail.com>>
 
 ---
 ©️ LaSalle Avignon 2024
