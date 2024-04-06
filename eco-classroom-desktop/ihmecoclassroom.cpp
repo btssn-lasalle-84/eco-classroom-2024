@@ -28,7 +28,7 @@ IHMEcoClassroom::IHMEcoClassroom(QWidget* parent) :
     creerTableauSallesEco();
     afficherSallesEco();
 
-    showMaximized();
+    // showMaximized();
 }
 
 /**
