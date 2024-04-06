@@ -1,0 +1,1195 @@
+format 224
+"desktop"
+  revision 8
+  modified_by 42 "tv"
+  cpp_root_dir "../../"
+  mysql_root_dir "../../sql/"
+
+
+  
+  // class settings
+  default_attribute_visibility private default_relation_visibility private default_operation_visibility public
+  
+  classdiagramsettings draw_all_relations yes hide_attributes no hide_operations no hide_getset_operations no hide_ports no show_members_full_definition no show_members_visibility no show_members_stereotype no show_members_context no show_members_multiplicity no show_members_initialization no show_attribute_modifiers no member_max_width 127 show_parameter_dir yes show_parameter_name yes package_name_in_tab no class_drawing_mode natural drawing_language uml show_context_mode no auto_label_position yes show_relation_modifiers no show_relation_visibility no show_infonote no shadow yes gradient none show_stereotype_properties no end
+  
+  classcompositediagramsettings auto_label_position yes draw_all_relations yes shadow yes gradient none end
+  
+  usecasediagramsettings package_name_in_tab no show_context_mode no auto_label_position yes draw_all_relations yes class_drawing_mode actor shadow yes gradient none show_stereotype_properties no end
+  
+  sequencediagramsettings show_full_operations_definition no show_class_of_operation no write_horizontally yes instances_drawing_mode natural drawing_language uml draw_all_relations yes shadow yes gradient none show_stereotype_properties no show_class_context_mode no show_msg_context_mode no end
+  
+  collaborationdiagramsettings show_full_operations_definition no show_class_of_operation no show_hierarchical_rank no write_horizontally yes instances_drawing_mode natural drawing_language uml package_name_in_tab no show_class_pack_context_mode no show_msg_context_mode no draw_all_relations yes shadow yes gradient none show_stereotype_properties no end
+  
+  objectdiagramsettings write_horizontally yes package_name_in_tab no show_class_pack_context_mode no auto_label_position yes draw_all_relations yes shadow yes gradient none show_stereotype_properties no end
+  
+  objectcompositediagramsettings auto_label_position yes draw_all_relations yes shadow yes gradient none end
+  
+  componentdiagramsettings package_name_in_tab no show_context_mode no auto_label_position yes draw_all_relations yes shadow yes gradient none
+   draw_component_as_icon no show_component_req_prov no show_component_rea no show_stereotype_properties no end
+  
+  deploymentdiagramsettings package_name_in_tab no show_context_mode no write_horizontally yes auto_label_position yes draw_all_relations yes shadow yes gradient none
+   draw_component_as_icon no show_component_req_prov no show_component_rea no show_stereotype_properties no end
+  
+  statediagramsettings package_name_in_tab no show_context_mode no auto_label_position yes write_label_horizontally yes show_trans_definition no draw_all_relations yes shadow yes gradient none
+   show_activities yes region_horizontally yes drawing_language uml show_stereotype_properties no end
+  
+  activitydiagramsettings package_name_in_tab no show_context_mode no show_opaque_action_definition no auto_label_position yes write_label_horizontally no draw_all_relations yes shadow yes gradient none
+   show_infonote yes drawing_language uml show_stereotype_properties no end
+  
+  class_color yellow duration_color transparent continuation_color gray note_color blue fragment_color transparent subject_color transparent usecase_color yellow package_color transparent component_color green artifact_color green deploymentnode_color gray state_color yellow stateaction_color transparent activity_color transparent activityregion_color transparent activitypartition_color transparent activityaction_color transparent parameterpin_color white generalization_color black 
+  dpi 96
+  font_size 11
+  diagram_format A4
+
+  image_root_dir ""
+
+
+  mark_for_import
+  
+  usecaseview 128002 "Vue des cas d'utilisation"
+    
+    usecasediagramsettings end
+    
+    sequencediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    activitydiagramsettings
+     end
+    usecasediagram 128002 "Diagramme des cas d'utilisation"
+      usecasediagramsettings draw_all_relations no end
+      size A0
+    end
+
+    class 128002 "Utilisateur"
+      visibility package stereotype "actor"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    usecase 128002 "Visualisation de l'ensemble des salles"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+      simplerelation 134914
+	-_->
+	  stereotype "include"
+	  on usecase_ref 128514 // Dialoguer avec les modules
+      end
+    end
+
+    usecase 128258 "Calculer des taux"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+    end
+
+    usecase 128386 "Récuperer les données"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+    end
+
+    usecase 128514 "Dialoguer avec les modules"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+    end
+
+    usecase 128642 "Effectuer un filtrage"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+      simplerelation 134658
+	-_->
+	  stereotype "extend"
+	  on usecase_ref 128002 // Visualisation de l'ensemble des salles
+      end
+    end
+
+    usecase 128770 "Visualiser une salle spécifique"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+      simplerelation 134786
+	-_->
+	  stereotype "extend"
+	  on usecase_ref 128002 // Visualisation de l'ensemble des salles
+      end
+    end
+  end
+
+  package_ref 134551 // eco-classroom-desktop
+
+  classview 134679 "ecoclassroom"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 135831 "IndiceConfortTHI"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ENGINE=InnoDB DEFAULT CHARSET=utf8;
+"
+      
+      attribute 140055 "idIndiceConfortTHI"
+	default explicit_type "INT"
+	stereotype "PK"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 140183 "libelle"
+	default explicit_type "VARCHAR"
+	multiplicity "255"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}
+"
+	MysqlColumn
+      end
+    end
+
+    class 135959 "IndiceInconfortIADI"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ENGINE=InnoDB DEFAULT CHARSET=utf8;
+"
+      
+      attribute 140311 "idIndiceInconfortIADI"
+	default explicit_type "INT"
+	stereotype "PK"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 140439 "libelle"
+	default explicit_type "VARCHAR"
+	multiplicity "255"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}
+"
+	MysqlColumn
+      end
+    end
+
+    class 136087 "IndiceConfinement"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ENGINE=InnoDB DEFAULT CHARSET=utf8;
+"
+      
+      attribute 140567 "idIndiceConfinement"
+	default explicit_type "INT"
+	stereotype "PK"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 140695 "libelle"
+	default explicit_type "VARCHAR"
+	multiplicity "255"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}
+"
+	MysqlColumn
+      end
+    end
+
+    class 136215 "IndiceQualiteAir"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ENGINE=InnoDB DEFAULT CHARSET=utf8;
+"
+      
+      attribute 140823 "idIndiceQualiteAir"
+	default explicit_type "INT"
+	stereotype "PK"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 140951 "libelle"
+	default explicit_type "VARCHAR"
+	multiplicity "255"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}
+"
+	MysqlColumn
+      end
+    end
+
+    class 136343 "Salle"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ENGINE=InnoDB DEFAULT CHARSET=utf8;
+"
+      
+      attribute 141079 "idSalle"
+	default explicit_type "INT"
+	stereotype "PK"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr} PRIMARY KEY"
+	MysqlColumn autoincr_btree notnull_hash
+      end
+
+      attribute 141207 "nom"
+	default explicit_type "VARCHAR"
+	multiplicity "32"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 141335 "description"
+	default explicit_type "VARCHAR"
+	multiplicity "255"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 141463 "superficie"
+	default explicit_type "INT"
+	init_value "0"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 141591 "idIndiceConfortTHI"
+	default explicit_type "INT"
+	init_value "-4"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 141719 "idIndiceInconfortIADI"
+	default explicit_type "INT"
+	init_value "0"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 141847 "idIndiceQualiteAir"
+	default explicit_type "INT"
+	init_value "0"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 141975 "idIndiceConfinement"
+	default explicit_type "INT"
+	init_value "0"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 142103 "estFavori"
+	default explicit_type "INT"
+	init_value "0"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}
+"
+	MysqlColumn
+      end
+    end
+
+    class 136471 "BrokerMQTT"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ENGINE=InnoDB DEFAULT CHARSET=utf8;
+"
+      
+      attribute 142231 "idBrokerMQTT"
+	default explicit_type "INT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 142359 "hostname"
+	default explicit_type "VARCHAR"
+	multiplicity "255"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 142487 "port"
+	default explicit_type "INT"
+	init_value "1883"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 142615 "username"
+	default explicit_type "VARCHAR"
+	multiplicity "64"
+	init_value "NULL"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 142743 "password"
+	default explicit_type "VARCHAR"
+	multiplicity "64"
+	init_value "NULL"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 142871 "estActif"
+	default explicit_type "INT"
+	init_value "0"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}
+"
+	MysqlColumn
+      end
+    end
+
+    class 136599 "MesureTemperature"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ENGINE=InnoDB DEFAULT CHARSET=utf8;
+"
+      
+      attribute 142999 "idMesureTemperature"
+	default explicit_type "INT"
+	stereotype "PK"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr} PRIMARY KEY"
+	MysqlColumn autoincr_btree
+      end
+
+      attribute 143127 "idSalle"
+	default explicit_type "INT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 143255 "temperature"
+	default explicit_type "DECIMAL"
+	multiplicity "3, 1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 143383 "horodatage"
+	default explicit_type "DATETIME"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}
+"
+	MysqlColumn notnull_hash
+      end
+    end
+
+    class 136727 "MesureHumidite"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ENGINE=InnoDB DEFAULT CHARSET=utf8;
+"
+      
+      attribute 143511 "idMesureHumidite"
+	default explicit_type "INT"
+	stereotype "PK"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr} PRIMARY KEY"
+	MysqlColumn autoincr_btree
+      end
+
+      attribute 143639 "idSalle"
+	default explicit_type "INT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 143767 "humidite"
+	default explicit_type "TINYINT UNSIGNED"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 143895 "horodatage"
+	default explicit_type "DATETIME"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}
+"
+	MysqlColumn notnull_hash
+      end
+    end
+
+    class 136855 "MesureLuminosite"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ENGINE=InnoDB DEFAULT CHARSET=utf8;
+"
+      
+      attribute 144023 "idMesureLuminosite"
+	default explicit_type "INT"
+	stereotype "PK"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr} PRIMARY KEY"
+	MysqlColumn autoincr_btree
+      end
+
+      attribute 144151 "idSalle"
+	default explicit_type "INT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 144279 "luminosite"
+	default explicit_type "SMALLINT UNSIGNED"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 144407 "horodatage"
+	default explicit_type "DATETIME"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}
+"
+	MysqlColumn notnull_hash
+      end
+    end
+
+    class 136983 "MesureCo2"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ENGINE=InnoDB DEFAULT CHARSET=utf8;
+"
+      
+      attribute 144535 "idMesureCo2"
+	default explicit_type "INT"
+	stereotype "PK"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr} PRIMARY KEY"
+	MysqlColumn autoincr_btree
+      end
+
+      attribute 144663 "idSalle"
+	default explicit_type "INT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 144791 "co2"
+	default explicit_type "SMALLINT UNSIGNED"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 144919 "horodatage"
+	default explicit_type "DATETIME"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}
+"
+	MysqlColumn notnull_hash
+      end
+    end
+
+    class 137111 "EtatPResence"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ENGINE=InnoDB DEFAULT CHARSET=utf8;
+"
+      
+      attribute 145047 "idEtatPResence"
+	default explicit_type "INT"
+	stereotype "PK"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr} PRIMARY KEY"
+	MysqlColumn autoincr_btree
+      end
+
+      attribute 145175 "idSalle"
+	default explicit_type "INT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 145303 "presence"
+	default explicit_type "SMALLINT UNSIGNED"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 145431 "horodatage"
+	default explicit_type "DATETIME"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}
+"
+	MysqlColumn notnull_hash
+      end
+    end
+
+    class 137239 "EtatLumieres"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ENGINE=InnoDB DEFAULT CHARSET=utf8;
+"
+      
+      attribute 145559 "idEtatLumieres"
+	default explicit_type "INT"
+	stereotype "PK"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr} PRIMARY KEY"
+	MysqlColumn autoincr_btree
+      end
+
+      attribute 145687 "idSalle"
+	default explicit_type "INT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 145815 "etatLumieres"
+	default explicit_type "SMALLINT UNSIGNED"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 145943 "horodatage"
+	default explicit_type "DATETIME"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}
+"
+	MysqlColumn notnull_hash
+      end
+    end
+
+    class 137367 "EtatFenetres"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ENGINE=InnoDB DEFAULT CHARSET=utf8;
+"
+      
+      attribute 146071 "idEtatFenetres"
+	default explicit_type "INT"
+	stereotype "PK"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr} PRIMARY KEY"
+	MysqlColumn autoincr_btree
+      end
+
+      attribute 146199 "idSalle"
+	default explicit_type "INT"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 146327 "etatFenetres"
+	default explicit_type "INT"
+	init_value "0"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 146455 "horodatage"
+	default explicit_type "DATETIME"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}
+"
+	MysqlColumn notnull_hash
+      end
+    end
+
+    class 137495 "Seuils"
+      visibility package stereotype "table"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl "DROP TABLE IF EXISTS ${name};
+CREATE TABLE ${name} ${definition} ENGINE=InnoDB DEFAULT CHARSET=utf8;
+"
+      
+      attribute 146583 "idSalle"
+	default explicit_type "INT"
+	stereotype "PK"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn notnull_hash
+      end
+
+      attribute 146711 "temperatureMin"
+	default explicit_type "DOUBLE"
+	init_value "14"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 146839 "temperatureMax"
+	default explicit_type "DOUBLE"
+	init_value "30"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 146967 "luminositeMin"
+	default explicit_type "INT"
+	init_value "300"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 147095 "eclairementMoyen"
+	default explicit_type "INT"
+	init_value "500"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 147223 "humiditeMin"
+	default explicit_type "INT"
+	init_value "45"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 147351 "humiditeMax"
+	default explicit_type "INT"
+	init_value "55"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 147479 "co2Max"
+	default explicit_type "INT"
+	init_value "1300"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}"
+	MysqlColumn
+      end
+
+      attribute 147607 "indiceConfinement"
+	default explicit_type "INT"
+	init_value "5"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl "  ${name} ${type}${notnull}${default}${autoincr}
+"
+	MysqlColumn
+      end
+    end
+
+    classdiagram 134679 "schema bdd"
+      classdiagramsettings draw_all_relations yes show_members_full_definition yes show_members_stereotype yes show_members_multiplicity yes show_members_initialization yes show_attribute_modifiers yes member_max_width 0 show_stereotype_properties yes end
+      size A0
+    end
+  end
+
+  deploymentview 134679 "ecoclassroom"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 135319 "ecoclassroom"
+      stereotype "database"
+      mysql_src "${comment}CREATE DATABASE IF NOT EXISTS ${name} CHARACTER SET utf8;
+use ${name};
+
+${definition}"
+      associated_elems
+	class_ref 135831 // IndiceConfortTHI
+	class_ref 135959 // IndiceInconfortIADI
+	class_ref 136087 // IndiceConfinement
+	class_ref 136215 // IndiceQualiteAir
+	class_ref 136343 // Salle
+	class_ref 136471 // BrokerMQTT
+	class_ref 136599 // MesureTemperature
+	class_ref 136727 // MesureHumidite
+	class_ref 136855 // MesureLuminosite
+	class_ref 136983 // MesureCo2
+	class_ref 137111 // EtatPResence
+	class_ref 137239 // EtatLumieres
+	class_ref 137367 // EtatFenetres
+	class_ref 137495 // Seuils
+      end
+    end
+  end
+end
