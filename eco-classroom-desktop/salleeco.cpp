@@ -62,6 +62,24 @@ int SalleEco::getIndiceConfinement() const
     return indiceConfinement;
 }
 
+MesureCO2 SalleEco::getMesureCO2() const
+{
+    if(!mesuresCO2.isEmpty())
+    {
+        return mesuresCO2.last();
+    }
+    return MesureCO2();
+}
+
+EtatPresence SalleEco::getEtatPresence() const
+{
+    if(!etatsPresence.isEmpty())
+    {
+        return etatsPresence.last();
+    }
+    return EtatPresence();
+}
+
 void SalleEco::setIDSalle(QString idSalle)
 {
     this->idSalle = idSalle;
@@ -100,4 +118,22 @@ void SalleEco::setIndiceTHI(int indiceTHI)
 void SalleEco::setIndiceConfinement(int indiceConfinement)
 {
     this->indiceConfinement = indiceConfinement;
+}
+
+void SalleEco::ajouterMesureCO2(int co2)
+{
+    MesureCO2 mesureCO2;
+    mesureCO2.co2        = co2;
+    mesureCO2.horodatage = QDateTime::currentDateTime();
+    mesureCO2.valide     = true;
+    mesuresCO2.push_back(mesureCO2);
+}
+
+void SalleEco::ajouterEtatPresence(bool presence)
+{
+    EtatPresence etatPresence;
+    etatPresence.presence   = presence;
+    etatPresence.horodatage = QDateTime::currentDateTime();
+    etatPresence.valide     = true;
+    etatsPresence.push_back(etatPresence);
 }

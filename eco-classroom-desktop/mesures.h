@@ -3,27 +3,25 @@
 
 #include <QDateTime>
 
-class Mesures
+struct MesureCO2
 {
-  private:
     int       co2;
+    QDateTime horodatage;
+    bool      valide = false;
+};
+
+struct MesureTemperature
+{
     double    temperature;
+    QDateTime horodatage;
+    bool      valide = false;
+};
+
+struct MesureHumidite
+{
     int       humidite;
     QDateTime horodatage;
-
-  public:
-    Mesures();
-    ~Mesures();
-
-    int       getCO2() const;
-    double    getTemperature() const;
-    int       getHumidite() const;
-    QDateTime getHorodatage() const;
-
-    void setCO2(int co2);
-    void setTemperature(double temperature);
-    void setHumidite(int humidite);
-    void setHorodatage(QDateTime horodatage);
+    bool      valide = false;
 };
 
 #endif // MESURES_H
