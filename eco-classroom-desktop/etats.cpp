@@ -8,10 +8,9 @@ Etats::Etats() :
 }
 
 Etats::Etats(bool presence, bool fenetres, bool lumieres, QDateTime horodatage) :
-presence(presence, lumieres(lumieres), fenetres(fenetres), horodatage(horodatage)
+    presence(presence), lumieres(lumieres), fenetres(fenetres), horodatage(horodatage)
 {
     qDebug() << Q_FUNC_INFO;
-
 }
 
 Etats::~Etats()

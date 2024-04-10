@@ -31,17 +31,17 @@ QDateTime Mesures::getHorodatage() const
     return horodatage;
 }
 
-void Mesures::setCO2(co2)
+void Mesures::setCO2(int co2)
 {
     this->co2 = co2;
 }
 
-void Mesures::setTemperature(temperature)
+void Mesures::setTemperature(double temperature)
 {
     this->temperature = temperature;
 }
 
-void Mesures::setHumidite(humidite)
+void Mesures::setHumidite(int humidite)
 {
     this->humidite = humidite;
 }

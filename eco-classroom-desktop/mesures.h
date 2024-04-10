@@ -20,10 +20,10 @@ class Mesures
     int       getHumidite() const;
     QDateTime getHorodatage() const;
 
-    void setCO2(co2);
-    void setTemperature(temperature);
-    void setHumidite(humidite);
-    void setHorodatage(QDateTime);
+    void setCO2(int co2);
+    void setTemperature(double temperature);
+    void setHumidite(int humidite);
+    void setHorodatage(QDateTime horodatage);
 };
 
 #endif // MESURES_H
