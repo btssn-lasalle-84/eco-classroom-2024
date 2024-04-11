@@ -71,6 +71,24 @@ MesureCO2 SalleEco::getMesureCO2() const
     return MesureCO2();
 }
 
+MesureTemperature SalleEco::getTemperature() const
+{
+    if(!mesuresTemperature.isEmpty())
+    {
+        return mesuresTemperature.last();
+    }
+    return MesureTemperature();
+}
+
+MesureHumidite SalleEco::getHumidite() const
+{
+    if(!mesuresHumidite.isEmpty())
+    {
+        return mesuresHumidite.last();
+    }
+    return MesureHumidite();
+}
+
 EtatPresence SalleEco::getEtatPresence() const
 {
     if(!etatsPresence.isEmpty())
@@ -78,6 +96,24 @@ EtatPresence SalleEco::getEtatPresence() const
         return etatsPresence.last();
     }
     return EtatPresence();
+}
+
+EtatFenetres SalleEco::getEtatFenetres() const
+{
+    if(!etatsFenetres.isEmpty())
+    {
+        return etatsFenetres.last();
+    }
+    return EtatFenetres();
+}
+
+EtatLumieres SalleEco::getEtatLumieres() const
+{
+    if(!etatsLumieres.isEmpty())
+    {
+        return etatsLumieres.last();
+    }
+    return EtatLumieres();
 }
 
 void SalleEco::setIDSalle(QString idSalle)
@@ -129,6 +165,24 @@ void SalleEco::ajouterMesureCO2(int co2)
     mesuresCO2.push_back(mesureCO2);
 }
 
+void SalleEco::ajouterMesureTemperature(double temperature)
+{
+    MesureTemperature mesuresTemperature;
+    mesuresTemperature.temperature = temperature;
+    mesuresTemperature.horodatage  = QDateTime::currentDateTime();
+    mesuresTemperature.valide      = true;
+    mesuresTemperature.push_back(mesuresTemperature);
+}
+
+void SalleEco::ajouterMesureHumidite(int humidite)
+{
+    MesureHumidite mesuresHumidite;
+    mesuresHumidite.humidite   = humidite;
+    mesuresHumidite.horodatage = QDateTime::currentDateTime();
+    mesuresHumidite.valide     = true;
+    mesuresHumidite.push_back(mesuresHumidite);
+}
+
 void SalleEco::ajouterEtatPresence(bool presence)
 {
     EtatPresence etatPresence;
@@ -136,4 +190,22 @@ void SalleEco::ajouterEtatPresence(bool presence)
     etatPresence.horodatage = QDateTime::currentDateTime();
     etatPresence.valide     = true;
     etatsPresence.push_back(etatPresence);
+}
+
+void SalleEco::ajouterEtatFenetres(bool fenetres)
+{
+    EtatFenetres etatsFenetres;
+    etatsFenetres.fenetres   = fenetres;
+    etatsFenetres.horodatage = QDateTime::currentDateTime();
+    etatsFenetres.valide     = true;
+    etatsFenetres.push_back(etatsFenetres);
+}
+
+void SalleEco::ajouterEtatLumieres(bool lumieres)
+{
+    EtatLumieres etatsLumieres;
+    etatsLumieres.lumieres   = lumieres;
+    etatsLumieres.horodatage = QDateTime::currentDateTime();
+    etatsLumieres.valide     = true;
+    etatsLumieres.push_back(etatsLumieres);
 }

@@ -51,18 +51,20 @@ class SalleEco : public QObject
                       QObject* parent = nullptr);
     ~SalleEco();
 
-    QString   getIdSalle() const;
-    QString   getNom() const;
-    QString   getDescription() const;
-    double    getSuperficie() const;
-    int       getIndiceCO2() const;
-    int       getIndiceIADI() const;
-    int       getIndiceTHI() const;
-    int       getIndiceConfinement() const;
-    MesureCO2 getMesureCO2() const;
-    // @todo getMesureTemperature() et getMesureHumidite()
-    EtatPresence getEtatPresence() const;
-    // @todo getEtatFenetres() et getEtatLumieres()
+    QString           getIdSalle() const;
+    QString           getNom() const;
+    QString           getDescription() const;
+    double            getSuperficie() const;
+    int               getIndiceCO2() const;
+    int               getIndiceIADI() const;
+    int               getIndiceTHI() const;
+    int               getIndiceConfinement() const;
+    MesureCO2         getMesureCO2() const;
+    MesureTemperature getTemperature() const;
+    MesureHumidite    getHumidite() const;
+    EtatPresence      getEtatPresence() const;
+    EtatFenetres      getEtatFenetres() const;
+    EtatLumieres      getEtatLumieres() const;
 
     void setIDSalle(QString idSalle);
     void setNom(QString nom);
@@ -74,9 +76,12 @@ class SalleEco : public QObject
     void setIndiceConfinement(int indiceConfinement);
 
     void ajouterMesureCO2(int co2);
-    // @todo ajouterMesureTemperature() et ajouterMesureHumidite()
+    void ajouterMesureTemperature(double temperature);
+    void ajouterMesureHumidite(int humidite);
+
     void ajouterEtatPresence(bool presence);
-    // @todo ajouterEtatFenetres() et ajouterEtatLumieres()
+    void ajouterEtatFenetres(bool fenetres);
+    void ajouterEtatLumieres(bool lumieres);
 
   signals:
 };
