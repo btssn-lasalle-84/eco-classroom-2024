@@ -5,8 +5,8 @@
 #include <QString>
 #include <QVector>
 
-class Mesures;
-class Etats;
+#include "mesures.h"
+#include "etats.h"
 
 class SalleEco : public QObject
 {
@@ -27,16 +27,20 @@ class SalleEco : public QObject
     };
 
   private:
-    QString           idSalle;
-    QString           nom;
-    QString           description;
-    double            superficie;
-    int               indiceCO2;
-    int               indiceIADI;
-    int               indiceTHI;
-    int               indiceConfinement;
-    QVector<Mesures*> mesures;
-    QVector<Etats*>   etats;
+    QString                    idSalle;
+    QString                    nom;
+    QString                    description;
+    double                     superficie;
+    int                        indiceCO2;
+    int                        indiceIADI;
+    int                        indiceTHI;
+    int                        indiceConfinement;
+    QVector<MesureCO2>         mesuresCO2;
+    QVector<MesureTemperature> mesuresTemperature;
+    QVector<MesureHumidite>    mesuresHumidite;
+    QVector<EtatPresence>      etatsPresence;
+    QVector<EtatFenetres>      etatsFenetres;
+    QVector<EtatLumieres>      etatsLumieres;
 
   public:
     explicit SalleEco(QObject* parent = nullptr);
@@ -47,14 +51,20 @@ class SalleEco : public QObject
                       QObject* parent = nullptr);
     ~SalleEco();
 
-    QString getIdSalle() const;
-    QString getNom() const;
-    QString getDescription() const;
-    double  getSuperficie() const;
-    int     getIndiceCO2() const;
-    int     getIndiceIADI() const;
-    int     getIndiceTHI() const;
-    int     getIndiceConfinement() const;
+    QString           getIdSalle() const;
+    QString           getNom() const;
+    QString           getDescription() const;
+    double            getSuperficie() const;
+    int               getIndiceCO2() const;
+    int               getIndiceIADI() const;
+    int               getIndiceTHI() const;
+    int               getIndiceConfinement() const;
+    MesureCO2         getMesureCO2() const;
+    MesureTemperature getTemperature() const;
+    MesureHumidite    getHumidite() const;
+    EtatPresence      getEtatPresence() const;
+    EtatFenetres      getEtatFenetres() const;
+    EtatLumieres      getEtatLumieres() const;
 
     void setIDSalle(QString idSalle);
     void setNom(QString nom);
@@ -65,7 +75,13 @@ class SalleEco : public QObject
     void setIndiceTHI(int indiceTHI);
     void setIndiceConfinement(int indiceConfinement);
 
-    // @todo ajouter accesseurs/mutateurs get/set pour les mesures et les états
+    void ajouterMesureCO2(int co2);
+    void ajouterMesureTemperature(double temperature);
+    void ajouterMesureHumidite(int humidite);
+
+    void ajouterEtatPresence(bool presence);
+    void ajouterEtatFenetres(bool fenetres);
+    void ajouterEtatLumieres(bool lumieres);
 
   signals:
 };
