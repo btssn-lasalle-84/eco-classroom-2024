@@ -167,20 +167,20 @@ void SalleEco::ajouterMesureCO2(int co2)
 
 void SalleEco::ajouterMesureTemperature(double temperature)
 {
-    MesureTemperature mesuresTemperature;
-    mesuresTemperature.temperature = temperature;
-    mesuresTemperature.horodatage  = QDateTime::currentDateTime();
-    mesuresTemperature.valide      = true;
-    mesuresTemperature.push_back(mesuresTemperature);
+    MesureTemperature mesureTemperature;
+    mesureTemperature.temperature = temperature;
+    mesureTemperature.horodatage  = QDateTime::currentDateTime();
+    mesureTemperature.valide      = true;
+    mesuresTemperature.push_back(mesureTemperature);
 }
 
 void SalleEco::ajouterMesureHumidite(int humidite)
 {
-    MesureHumidite mesuresHumidite;
-    mesuresHumidite.humidite   = humidite;
-    mesuresHumidite.horodatage = QDateTime::currentDateTime();
-    mesuresHumidite.valide     = true;
-    mesuresHumidite.push_back(mesuresHumidite);
+    MesureHumidite mesureHumidite;
+    mesureHumidite.humidite   = humidite;
+    mesureHumidite.horodatage = QDateTime::currentDateTime();
+    mesureHumidite.valide     = true;
+    mesuresHumidite.push_back(mesureHumidite);
 }
 
 void SalleEco::ajouterEtatPresence(bool presence)
@@ -194,18 +194,18 @@ void SalleEco::ajouterEtatPresence(bool presence)
 
 void SalleEco::ajouterEtatFenetres(bool fenetres)
 {
-    EtatFenetres etatsFenetres;
-    etatsFenetres.fenetres   = fenetres;
-    etatsFenetres.horodatage = QDateTime::currentDateTime();
-    etatsFenetres.valide     = true;
-    etatsFenetres.push_back(etatsFenetres);
+    EtatFenetres etatFenetres;
+    etatFenetres.fenetres   = fenetres;
+    etatFenetres.horodatage = QDateTime::currentDateTime();
+    etatFenetres.valide     = true;
+    etatsFenetres.push_back(etatFenetres);
 }
 
 void SalleEco::ajouterEtatLumieres(bool lumieres)
 {
-    EtatLumieres etatsLumieres;
-    etatsLumieres.lumieres   = lumieres;
-    etatsLumieres.horodatage = QDateTime::currentDateTime();
-    etatsLumieres.valide     = true;
-    etatsLumieres.push_back(etatsLumieres);
+    EtatLumieres etatLumieres;
+    etatLumieres.lumieres   = lumieres;
+    etatLumieres.horodatage = QDateTime::currentDateTime();
+    etatLumieres.valide     = true;
+    etatsLumieres.push_back(etatLumieres);
 }
