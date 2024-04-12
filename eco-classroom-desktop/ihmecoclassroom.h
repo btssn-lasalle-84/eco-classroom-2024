@@ -23,7 +23,7 @@
  * @def VERSION_APPLICATION
  * @brief La version de l'application
  */
-#define VERSION "0.1"
+#define VERSION "0.2"
 
 class SalleEco;
 class BaseDeDonnees;
