@@ -19,5 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Ecoclassroom 2024"
+rootProject.name = "ECOCLASSROOM 2024"
 include(":app")
+ 
