@@ -115,6 +115,8 @@ class SalleEco : public QObject
     void ajouterEtatFenetres(bool fenetres);
     void ajouterEtatLumieres(bool lumieres);
 
+    void calculerIndiceQualiteAir();
+
   signals:
 };
 
