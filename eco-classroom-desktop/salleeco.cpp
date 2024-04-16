@@ -210,34 +210,37 @@ void SalleEco::ajouterEtatLumieres(bool lumieres)
     etatsLumieres.push_back(etatLumieres);
 }
 
-void SalleEco::calculerIndiceQualiteAir()
+void SalleEco::determinerIndiceQualiteAir()
 {
-    int indiceCO2 = getIndiceCO2();
+    int mesuresCO2 = getIndiceCO2();
 
-    if (indiceCO2 >= SEUIL_QUALITE_AIR_EXCELLENT_NIVEAU_MINIMUM && indiceCO2 <= SEUIL_QUALITE_AIR_EXCELLENT_NIVEAU_MAXIMUM)
+    if(mesuresCO2 >= SEUIL_QUALITE_AIR_EXCELLENT_NIVEAU_MINIMUM &&
+       mesuresCO2 <= SEUIL_QUALITE_AIR_EXCELLENT_NIVEAU_MAXIMUM)
     {
-            indiceCO2 = IndiceQualiteAir::Excellente;
+        mesuresCO2 = IndiceQualiteAir::Excellente;
     }
-    else if (indiceCO2 >= SEUIL_QUALITE_AIR_TRES_BIEN_NIVEAU_MINIMUM && indiceCO2 <= SEUIL_QUALITE_AIR_TRES_BIEN_NIVEAU_MAXIMUM)
+    else if(mesuresCO2 >= SEUIL_QUALITE_AIR_TRES_BIEN_NIVEAU_MINIMUM &&
+            mesuresCO2 <= SEUIL_QUALITE_AIR_TRES_BIEN_NIVEAU_MAXIMUM)
     {
-        indiceCO2 = IndiceQualiteAir::TresBien;
+        mesuresCO2 = IndiceQualiteAir::TresBien;
     }
-    else if (indiceCO2 >= SEUIL_QUALITE_AIR_MODERE_NIVEAU_MINIMUM && indiceCO2 <= SEUIL_QUALITE_AIR_MODERE_NIVEAU_MAXIMUM)
+    else if(mesuresCO2 >= SEUIL_QUALITE_AIR_MODERE_NIVEAU_MINIMUM &&
+            mesuresCO2 <= SEUIL_QUALITE_AIR_MODERE_NIVEAU_MAXIMUM)
     {
-        indiceCO2 = IndiceQualiteAir::Modere;
+        mesuresCO2 = IndiceQualiteAir::Modere;
     }
-    else if (indiceCO2 >= SEUIL_QUALITE_AIR_MAUVAIS_NIVEAU_MINIMUM && indiceCO2 <= SEUIL_QUALITE_AIR_MAUVAIS_NIVEAU_MAXIMUM)
+    else if(mesuresCO2 >= SEUIL_QUALITE_AIR_MAUVAIS_NIVEAU_MINIMUM &&
+            mesuresCO2 <= SEUIL_QUALITE_AIR_MAUVAIS_NIVEAU_MAXIMUM)
     {
-        indiceCO2 = IndiceQualiteAir::Mauvais;
+        mesuresCO2 = IndiceQualiteAir::Mauvais;
     }
-    else if (indiceCO2 >= SEUIL_QUALITE_AIR_TRES_MAUVAIS_NIVEAU_MINIMUM && indiceCO2 <= SEUIL_QUALITE_AIR_TRES_MAUVAIS_NIVEAU_MAXIMUM)
+    else if(mesuresCO2 >= SEUIL_QUALITE_AIR_TRES_MAUVAIS_NIVEAU_MINIMUM &&
+            mesuresCO2 <= SEUIL_QUALITE_AIR_TRES_MAUVAIS_NIVEAU_MAXIMUM)
     {
-        indiceCO2 = IndiceQualiteAir::TresMauvais;
+        mesuresCO2 = IndiceQualiteAir::TresMauvais;
     }
-    else if (indiceCO2 >= SEUIL_QUALITE_AIR_SEVERE)
+    else
     {
-        indiceCO2 = IndiceQualiteAir::Severe;
+        mesuresCO2 = IndiceQualiteAir::Severe;
     }
-
 }
-
