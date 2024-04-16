@@ -1,6 +1,7 @@
 #include "ihmecoclassroom.h"
 #include "salleeco.h"
 #include "basededonnees.h"
+#include "dialoguemqtt.h"
 #include <QDebug>
 
 /**
@@ -19,7 +20,8 @@
  * fenêtre principale de l'application
  */
 IHMEcoClassroom::IHMEcoClassroom(QWidget* parent) :
-    QWidget(parent), baseDeDonnees(BaseDeDonnees::getInstance())
+    QWidget(parent), baseDeDonnees(BaseDeDonnees::getInstance()),
+    dialogueMQTT(new DialogueMQTT(this))
 {
     qDebug() << Q_FUNC_INFO;
     baseDeDonnees->connecter();

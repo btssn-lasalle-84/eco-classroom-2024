@@ -27,6 +27,7 @@
 
 class SalleEco;
 class BaseDeDonnees;
+class DialogueMQTT;
 
 /**
  * @class IHMEcoClassroom
@@ -40,6 +41,7 @@ class IHMEcoClassroom : public QWidget
   private:
     QMap<QString, SalleEco*> salles;        //!< Les salles
     BaseDeDonnees*           baseDeDonnees; //!< l'association vers la classe BaseDeDonnees
+    DialogueMQTT*            dialogueMQTT;  //!< l'association vers la classe DialogueMQTT
 
     QTableWidget* tableauSallesEco;
     void          creerTableauSallesEco();
