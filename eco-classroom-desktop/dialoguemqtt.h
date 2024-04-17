@@ -56,7 +56,7 @@ class DialogueMQTT : public QObject
     void recevoirMessage(const QByteArray& message, const QMqttTopicName& topic);
     void gererConnexion();
     void gererDeconnexion();
-    void gererErreur(QMqttClient::ClientError erreur);
+    void gererErreur();
 
   signals:
     void brokerConnecte();

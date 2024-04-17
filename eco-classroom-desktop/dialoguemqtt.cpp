@@ -1,5 +1,5 @@
 #include "dialoguemqtt.h"
-//#include <QMessageBox>
+#include <QMessageBox>
 #include <QDebug>
 
 DialogueMQTT::DialogueMQTT(QObject* parent) : QObject(parent), clientMQTT(new QMqttClient(this))
@@ -27,7 +27,7 @@ void DialogueMQTT::demarrer(QString hostname, quint16 port)
             SIGNAL(messageReceived(const QByteArray&, const QMqttTopicName&)),
             this,
             SLOT(recevoirMessage(const QByteArray&, const QMqttTopicName&)));
-    connect(clientMQTT, SIGNAL(errorChanged(ClientError)), this, SLOT(gererErreur(ClientError)));
+    connect(clientMQTT, SIGNAL(errorChanged(ClientError)), this, SLOT(gererErreur()));
 
     clientMQTT->connectToHost();
 }
@@ -47,9 +47,7 @@ void DialogueMQTT::abonner(QString topic)
     subscription = clientMQTT->subscribe(topic);
     if(!subscription)
     {
-        // @todo il faut emettre un signal à connecter à un slot de l'ihm pour pouvoir afficher
-        // cette boîte de dialogue QMessageBox::critical(this, "Erreur", "Impossible de s'abonner
-        // !");
+        QMessageBox::critical(nullptr, "Erreur", "Impossible de s'abonner au broker MQTT !");
         return;
     }
 }
@@ -92,8 +90,8 @@ void DialogueMQTT::gererDeconnexion()
     desabonner(RACINE_DES_TOPICS);
 }
 
-void DialogueMQTT::gererErreur(QMqttClient::ClientError erreur)
+void DialogueMQTT::gererErreur()
 {
     // pour le débuggage
-    qDebug() << Q_FUNC_INFO << "erreur" << erreur;
+    qDebug() << Q_FUNC_INFO << "erreur" << clientMQTT->error();
 }
