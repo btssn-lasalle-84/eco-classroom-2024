@@ -4,47 +4,62 @@
 DialogueMQTT::DialogueMQTT(QObject* parent) : QObject(parent), clientMQTT(new QMqttClient(this))
 {
     qDebug() << Q_FUNC_INFO;
-    // @todo appeler la méthode demarrer()
+    demarrer();
 }
 
 DialogueMQTT::~DialogueMQTT()
 {
-    // @todo la méthode arreter()
     qDebug() << Q_FUNC_INFO;
+    arreter();
 }
 
 void DialogueMQTT::demarrer(QString hostname, quint16 port)
 {
     qDebug() << Q_FUNC_INFO << "hostname" << hostname << "port" << port;
 
-    // @todo Fixer le Hostname de l'objet clientMQTT
+    clientMQTT->setHostname(hostname);
+    clientMQTT->setPort(NUMERO_PORT_BROKER_MQTT);
 
-    // @todo Fixer le Port de l'objet clientMQTT
+    connect(clientMQTT, SIGNAL(connected(), this, SLOT(gererConnexion());
+    connect(clientMQTT, SIGNAL(disconnected()), this, SLOT(gererDeconnexion());
+    connect(clientMQTT, SIGNAL(messageReceived()), this, SLOT(recevoirMessage());
+    connect(clientMQTT, SIGNAL(errorChanged(ClientError()), this, SLOT(gererErreur());
 
-    // @todo Connecter les signaux connected(), disconnected(), messageReceived() et
-    // errorChanged(ClientError) aux slots gererConnexion(), gererDeconnexion(), recevoirMessage()
-    // et gererErreur()
-
-    // @todo Appeler la méthode connectToHost() de l'objet clientMQTT pour se connecter au broker
+    clientMQTT->connectToHost();
 }
 
 void DialogueMQTT::arreter()
 {
     qDebug() << Q_FUNC_INFO;
-    // @todo Appeler la méthode disconnectFromHost() de l'objet clientMQTT pour se connecter au
-    // broker
+    clientMQTT->disconnectFromHost();
 }
 
 void DialogueMQTT::abonner(QString topic)
 {
     qDebug() << Q_FUNC_INFO << "topic" << topic;
-    // @todo Appeler la méthode subscribe() de l'objet clientMQTT pour s'abonner au topic
+
+    QMqttSubscription* subscription;
+
+    subscription = clientMQTT->subscribe(topic);
+    if(!subscription)
+    {
+        QMessageBox::critical(this, "Erreur", "Impossible de s'abonner !");
+        return;
+    }
 }
 
 void DialogueMQTT::desabonner(QString topic)
 {
     qDebug() << Q_FUNC_INFO << "topic" << topic;
-    // @todo Appeler la méthode unsubscribe() de l'objet clientMQTT pour s'abonner au topic
+
+    QMqttSubscription* unsubscribe;
+
+    unsubscribe = clientMQTT->unsubscribe(topic);
+    if(!unsubscribe)
+    {
+        QMessageBox::critical(this, "Erreur", "Impossible de se désabonner !");
+        return;
+    }
 }
 
 void DialogueMQTT::recevoirMessage(const QByteArray& message, const QMqttTopicName& topic)
@@ -69,7 +84,7 @@ void DialogueMQTT::gererConnexion()
     // @todo Emettre le signal brokerConnecte() qu'il faudra connecter dans l'IHM pour signaler
     // visuellement que l'on est connecté au broker
 
-    // @todo Appeler la méthode abonner() pour s'abonner au topic racine des salles
+    abonner(RACINE_DES_TOPICS);
 }
 
 void DialogueMQTT::gererDeconnexion()
@@ -78,7 +93,7 @@ void DialogueMQTT::gererDeconnexion()
     // @todo Emettre le signal brokerDeconnecte() qu'il faudra connecter dans l'IHM pour signaler
     // visuellement que l'on est déconnecté au broker
 
-    // @todo Appeler la méthode desabonner() pour se désabonner du topic racine des salles
+    desabonner(RACINE_DES_TOPICS);
 }
 
 void DialogueMQTT::gererErreur(QMqttClient::ClientError erreur)
