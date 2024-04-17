@@ -1,4 +1,5 @@
 #include "dialoguemqtt.h"
+//#include <QMessageBox>
 #include <QDebug>
 
 DialogueMQTT::DialogueMQTT(QObject* parent) : QObject(parent), clientMQTT(new QMqttClient(this))
@@ -20,10 +21,13 @@ void DialogueMQTT::demarrer(QString hostname, quint16 port)
     clientMQTT->setHostname(hostname);
     clientMQTT->setPort(port);
 
-    connect(clientMQTT, SIGNAL(connected(), this, SLOT(gererConnexion());
-    connect(clientMQTT, SIGNAL(disconnected()), this, SLOT(gererDeconnexion());
-    connect(clientMQTT, SIGNAL(messageReceived()), this, SLOT(recevoirMessage());
-    connect(clientMQTT, SIGNAL(errorChanged(ClientError()), this, SLOT(gererErreur());
+    connect(clientMQTT, SIGNAL(connected()), this, SLOT(gererConnexion()));
+    connect(clientMQTT, SIGNAL(disconnected()), this, SLOT(gererDeconnexion()));
+    connect(clientMQTT,
+            SIGNAL(messageReceived(const QByteArray&, const QMqttTopicName&)),
+            this,
+            SLOT(recevoirMessage(const QByteArray&, const QMqttTopicName&)));
+    connect(clientMQTT, SIGNAL(errorChanged(ClientError)), this, SLOT(gererErreur(ClientError)));
 
     clientMQTT->connectToHost();
 }
@@ -43,7 +47,9 @@ void DialogueMQTT::abonner(QString topic)
     subscription = clientMQTT->subscribe(topic);
     if(!subscription)
     {
-        QMessageBox::critical(this, "Erreur", "Impossible de s'abonner !");
+        // @todo il faut emettre un signal à connecter à un slot de l'ihm pour pouvoir afficher
+        // cette boîte de dialogue QMessageBox::critical(this, "Erreur", "Impossible de s'abonner
+        // !");
         return;
     }
 }
@@ -51,8 +57,6 @@ void DialogueMQTT::abonner(QString topic)
 void DialogueMQTT::desabonner(QString topic)
 {
     qDebug() << Q_FUNC_INFO << "topic" << topic;
-
-    QMqttSubscription* unsubscribe;
 
     clientMQTT->unsubscribe(topic);
 }
@@ -64,8 +68,8 @@ void DialogueMQTT::recevoirMessage(const QByteArray& message, const QMqttTopicNa
     // Les données des modules sonde et détection sont publiées sur le topic : salles/nom/type
     // cf. l'enum StructureTopic
 
-    QStringList topic = topic.name().split('/');
-
+    QStringList champs = topic.name().split('/');
+    qDebug() << Q_FUNC_INFO << "champs" << champs;
 
     // @todo Extraire le nom de la salle et le type de donnée
 
@@ -77,18 +81,14 @@ void DialogueMQTT::recevoirMessage(const QByteArray& message, const QMqttTopicNa
 void DialogueMQTT::gererConnexion()
 {
     qDebug() << Q_FUNC_INFO;
-    // @todo Emettre le signal brokerConnecte() qu'il faudra connecter dans l'IHM pour signaler
-    // visuellement que l'on est connecté au broker
-
+    emit brokerConnecte();
     abonner(RACINE_DES_TOPICS);
 }
 
 void DialogueMQTT::gererDeconnexion()
 {
     qDebug() << Q_FUNC_INFO;
-    // @todo Emettre le signal brokerDeconnecte() qu'il faudra connecter dans l'IHM pour signaler
-    // visuellement que l'on est déconnecté au broker
-
+    emit brokerDeconnecte();
     desabonner(RACINE_DES_TOPICS);
 }
 
