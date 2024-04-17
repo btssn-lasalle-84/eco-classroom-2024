@@ -18,7 +18,7 @@ void DialogueMQTT::demarrer(QString hostname, quint16 port)
     qDebug() << Q_FUNC_INFO << "hostname" << hostname << "port" << port;
 
     clientMQTT->setHostname(hostname);
-    clientMQTT->setPort(NUMERO_PORT_BROKER_MQTT);
+    clientMQTT->setPort(port);
 
     connect(clientMQTT, SIGNAL(connected(), this, SLOT(gererConnexion());
     connect(clientMQTT, SIGNAL(disconnected()), this, SLOT(gererDeconnexion());
@@ -54,12 +54,7 @@ void DialogueMQTT::desabonner(QString topic)
 
     QMqttSubscription* unsubscribe;
 
-    unsubscribe = clientMQTT->unsubscribe(topic);
-    if(!unsubscribe)
-    {
-        QMessageBox::critical(this, "Erreur", "Impossible de se désabonner !");
-        return;
-    }
+    clientMQTT->unsubscribe(topic);
 }
 
 void DialogueMQTT::recevoirMessage(const QByteArray& message, const QMqttTopicName& topic)
@@ -69,7 +64,8 @@ void DialogueMQTT::recevoirMessage(const QByteArray& message, const QMqttTopicNa
     // Les données des modules sonde et détection sont publiées sur le topic : salles/nom/type
     // cf. l'enum StructureTopic
 
-    // @todo Spliter le topic.name() avec le délimiteur '/'
+    QStringList topic = topic.name().split('/');
+
 
     // @todo Extraire le nom de la salle et le type de donnée
 
