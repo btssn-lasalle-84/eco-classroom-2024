@@ -117,6 +117,7 @@ class SalleEco : public QObject
 
   public slots:
     void traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee);
+    void determinerIndiceQualiteAir();
 
   signals:
 };
