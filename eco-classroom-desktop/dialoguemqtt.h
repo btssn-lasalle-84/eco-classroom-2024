@@ -34,9 +34,9 @@ class DialogueMQTT : public QObject
     // La structure des topics : salles/nom/type
     enum StructureTopic
     {
-        RACINE,            //!< La racine du topic (égal à RACINE_DES_TOPICS)
-        NOM_SALLE_ECO,     //!< Le nom de la salle dont provient la donnée
-        TYPE_DONNEE_MODULE //!< Le type de données (température, co2, etc...)
+        RACINE             = 0, //!< La racine du topic (égal à RACINE_DES_TOPICS)
+        NOM_SALLE_ECO      = 1, //!< Le nom de la salle dont provient la donnée
+        TYPE_DONNEE_MODULE = 3  //!< Le type de données (température, co2, etc...)
     };
 
   private:

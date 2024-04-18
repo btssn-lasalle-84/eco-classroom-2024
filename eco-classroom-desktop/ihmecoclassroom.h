@@ -42,11 +42,13 @@ class IHMEcoClassroom : public QWidget
     QMap<QString, SalleEco*> salles;        //!< Les salles
     BaseDeDonnees*           baseDeDonnees; //!< l'association vers la classe BaseDeDonnees
     DialogueMQTT*            dialogueMQTT;  //!< l'association vers la classe DialogueMQTT
-
+    // Widgets
     QTableWidget* tableauSallesEco;
-    void          creerTableauSallesEco();
-    void          ajouterSalleEcoTableau(const SalleEco& salle);
-    void          afficherSallesEco();
+
+    void gererEvenements();
+    void creerTableauSallesEco();
+    void ajouterSalleEcoTableau(const SalleEco& salle);
+    void afficherSallesEco();
 
     /**
      * @enum ColonneTableauSallesEco

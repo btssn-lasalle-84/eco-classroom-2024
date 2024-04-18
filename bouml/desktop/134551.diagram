@@ -1,34 +1,59 @@
 format 224
 
+classcanvas 128002 class_ref 134570 // BaseDeDonnees
+  classdiagramsettings member_max_width 0 end
+  xyz 1013 46 3005
+end
 classcanvas 128023 class_ref 134679 // IHMEcoClassroom
   classdiagramsettings member_max_width 0 end
-  xyz 317 11 2000
+  xyz 317.8 12 2000
 end
 classcanvas 128151 class_ref 135063 // SalleEco
   classdiagramsettings member_max_width 0 end
-  xyz 21 343 2000
+  xyz 21 348.8 2000
 end
 classcanvas 128279 class_ref 134935 // Mesures
   classdiagramsettings member_max_width 0 end
-  xyz 21 1050 2000
+  xyz 96 1131 2000
 end
 classcanvas 128407 class_ref 134551 // Etats
   classdiagramsettings member_max_width 0 end
-  xyz 831 1050 2000
+  xyz 489 1124 2000
+end
+classcanvas 128642 class_ref 134530 // DialogueMQTT
+  classdiagramsettings member_max_width 0 end
+  xyz 1128 520.2 3005
+end
+relationcanvas 128130 relation_ref 134570 // <unidirectional association>
+  from ref 128002 z 3006 to point 966 37
+  line 128258 z 3006 to point 966 87
+  line 128386 z 3006 to ref 128002
+  role_a_pos 968 73 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128514 relation_ref 134698 // <unidirectional association>
+  from ref 128023 z 3006 to ref 128002
+  role_a_pos 883 100 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128535 relation_ref 134807 // <unidirectional association>
-  from ref 128151 z 2001 stereotype "<<QVector>>" xyz 191 995 3000 to ref 128279
-  role_a_pos 217 1024 3000 no_role_b
+  from ref 128151 z 2001 stereotype "<<QVector>>" xyz 192 1093 3000 to ref 128279
+  role_a_pos 239 1103 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128663 relation_ref 134935 // <unidirectional association>
-  from ref 128151 z 2001 stereotype "<<QVector>>" xyz 782 995 3000 to ref 128407
-  role_a_pos 884 1024 3000 no_role_b
+  from ref 128151 z 2001 stereotype "<<QVector>>" xyz 510 1090 3000 to ref 128407
+  role_a_pos 577 1096 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128770 relation_ref 128130 // <unidirectional association>
+  from ref 128023 z 3006 to ref 128642
+  role_a_pos 1179 496 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128791 relation_ref 135063 // <unidirectional association>
-  from ref 128023 z 2001 stereotype "<<QMap>>" xyz 496 265 3000 to ref 128151
-  role_a_pos 552 317 3000 no_role_b
+  from ref 128023 z 2001 stereotype "<<QMap>>" xyz 498.5 263 3000 to ref 128151
+  role_a_pos 489 296 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 end

@@ -56,7 +56,7 @@ class IHMEcoClassroom
     creerTableauSallesEco();
     afficherSallesEco();
 
-    showMaximized();
+    // showMaximized();
 !!!134935.cpp!!!	~IHMEcoClassroom()
     BaseDeDonnees::detruireInstance();
     qDebug() << Q_FUNC_INFO;
