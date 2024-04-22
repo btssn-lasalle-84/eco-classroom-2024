@@ -1,0 +1,65 @@
+class DialogueMQTT
+!!!128002.cpp!!!	DialogueMQTT(inout parent : QObject = nullptr)
+    qDebug() << Q_FUNC_INFO;
+    demarrer();
+!!!128130.cpp!!!	~DialogueMQTT()
+    qDebug() << Q_FUNC_INFO;
+    arreter();
+!!!128258.cpp!!!	demarrer(in hostname : QString = ADRESSE_IP_BROKER_MQTT, in port : quint16 = NUMERO_PORT_BROKER_MQTT) : void
+    qDebug() << Q_FUNC_INFO << "hostname" << hostname << "port" << port;
+
+    clientMQTT->setHostname(hostname);
+    clientMQTT->setPort(port);
+
+    connect(clientMQTT, SIGNAL(connected()), this, SLOT(gererConnexion()));
+    connect(clientMQTT, SIGNAL(disconnected()), this, SLOT(gererDeconnexion()));
+    connect(clientMQTT,
+            SIGNAL(messageReceived(const QByteArray&, const QMqttTopicName&)),
+            this,
+            SLOT(recevoirMessage(const QByteArray&, const QMqttTopicName&)));
+    connect(clientMQTT, SIGNAL(errorChanged(ClientError)), this, SLOT(gererErreur()));
+
+    clientMQTT->connectToHost();
+!!!128386.cpp!!!	arreter() : void
+    qDebug() << Q_FUNC_INFO;
+    clientMQTT->disconnectFromHost();
+!!!128514.cpp!!!	abonner(in topic : QString) : void
+    qDebug() << Q_FUNC_INFO << "topic" << topic;
+
+    QMqttSubscription* subscription;
+
+    subscription = clientMQTT->subscribe(topic);
+    if(!subscription)
+    {
+        QMessageBox::critical(nullptr, "Erreur", "Impossible de s'abonner au broker MQTT !");
+        return;
+    }
+!!!128642.cpp!!!	desabonner(in topic : QString) : void
+    qDebug() << Q_FUNC_INFO << "topic" << topic;
+
+    clientMQTT->unsubscribe(topic);
+!!!128770.cpp!!!	recevoirMessage(in message : QByteArray, in topic : QMqttTopicName) : void
+    qDebug() << Q_FUNC_INFO << QDateTime::currentDateTime().toString() << "topic" << topic.name()
+             << "message" << message;
+    // Les données des modules sonde et détection sont publiées sur le topic : salles/nom/type
+    // cf. l'enum StructureTopic
+
+    QStringList champs = topic.name().split('/');
+    qDebug() << Q_FUNC_INFO << "champs" << champs;
+
+    emit nouvelleDonnee(champs.at(StructureTopic::NOM_SALLE_ECO),
+                        champs.at(StructureTopic::TYPE_DONNEE_MODULE),
+                        message);
+
+    // @todo Il faudra connecter ce signal dans l'IHM pour traiter les données reçues
+!!!128898.cpp!!!	gererConnexion() : void
+    qDebug() << Q_FUNC_INFO;
+    emit brokerConnecte();
+    abonner(RACINE_DES_TOPICS);
+!!!129026.cpp!!!	gererDeconnexion() : void
+    qDebug() << Q_FUNC_INFO;
+    emit brokerDeconnecte();
+    desabonner(RACINE_DES_TOPICS);
+!!!129154.cpp!!!	gererErreur() : void
+    // pour le débuggage
+    qDebug() << Q_FUNC_INFO << "erreur" << clientMQTT->error();

@@ -210,32 +210,66 @@ void SalleEco::ajouterEtatLumieres(bool lumieres)
     etatsLumieres.push_back(etatLumieres);
 }
 
+void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee)
+{
+    // est-ce une donnée pour ma salle ?
+    if(nomSalleEco == nom)
+    {
+        qDebug() << Q_FUNC_INFO << "nom" << nom << QDateTime::currentDateTime().toString()
+                 << "nomSalleEco" << nomSalleEco << "typeDonnee" << typeDonnee << "donnee"
+                 << donnee;
+
+        if(typeDonnee == "co2")
+        {
+            ajouterMesureCO2(donnee.toInt());
+            // @todo enregistrer cette donnée dans la base de données
+            // @todo déclencher des calculs en appelant les méthodes
+        }
+
+        else if(typeDonnee == "temperature")
+        {
+            ajouterMesureTemperature(donnee.toDouble());
+            // @todo enregistrer cette donnée dans la base de données
+            // @todo déclencher des calculs en appelant les méthodes
+        }
+
+        else if(typeDonnee == "humidite")
+        {
+            ajouterMesureHumidite(donnee.toInt());
+            // @todo enregistrer cette donnée dans la base de données
+            // @todo déclencher des calculs en appelant les méthodes
+        }
+
+        // @todo mettre à jour l'IHM correspondante par envoi de "signals"
+    }
+}
+
 void SalleEco::determinerIndiceQualiteAir()
 {
     MesureCO2 mesureCO2 = getMesureCO2();
 
-    if(mesuresCO2.co2 >= SEUIL_QUALITE_AIR_EXCELLENT_NIVEAU_MINIMUM &&
-       mesuresCO2.co2 <= SEUIL_QUALITE_AIR_EXCELLENT_NIVEAU_MAXIMUM)
+    if(mesureCO2.co2 >= SEUIL_QUALITE_AIR_EXCELLENT_NIVEAU_MINIMUM &&
+       mesureCO2.co2 <= SEUIL_QUALITE_AIR_EXCELLENT_NIVEAU_MAXIMUM)
     {
         indiceCO2 = IndiceQualiteAir::Excellente;
     }
-    else if(mesuresCO2.co2 >= SEUIL_QUALITE_AIR_TRES_BIEN_NIVEAU_MINIMUM &&
-            mesuresCO2.co2 <= SEUIL_QUALITE_AIR_TRES_BIEN_NIVEAU_MAXIMUM)
+    else if(mesureCO2.co2 >= SEUIL_QUALITE_AIR_TRES_BIEN_NIVEAU_MINIMUM &&
+            mesureCO2.co2 <= SEUIL_QUALITE_AIR_TRES_BIEN_NIVEAU_MAXIMUM)
     {
         indiceCO2 = IndiceQualiteAir::TresBien;
     }
-    else if(mesuresCO2.co2 >= SEUIL_QUALITE_AIR_MODERE_NIVEAU_MINIMUM &&
-            mesuresCO2.co2 <= SEUIL_QUALITE_AIR_MODERE_NIVEAU_MAXIMUM)
+    else if(mesureCO2.co2 >= SEUIL_QUALITE_AIR_MODERE_NIVEAU_MINIMUM &&
+            mesureCO2.co2 <= SEUIL_QUALITE_AIR_MODERE_NIVEAU_MAXIMUM)
     {
         indiceCO2 = IndiceQualiteAir::Modere;
     }
-    else if(mesuresCO2.co2 >= SEUIL_QUALITE_AIR_MAUVAIS_NIVEAU_MINIMUM &&
-            mesuresCO2.co2 <= SEUIL_QUALITE_AIR_MAUVAIS_NIVEAU_MAXIMUM)
+    else if(mesureCO2.co2 >= SEUIL_QUALITE_AIR_MAUVAIS_NIVEAU_MINIMUM &&
+            mesureCO2.co2 <= SEUIL_QUALITE_AIR_MAUVAIS_NIVEAU_MAXIMUM)
     {
         indiceCO2 = IndiceQualiteAir::Mauvais;
     }
-    else if(mesuresCO2.co2 >= SEUIL_QUALITE_AIR_TRES_MAUVAIS_NIVEAU_MINIMUM &&
-            mesuresCO2.co2 <= SEUIL_QUALITE_AIR_TRES_MAUVAIS_NIVEAU_MAXIMUM)
+    else if(mesureCO2.co2 >= SEUIL_QUALITE_AIR_TRES_MAUVAIS_NIVEAU_MINIMUM &&
+            mesureCO2.co2 <= SEUIL_QUALITE_AIR_TRES_MAUVAIS_NIVEAU_MAXIMUM)
     {
         indiceCO2 = IndiceQualiteAir::TresMauvais;
     }

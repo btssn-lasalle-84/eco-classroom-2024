@@ -19,6 +19,42 @@ class SalleEco
     return indiceTHI;
 !!!150442.cpp!!!	getIndiceConfinement() : int
     return indiceConfinement;
+!!!129666.cpp!!!	getMesureCO2() : MesureCO2
+    if(!mesuresCO2.isEmpty())
+    {
+        return mesuresCO2.last();
+    }
+    return MesureCO2();
+!!!129794.cpp!!!	getTemperature() : MesureTemperature
+    if(!mesuresTemperature.isEmpty())
+    {
+        return mesuresTemperature.last();
+    }
+    return MesureTemperature();
+!!!129922.cpp!!!	getHumidite() : MesureHumidite
+    if(!mesuresHumidite.isEmpty())
+    {
+        return mesuresHumidite.last();
+    }
+    return MesureHumidite();
+!!!130050.cpp!!!	getEtatPresence() : EtatPresence
+    if(!etatsPresence.isEmpty())
+    {
+        return etatsPresence.last();
+    }
+    return EtatPresence();
+!!!130178.cpp!!!	getEtatFenetres() : EtatFenetres
+    if(!etatsFenetres.isEmpty())
+    {
+        return etatsFenetres.last();
+    }
+    return EtatFenetres();
+!!!130306.cpp!!!	getEtatLumieres() : EtatLumieres
+    if(!etatsLumieres.isEmpty())
+    {
+        return etatsLumieres.last();
+    }
+    return EtatLumieres();
 !!!150570.cpp!!!	setIDSalle(in idSalle : QString) : void
     this->idSalle = idSalle;
 !!!150698.cpp!!!	setNom(in nom : QString) : void
@@ -35,3 +71,39 @@ class SalleEco
     this->indiceTHI = indiceTHI;
 !!!151466.cpp!!!	setIndiceConfinement(in indiceConfinement : int) : void
     this->indiceConfinement = indiceConfinement;
+!!!130434.cpp!!!	ajouterMesureCO2(in co2 : int) : void
+    MesureCO2 mesureCO2;
+    mesureCO2.co2        = co2;
+    mesureCO2.horodatage = QDateTime::currentDateTime();
+    mesureCO2.valide     = true;
+    mesuresCO2.push_back(mesureCO2);
+!!!130562.cpp!!!	ajouterMesureTemperature(in temperature : double) : void
+    MesureTemperature mesureTemperature;
+    mesureTemperature.temperature = temperature;
+    mesureTemperature.horodatage  = QDateTime::currentDateTime();
+    mesureTemperature.valide      = true;
+    mesuresTemperature.push_back(mesureTemperature);
+!!!130690.cpp!!!	ajouterMesureHumidite(in humidite : int) : void
+    MesureHumidite mesureHumidite;
+    mesureHumidite.humidite   = humidite;
+    mesureHumidite.horodatage = QDateTime::currentDateTime();
+    mesureHumidite.valide     = true;
+    mesuresHumidite.push_back(mesureHumidite);
+!!!130818.cpp!!!	ajouterEtatPresence(in presence : bool) : void
+    EtatPresence etatPresence;
+    etatPresence.presence   = presence;
+    etatPresence.horodatage = QDateTime::currentDateTime();
+    etatPresence.valide     = true;
+    etatsPresence.push_back(etatPresence);
+!!!130946.cpp!!!	ajouterEtatFenetres(in fenetres : bool) : void
+    EtatFenetres etatFenetres;
+    etatFenetres.fenetres   = fenetres;
+    etatFenetres.horodatage = QDateTime::currentDateTime();
+    etatFenetres.valide     = true;
+    etatsFenetres.push_back(etatFenetres);
+!!!131074.cpp!!!	ajouterEtatLumieres(in lumieres : bool) : void
+    EtatLumieres etatLumieres;
+    etatLumieres.lumieres   = lumieres;
+    etatLumieres.horodatage = QDateTime::currentDateTime();
+    etatLumieres.valide     = true;
+    etatsLumieres.push_back(etatLumieres);

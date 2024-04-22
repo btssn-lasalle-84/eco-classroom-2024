@@ -115,6 +115,8 @@ class SalleEco : public QObject
     void ajouterEtatFenetres(bool fenetres);
     void ajouterEtatLumieres(bool lumieres);
 
+  public slots:
+    void traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee);
     void determinerIndiceQualiteAir();
 
   signals:
