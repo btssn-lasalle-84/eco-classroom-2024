@@ -222,21 +222,23 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
         if(typeDonnee == "co2")
         {
             ajouterMesureCO2(donnee.toInt());
-            // @todo enregistrer cette donnée dans la base de données
+            QString enregistrementCO2 = "INSERT INTO MesureCo2 (idSalle, co2) VALUES(nomSalleEco, donnee)";
             // @todo déclencher des calculs en appelant les méthodes
         }
 
         else if(typeDonnee == "temperature")
         {
             ajouterMesureTemperature(donnee.toDouble());
-            // @todo enregistrer cette donnée dans la base de données
+            QString enregistrementTemperature = "INSERT INTO MesureTemperature (idSalle, temperature) VALUES(nomSalleEco, donnee)";
+
             // @todo déclencher des calculs en appelant les méthodes
         }
 
         else if(typeDonnee == "humidite")
         {
             ajouterMesureHumidite(donnee.toInt());
-            // @todo enregistrer cette donnée dans la base de données
+            QString enregistrementHumidite = "INSERT INTO MesureHumidite (idSalle, humidite) VALUES(nomSalleEco, donnee)";
+
             // @todo déclencher des calculs en appelant les méthodes
         }
 
