@@ -5,6 +5,9 @@
 #include <QString>
 #include <QVector>
 
+#include "mesures.h"
+#include "etats.h"
+
 #define SEUIL_QUALITE_AIR_EXCELLENT_NIVEAU_MINIMUM    0
 #define SEUIL_QUALITE_AIR_EXCELLENT_NIVEAU_MAXIMUM    400
 #define SEUIL_QUALITE_AIR_TRES_BIEN_NIVEAU_MINIMUM    401
@@ -37,8 +40,7 @@
 #define SEUIL_INCONFORT_IADI_INCONFORT      29
 #define SEUIL_INCONFORT_IADI_STRESS_INTENSE 32
 
-#include "mesures.h"
-#include "etats.h"
+class BaseDeDonnees;
 
 class SalleEco : public QObject
 {
@@ -73,6 +75,7 @@ class SalleEco : public QObject
     QVector<EtatPresence>      etatsPresence;
     QVector<EtatFenetres>      etatsFenetres;
     QVector<EtatLumieres>      etatsLumieres;
+    BaseDeDonnees*             baseDeDonnees; //!< l'association vers la classe BaseDeDonnees
 
   public:
     explicit SalleEco(QObject* parent = nullptr);

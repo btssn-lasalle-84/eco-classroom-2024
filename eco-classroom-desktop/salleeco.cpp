@@ -1,9 +1,12 @@
 #include "salleeco.h"
 #include "indices.h"
+#include "basededonnees.h"
 #include <QDebug>
 
-SalleEco::SalleEco(QObject* parent) : QObject(parent)
+SalleEco::SalleEco(QObject* parent) : QObject(parent), baseDeDonnees(BaseDeDonnees::getInstance())
 {
+    qDebug() << Q_FUNC_INFO;
+    baseDeDonnees->connecter();
 }
 
 SalleEco::SalleEco(QString  idSalle,
@@ -12,13 +15,16 @@ SalleEco::SalleEco(QString  idSalle,
                    double   superficie,
                    QObject* parent) :
     QObject(parent),
-    idSalle(idSalle), nom(nom), description(description), superficie(superficie)
+    idSalle(idSalle), nom(nom), description(description), superficie(superficie),
+    baseDeDonnees(BaseDeDonnees::getInstance())
 {
     qDebug() << Q_FUNC_INFO << idSalle << nom << description << superficie;
+    baseDeDonnees->connecter();
 }
 
 SalleEco::~SalleEco()
 {
+    BaseDeDonnees::detruireInstance();
     qDebug() << Q_FUNC_INFO << idSalle << nom << description << superficie;
 }
 
@@ -219,26 +225,28 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
                  << "nomSalleEco" << nomSalleEco << "typeDonnee" << typeDonnee << "donnee"
                  << donnee;
 
+        QString requete;
+
         if(typeDonnee == "co2")
         {
             ajouterMesureCO2(donnee.toInt());
-            QString enregistrementCO2 = "INSERT INTO MesureCo2 (idSalle, co2) VALUES(nomSalleEco, donnee)";
+
+            requete = "INSERT INTO MesureCo2 (idSalle,co2,horodatage) VALUES (" + idSalle + "," +
+                      donnee + ",NOW())";
+            qDebug() << Q_FUNC_INFO << "requete" << requete;
+            baseDeDonnees->executer(requete);
             // @todo déclencher des calculs en appelant les méthodes
         }
-
         else if(typeDonnee == "temperature")
         {
             ajouterMesureTemperature(donnee.toDouble());
-            QString enregistrementTemperature = "INSERT INTO MesureTemperature (idSalle, temperature) VALUES(nomSalleEco, donnee)";
-
+            // @todo enregistrer la nouvelle mesure
             // @todo déclencher des calculs en appelant les méthodes
         }
-
         else if(typeDonnee == "humidite")
         {
             ajouterMesureHumidite(donnee.toInt());
-            QString enregistrementHumidite = "INSERT INTO MesureHumidite (idSalle, humidite) VALUES(nomSalleEco, donnee)";
-
+            // @todo enregistrer la nouvelle mesure
             // @todo déclencher des calculs en appelant les méthodes
         }
 
