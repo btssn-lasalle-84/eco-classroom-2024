@@ -240,13 +240,19 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
         else if(typeDonnee == "temperature")
         {
             ajouterMesureTemperature(donnee.toDouble());
-            // @todo enregistrer la nouvelle mesure
+
+            requete = "INSERT INTO MesureTemperature (idSalle,temperature,horodatage) VALUES (" + idSalle + "," + donnee + ",NOW())";
+            qDebug() << Q_FUNC_INFO << "requete" << requete;
+            baseDeDonnees->executer(requete);
             // @todo déclencher des calculs en appelant les méthodes
         }
         else if(typeDonnee == "humidite")
         {
             ajouterMesureHumidite(donnee.toInt());
-            // @todo enregistrer la nouvelle mesure
+
+            requete = "INSERT INTO MesureHumidite (idSalle,humidite,horodatage) VALUES (" + idSalle + "," + donnee + ",NOW())";
+            qDebug() << Q_FUNC_INFO << "requete" << requete;
+            baseDeDonnees->executer(requete);
             // @todo déclencher des calculs en appelant les méthodes
         }
 
