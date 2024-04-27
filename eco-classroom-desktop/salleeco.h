@@ -121,8 +121,15 @@ class SalleEco : public QObject
   public slots:
     void traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee);
     void determinerIndiceQualiteAir();
+    void determinerIndiceConfinement();
+    void determinerIndiceIADI();
+    void determinerIndiceTHI();
 
   signals:
+    void nouvelIndiceQualiteAir(QString nomSalleEco);
+    void nouvelIndiceConfinement(QString nomSalleEco);
+    void nouvelIndiceIADI(QString nomSalleEco);
+    void nouvelIndiceTHI(QString nomSalleEco);
 };
 
 #endif // SALLEECO_H

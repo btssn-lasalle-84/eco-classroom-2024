@@ -235,34 +235,39 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
                       donnee + ",NOW())";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             baseDeDonnees->executer(requete);
-            // @todo déclencher des calculs en appelant les méthodes
+            // @todo Appeler determinerIndiceQualiteAir() puis determinerIndiceConfinement()
+            // @todo Si changement d'indice, signaler nouvelIndiceQualiteAir(nom) et/ou
+            // nouvelIndiceConfinement(nom)
         }
         else if(typeDonnee == "temperature")
         {
             ajouterMesureTemperature(donnee.toDouble());
 
-            requete = "INSERT INTO MesureTemperature (idSalle,temperature,horodatage) VALUES (" + idSalle + "," + donnee + ",NOW())";
+            requete = "INSERT INTO MesureTemperature (idSalle,temperature,horodatage) VALUES (" +
+                      idSalle + "," + donnee + ",NOW())";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             baseDeDonnees->executer(requete);
-            // @todo déclencher des calculs en appelant les méthodes
+            // @todo Appeler determinerIndiceTHI() et determinerIndiceIADI()
         }
         else if(typeDonnee == "humidite")
         {
             ajouterMesureHumidite(donnee.toInt());
 
-            requete = "INSERT INTO MesureHumidite (idSalle,humidite,horodatage) VALUES (" + idSalle + "," + donnee + ",NOW())";
+            requete = "INSERT INTO MesureHumidite (idSalle,humidite,horodatage) VALUES (" +
+                      idSalle + "," + donnee + ",NOW())";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             baseDeDonnees->executer(requete);
-            // @todo déclencher des calculs en appelant les méthodes
+            // @todo Appeler determinerIndiceTHI() et determinerIndiceIADI()
         }
-
-        // @todo mettre à jour l'IHM correspondante par envoi de "signals"
     }
 }
 
 void SalleEco::determinerIndiceQualiteAir()
 {
     MesureCO2 mesureCO2 = getMesureCO2();
+    qDebug() << Q_FUNC_INFO << "mesureCO2" << mesureCO2.co2;
+
+    int indiceCO2Precedent = indiceCO2;
 
     if(mesureCO2.co2 >= SEUIL_QUALITE_AIR_EXCELLENT_NIVEAU_MINIMUM &&
        mesureCO2.co2 <= SEUIL_QUALITE_AIR_EXCELLENT_NIVEAU_MAXIMUM)
@@ -293,4 +298,29 @@ void SalleEco::determinerIndiceQualiteAir()
     {
         indiceCO2 = IndiceQualiteAir::Severe;
     }
+
+    // @todo Si changement d'indice, signaler nouvelIndiceQualiteAir(nom)
+
+    qDebug() << Q_FUNC_INFO << "indiceCO2" << indiceCO2;
+}
+
+void SalleEco::determinerIndiceConfinement()
+{
+    // @todo Déterminer l'indice de confinement
+    qDebug() << Q_FUNC_INFO << "indiceConfinement" << indiceConfinement;
+    // @todo Si changement d'indice, signaler nouvelIndiceConfinement(nom)
+}
+
+void SalleEco::determinerIndiceIADI()
+{
+    // @todo Déterminer l'indice IADI
+    qDebug() << Q_FUNC_INFO << "indiceIADI" << indiceIADI;
+    // @todo Si changement d'indice, signaler nouvelIndiceIADI(nom)
+}
+
+void SalleEco::determinerIndiceTHI()
+{
+    // @todo Déterminer l'indice THI
+    qDebug() << Q_FUNC_INFO << "indiceTHI" << indiceTHI;
+    // @todo Si changement d'indice, signaler nouvelIndiceTHI(nom)
 }

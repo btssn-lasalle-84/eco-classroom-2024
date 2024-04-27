@@ -86,7 +86,18 @@ void IHMEcoClassroom::gererEvenements()
                 SIGNAL(nouvelleDonnee(QString, QString, QString)),
                 sallesEco.value(),
                 SLOT(traiterNouvelleDonnee(QString, QString, QString)));
+        // @todo connecter le signal nouvelIndiceQualiteAir(QString) vers un slot de l'IHM pour
+        // mettre à jour l'indice correspondant
+        // @todo connecter le signal nouvelIndiceConfinement(QString) vers un slot de l'IHM pour
+        // mettre à jour l'indice correspondant
+        // @todo connecter le signal nouvelIndiceIADI(QString) vers un slot de l'IHM pour mettre à
+        // jour l'indice correspondant
+        // @todo connecter le signal nouvelIndiceTHI(QString) vers un slot de l'IHM pour mettre à
+        // jour l'indice correspondant
     }
+
+    // @todo connecter le signal nouvelleDonnee(QString, QString, QString) vers un slot de l'IHM
+    // pour afficher la nouvelle donnée
 }
 
 void IHMEcoClassroom::creerTableauSallesEco()
