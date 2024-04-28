@@ -235,7 +235,9 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
                       donnee + ",NOW())";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             baseDeDonnees->executer(requete);
-            // @todo Appeler determinerIndiceQualiteAir() puis determinerIndiceConfinement()
+            determinerIndiceQualiteAir();
+            determinerIndiceConfinement();
+
             // @todo Si changement d'indice, signaler nouvelIndiceQualiteAir(nom) et/ou
             // nouvelIndiceConfinement(nom)
         }
@@ -247,7 +249,8 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
                       idSalle + "," + donnee + ",NOW())";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             baseDeDonnees->executer(requete);
-            // @todo Appeler determinerIndiceTHI() et determinerIndiceIADI()
+            determinerIndiceTHI();
+            determinerIndiceIADI();
         }
         else if(typeDonnee == "humidite")
         {
@@ -257,7 +260,8 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
                       idSalle + "," + donnee + ",NOW())";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             baseDeDonnees->executer(requete);
-            // @todo Appeler determinerIndiceTHI() et determinerIndiceIADI()
+            determinerIndiceTHI();
+            determinerIndiceIADI();
         }
     }
 }
@@ -299,28 +303,51 @@ void SalleEco::determinerIndiceQualiteAir()
         indiceCO2 = IndiceQualiteAir::Severe;
     }
 
-    // @todo Si changement d'indice, signaler nouvelIndiceQualiteAir(nom)
-
+    if (indiceCO2 != indiceCO2Precedent)
+    {
+           emit nouvelIndiceQualiteAir(nom);
+    }
     qDebug() << Q_FUNC_INFO << "indiceCO2" << indiceCO2;
 }
 
 void SalleEco::determinerIndiceConfinement()
 {
+
     // @todo Déterminer l'indice de confinement
+
+    int indiceConfinementPrecedent = indiceConfinement;
+
     qDebug() << Q_FUNC_INFO << "indiceConfinement" << indiceConfinement;
-    // @todo Si changement d'indice, signaler nouvelIndiceConfinement(nom)
+
+    if (indiceConfinement != indiceConfinementPrecedent)
+    {
+           emit nouvelIndiceConfinement(nom);
+    }
 }
 
 void SalleEco::determinerIndiceIADI()
 {
     // @todo Déterminer l'indice IADI
+    int indiceIADIPrecedent = indiceIADI;
+
     qDebug() << Q_FUNC_INFO << "indiceIADI" << indiceIADI;
-    // @todo Si changement d'indice, signaler nouvelIndiceIADI(nom)
+
+    if (indiceIADI != indiceIADIPrecedent)
+    {
+        emit nouvelIndiceIADI(nom);
+    }
 }
 
 void SalleEco::determinerIndiceTHI()
 {
     // @todo Déterminer l'indice THI
+
+    int indiceTHIPrecedent = indiceTHI;
+
     qDebug() << Q_FUNC_INFO << "indiceTHI" << indiceTHI;
-    // @todo Si changement d'indice, signaler nouvelIndiceTHI(nom)
+
+    if (indiceTHI != indiceTHIPrecedent)
+    {
+        emit nouvelIndiceTHI(nom);
+    }
 }
