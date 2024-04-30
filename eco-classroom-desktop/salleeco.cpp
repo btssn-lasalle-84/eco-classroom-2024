@@ -313,27 +313,27 @@ void SalleEco::determinerIndiceQualiteAir()
 void SalleEco::determinerIndiceConfinement()
 {
 
-    if(indiceConfinement < 0.5)
+    if(indiceConfinement < SEUIL_ICONE_NUL)
     {
         indiceConfinement =  INDICE_CONFINEMENT_NUL;
     }
-    else if((indiceConfinement >= 0.5) && indiceConfinement < 1.5)
+    else if((indiceConfinement >= SEUIL_ICONE_NUL) && indiceConfinement < SEUIL_ICONE_FAIBLE)
     {
         indiceConfinement = INDICE_CONFINEMENT_FAIBLE;
     }
-    else if((indiceConfinement >= 1.5) && indiceConfinement < 2.5)
+    else if((indiceConfinement >= SEUIL_ICONE_FAIBLE) && indiceConfinement < SEUIL_ICONE_MOYEN)
     {
         indiceConfinement = INDICE_CONFINEMENT_MOYEN;
     }
-    else if((indiceConfinement >= 2.5) && indiceConfinement < 3.5)
+    else if((indiceConfinement >= SEUIL_ICONE_MOYEN) && indiceConfinement < SEUIL_ICONE_ELEVE)
     {
         indiceConfinement = INDICE_CONFINEMENT_ELEVE;
     }
-    else if((indiceConfinement >= 3.5) && indiceConfinement < 4.5)
+    else if((indiceConfinement >= SEUIL_ICONE_ELEVE) && indiceConfinement < SEUIL_ICONE_TRES_ELEVE)
     {
         indiceConfinement = INDICE_CONFINEMENT_TRES_ELEVE;
     }
-    else (indiceConfinement >= 4.5)
+    else
     {
         indiceConfinement = INDICE_CONFINEMENT_EXTREME;
     }
@@ -350,9 +350,7 @@ void SalleEco::determinerIndiceConfinement()
 
 void SalleEco::determinerIndiceIADI()
 {
-    // @todo Déterminer l'indice IADI
-
-    indiceIADI = getTemperature() - 0.55 * (1 - 0.01 * getHumidite()) * (getTemperature() - 14.5);
+    double indiceIADI = getTemperature().temperature - 0.55 * (1 - 0.01 * getHumidite().humidite) * (getTemperature().temperature - 14.5);
 
     int indiceIADIPrecedent = indiceIADI;
 
@@ -366,9 +364,7 @@ void SalleEco::determinerIndiceIADI()
 
 void SalleEco::determinerIndiceTHI()
 {
-    // @todo Déterminer l'indice THI
-
-    indiceTHI = 0.8 x getTemperature() + (getHumidite() x getTemperature() / 500.);
+    double indiceTHI = getTemperature().temperature - ((0.55 - 0.0055 * getHumidite().humidite) * (getTemperature().temperature - 14.5));
 
     int indiceTHIPrecedent = indiceTHI;
 

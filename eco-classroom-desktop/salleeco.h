@@ -40,6 +40,18 @@
 #define SEUIL_INCONFORT_IADI_INCONFORT      29
 #define SEUIL_INCONFORT_IADI_STRESS_INTENSE 32
 
+#define SEUIL_ICONE_NUL 0.5
+#define SEUIL_ICONE_FAIBLE 1.5
+#define SEUIL_ICONE_MOYEN 2.5
+#define SEUIL_ICONE_ELEVE 3.5
+#define SEUIL_ICONE_TRES_ELEVE 4.5
+
+
+
+
+
+
+
 class BaseDeDonnees;
 
 class SalleEco : public QObject
