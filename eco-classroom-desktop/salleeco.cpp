@@ -303,60 +303,35 @@ void SalleEco::determinerIndiceQualiteAir()
         indiceCO2 = IndiceQualiteAir::Severe;
     }
 
-    if (indiceCO2 != indiceCO2Precedent)
+    if(indiceCO2 != indiceCO2Precedent)
     {
-           emit nouvelIndiceQualiteAir(nom);
+        emit nouvelIndiceQualiteAir(nom);
     }
     qDebug() << Q_FUNC_INFO << "indiceCO2" << indiceCO2;
 }
 
 void SalleEco::determinerIndiceConfinement()
 {
-
-    if(indiceConfinement < SEUIL_ICONE_NUL)
-    {
-        indiceConfinement =  INDICE_CONFINEMENT_NUL;
-    }
-    else if((indiceConfinement >= SEUIL_ICONE_NUL) && indiceConfinement < SEUIL_ICONE_FAIBLE)
-    {
-        indiceConfinement = INDICE_CONFINEMENT_FAIBLE;
-    }
-    else if((indiceConfinement >= SEUIL_ICONE_FAIBLE) && indiceConfinement < SEUIL_ICONE_MOYEN)
-    {
-        indiceConfinement = INDICE_CONFINEMENT_MOYEN;
-    }
-    else if((indiceConfinement >= SEUIL_ICONE_MOYEN) && indiceConfinement < SEUIL_ICONE_ELEVE)
-    {
-        indiceConfinement = INDICE_CONFINEMENT_ELEVE;
-    }
-    else if((indiceConfinement >= SEUIL_ICONE_ELEVE) && indiceConfinement < SEUIL_ICONE_TRES_ELEVE)
-    {
-        indiceConfinement = INDICE_CONFINEMENT_TRES_ELEVE;
-    }
-    else
-    {
-        indiceConfinement = INDICE_CONFINEMENT_EXTREME;
-    }
-
     int indiceConfinementPrecedent = indiceConfinement;
 
     qDebug() << Q_FUNC_INFO << "indiceConfinement" << indiceConfinement;
 
-    if (indiceConfinement != indiceConfinementPrecedent)
+    if(indiceConfinement != indiceConfinementPrecedent)
     {
-           emit nouvelIndiceConfinement(nom);
+        emit nouvelIndiceConfinement(nom);
     }
 }
 
 void SalleEco::determinerIndiceIADI()
 {
-    double indiceIADI = getTemperature().temperature - 0.55 * (1 - 0.01 * getHumidite().humidite) * (getTemperature().temperature - 14.5);
+    double indiceIADI = getTemperature().temperature - 0.55 * (1 - 0.01 * getHumidite().humidite) *
+                                                         (getTemperature().temperature - 14.5);
 
     int indiceIADIPrecedent = indiceIADI;
 
     qDebug() << Q_FUNC_INFO << "indiceIADI" << indiceIADI;
 
-    if (indiceIADI != indiceIADIPrecedent)
+    if(indiceIADI != indiceIADIPrecedent)
     {
         emit nouvelIndiceIADI(nom);
     }
@@ -364,13 +339,49 @@ void SalleEco::determinerIndiceIADI()
 
 void SalleEco::determinerIndiceTHI()
 {
-    double indiceTHI = getTemperature().temperature - ((0.55 - 0.0055 * getHumidite().humidite) * (getTemperature().temperature - 14.5));
+    double calculDeThom = getTemperature().temperature - 0.55 *
+                                                           (1 - 0.01 * getHumidite().humidite) *
+                                                           (getTemperature().temperature - 14.5);
+    qDebug() << Q_FUNC_INFO << "calculDeThom" << calculDeThom;
 
     int indiceTHIPrecedent = indiceTHI;
 
+    if(calculDeThom < SEUIL_CONFORT_THI_FROID)
+    {
+        indiceTHI = INDICE_CONFORT_THI_FROID;
+    }
+    else if(calculDeThom >= SEUIL_CONFORT_THI_FROID && calculDeThom < SEUIL_CONFORT_THI_FRAIS)
+    {
+        indiceTHI = INDICE_CONFORT_THI_FRAIS;
+    }
+    else if(calculDeThom >= SEUIL_CONFORT_THI_FRAIS &&
+            calculDeThom < SEUIL_CONFORT_THI_LEGEREMENT_FRAIS)
+    {
+        indiceTHI = INDICE_CONFORT_THI_LEGEREMENT_FRAIS;
+    }
+    else if(calculDeThom >= SEUIL_CONFORT_THI_LEGEREMENT_FRAIS &&
+            calculDeThom < SEUIL_CONFORT_THI_NEUTRE)
+    {
+        indiceTHI = INDICE_CONFORT_THI_NEUTRE;
+    }
+    else if(calculDeThom >= SEUIL_CONFORT_THI_NEUTRE &&
+            calculDeThom < SEUIL_CONFORT_THI_LEGEREMENT_TIEDE)
+    {
+        indiceTHI = INDICE_CONFORT_THI_LEGEREMENT_TIEDE;
+    }
+    else if(calculDeThom >= SEUIL_CONFORT_THI_LEGEREMENT_TIEDE &&
+            calculDeThom < SEUIL_CONFORT_THI_TIEDE)
+    {
+        indiceTHI = INDICE_CONFORT_THI_TIEDE;
+    }
+    else
+    {
+        indiceTHI = INDICE_CONFORT_THI_CHAUD;
+    }
+
     qDebug() << Q_FUNC_INFO << "indiceTHI" << indiceTHI;
 
-    if (indiceTHI != indiceTHIPrecedent)
+    if(indiceTHI != indiceTHIPrecedent)
     {
         emit nouvelIndiceTHI(nom);
     }
