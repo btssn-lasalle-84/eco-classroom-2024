@@ -56,7 +56,7 @@ enum IndiceConfinement
     Faible = 1,
     Moyen,
     Eleve,
-    TresElev,
+    TresEleve,
     Extreme
 };
 

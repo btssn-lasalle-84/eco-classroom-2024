@@ -303,16 +303,33 @@ void SalleEco::determinerIndiceQualiteAir()
         indiceCO2 = IndiceQualiteAir::Severe;
     }
 
+    qDebug() << Q_FUNC_INFO << "indiceCO2" << indiceCO2;
+
     if(indiceCO2 != indiceCO2Precedent)
     {
         emit nouvelIndiceQualiteAir(nom);
     }
-    qDebug() << Q_FUNC_INFO << "indiceCO2" << indiceCO2;
 }
 
 void SalleEco::determinerIndiceConfinement()
 {
     int indiceConfinementPrecedent = indiceConfinement;
+
+    // @todo Calculer l'indice ICONE (Indice de CONfinement d’air dans les Ecoles)
+    // Formule : ICONE = (2.5 / log(2)) x log(1 + f1 + 3xf2)
+
+    // Pour l'instant : on utilisera le seuil maximal retenu pour une salle de classe de 1300 ppm
+    MesureCO2 mesureCO2 = getMesureCO2();
+    qDebug() << Q_FUNC_INFO << "mesureCO2" << mesureCO2.co2;
+
+    if(mesureCO2.co2 >= SEUIL_MAX_CO2_CLASSE)
+    {
+        indiceConfinement = IndiceConfinement::Eleve;
+    }
+    else
+    {
+        indiceConfinement = IndiceConfinement::Nul;
+    }
 
     qDebug() << Q_FUNC_INFO << "indiceConfinement" << indiceConfinement;
 
@@ -324,10 +341,39 @@ void SalleEco::determinerIndiceConfinement()
 
 void SalleEco::determinerIndiceIADI()
 {
-    double indiceIADI = getTemperature().temperature - 0.55 * (1 - 0.01 * getHumidite().humidite) *
-                                                         (getTemperature().temperature - 14.5);
-
     int indiceIADIPrecedent = indiceIADI;
+    // L’indice de confort thermique IADI (Indoor Air Disconfort Index) se calcule (Moschandreas et
+    // Sofuoglu, 2004) à partir de la température de l’air intérieur et l’humidité relative
+    qDebug() << Q_FUNC_INFO << "temperature" << getTemperature().temperature << "humidite"
+             << getHumidite().humidite;
+    double iadi = getTemperature().temperature - 0.55 * (1 - 0.01 * getHumidite().humidite) *
+                                                   (getTemperature().temperature - 14.5);
+    qDebug() << Q_FUNC_INFO << "iadi" << iadi;
+
+    if(iadi < SEUIL_INCONFORT_IADI_AUCUN)
+    {
+        indiceIADI = IndiceInconfortIADI::Aucun;
+    }
+    else if(iadi >= SEUIL_INCONFORT_IADI_AUCUN && iadi < SEUIL_INCONFORT_IADI_GENE)
+    {
+        indiceIADI = IndiceInconfortIADI::Gene;
+    }
+    else if(iadi >= SEUIL_INCONFORT_IADI_GENE && iadi < SEUIL_INCONFORT_IADI_MAL_ETRE)
+    {
+        indiceIADI = IndiceInconfortIADI::MalEtre;
+    }
+    else if(iadi >= SEUIL_INCONFORT_IADI_MAL_ETRE && iadi < SEUIL_INCONFORT_IADI_INCONFORT)
+    {
+        indiceIADI = IndiceInconfortIADI::Inconfort;
+    }
+    else if(iadi >= SEUIL_INCONFORT_IADI_INCONFORT && iadi < SEUIL_INCONFORT_IADI_STRESS_INTENSE)
+    {
+        indiceIADI = IndiceInconfortIADI::StressIntense;
+    }
+    else if(iadi >= SEUIL_INCONFORT_IADI_STRESS_INTENSE)
+    {
+        indiceIADI = IndiceInconfortIADI::UrgenceMedicale;
+    }
 
     qDebug() << Q_FUNC_INFO << "indiceIADI" << indiceIADI;
 
@@ -339,12 +385,14 @@ void SalleEco::determinerIndiceIADI()
 
 void SalleEco::determinerIndiceTHI()
 {
-    double calculDeThom = getTemperature().temperature - 0.55 *
-                                                           (1 - 0.01 * getHumidite().humidite) *
-                                                           (getTemperature().temperature - 14.5);
-    qDebug() << Q_FUNC_INFO << "calculDeThom" << calculDeThom;
-
     int indiceTHIPrecedent = indiceTHI;
+    // L’indice THI (Temperature Humidity Index) de Thom se calcule selon la formule suivante :
+
+    qDebug() << Q_FUNC_INFO << "temperature" << getTemperature().temperature << "humidite"
+             << getHumidite().humidite;
+    double calculDeThom = getTemperature().temperature - ((0.55 - 0.0055 * getHumidite().humidite) *
+                                                          (getTemperature().temperature - 14.5));
+    qDebug() << Q_FUNC_INFO << "calculDeThom" << calculDeThom;
 
     if(calculDeThom < SEUIL_CONFORT_THI_FROID)
     {
