@@ -311,14 +311,44 @@ void SalleEco::determinerIndiceQualiteAir()
     }
 }
 
+double SalleEco::calculProportionBasse()
+{
+    int valeurProportionBasse = 0;
+
+    for(const MesureCO2& mesure: mesuresCO2)
+    {
+        if((mesure.co2 >= PROPORTION_VALEUR_BASSE) && (mesure.co2 <= PROPORTION_VALEUR_HAUTE))
+        {
+            valeurProportionBasse++;
+        }
+    }
+}
+
+double SalleEco::calculProportionHaute()
+{
+    int valeurProportionHaute = 0;
+
+    for(const MesureCO2& mesure: mesuresCO2)
+    {
+        if(mesure.co2 >= PROPORTION_VALEUR_HAUTE)
+        {
+            valeurProportionHaute++;
+        }
+    }
+}
+
 void SalleEco::determinerIndiceConfinement()
 {
     int indiceConfinementPrecedent = indiceConfinement;
 
+    double calculIcone =
+      (2.5 / log(2)) * log(1 + calculProportionBasse() + 3 * calculProportionHaute());
+
     // @todo Calculer l'indice ICONE (Indice de CONfinement d’air dans les Ecoles)
     // Formule : ICONE = (2.5 / log(2)) x log(1 + f1 + 3xf2)
 
-    // Pour l'instant : on utilisera le seuil maximal retenu pour une salle de classe de 1300 ppm
+    // Pour l'instant : on utilisera le seuil maximal retenu pour une salle de classe de 1300
+    // ppm
     MesureCO2 mesureCO2 = getMesureCO2();
     qDebug() << Q_FUNC_INFO << "mesureCO2" << mesureCO2.co2;
 
@@ -342,8 +372,8 @@ void SalleEco::determinerIndiceConfinement()
 void SalleEco::determinerIndiceIADI()
 {
     int indiceIADIPrecedent = indiceIADI;
-    // L’indice de confort thermique IADI (Indoor Air Disconfort Index) se calcule (Moschandreas et
-    // Sofuoglu, 2004) à partir de la température de l’air intérieur et l’humidité relative
+    // L’indice de confort thermique IADI (Indoor Air Disconfort Index) se calcule (Moschandreas
+    // et Sofuoglu, 2004) à partir de la température de l’air intérieur et l’humidité relative
     qDebug() << Q_FUNC_INFO << "temperature" << getTemperature().temperature << "humidite"
              << getHumidite().humidite;
     double iadi = getTemperature().temperature - 0.55 * (1 - 0.01 * getHumidite().humidite) *

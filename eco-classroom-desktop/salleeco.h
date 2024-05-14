@@ -22,6 +22,9 @@
 
 #define SEUIL_MAX_CO2_CLASSE 1300
 
+#define PROPORTION_VALEUR_BASSE 1000
+#define PROPORTION_VALEUR_HAUTE 1700
+
 #define INDICE_CONFINEMENT_NUL        0
 #define INDICE_CONFINEMENT_FAIBLE     1
 #define INDICE_CONFINEMENT_MOYEN      2
@@ -135,11 +138,13 @@ class SalleEco : public QObject
     void ajouterEtatLumieres(bool lumieres);
 
   public slots:
-    void traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee);
-    void determinerIndiceQualiteAir();
-    void determinerIndiceConfinement();
-    void determinerIndiceIADI();
-    void determinerIndiceTHI();
+    void   traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee);
+    void   determinerIndiceQualiteAir();
+    double calculProportionBasse();
+    double calculProportionHaute();
+    void   determinerIndiceConfinement();
+    void   determinerIndiceIADI();
+    void   determinerIndiceTHI();
 
   signals:
     void nouvelIndiceQualiteAir(QString nomSalleEco);
