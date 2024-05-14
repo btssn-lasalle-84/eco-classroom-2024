@@ -5,6 +5,9 @@
 #include <QString>
 #include <QVector>
 
+#include "mesures.h"
+#include "etats.h"
+
 #define SEUIL_QUALITE_AIR_EXCELLENT_NIVEAU_MINIMUM    0
 #define SEUIL_QUALITE_AIR_EXCELLENT_NIVEAU_MAXIMUM    400
 #define SEUIL_QUALITE_AIR_TRES_BIEN_NIVEAU_MINIMUM    401
@@ -17,6 +20,8 @@
 #define SEUIL_QUALITE_AIR_TRES_MAUVAIS_NIVEAU_MAXIMUM 5000
 #define SEUIL_QUALITE_AIR_SEVERE                      5001
 
+#define SEUIL_MAX_CO2_CLASSE 1300
+
 #define INDICE_CONFINEMENT_NUL        0
 #define INDICE_CONFINEMENT_FAIBLE     1
 #define INDICE_CONFINEMENT_MOYEN      2
@@ -25,11 +30,19 @@
 #define INDICE_CONFINEMENT_EXTREME    5
 
 #define SEUIL_CONFORT_THI_FROID            -1.7
-#define SEUIL_CONFORT_THI_FRAIS            13
-#define SEUIL_CONFORT_THI_LEGEREMENT_FRAIS 15
-#define SEUIL_CONFORT_THI_NEUTRE           20
+#define SEUIL_CONFORT_THI_FRAIS            13.
+#define SEUIL_CONFORT_THI_LEGEREMENT_FRAIS 15.
+#define SEUIL_CONFORT_THI_NEUTRE           20.
 #define SEUIL_CONFORT_THI_LEGEREMENT_TIEDE 26.5
-#define SEUIL_CONFORT_THI_TIEDE            30
+#define SEUIL_CONFORT_THI_TIEDE            30.
+
+#define INDICE_CONFORT_THI_FROID            -3
+#define INDICE_CONFORT_THI_FRAIS            -2
+#define INDICE_CONFORT_THI_LEGEREMENT_FRAIS -1
+#define INDICE_CONFORT_THI_NEUTRE           0
+#define INDICE_CONFORT_THI_LEGEREMENT_TIEDE 1
+#define INDICE_CONFORT_THI_TIEDE            2
+#define INDICE_CONFORT_THI_CHAUD            3
 
 #define SEUIL_INCONFORT_IADI_AUCUN          20
 #define SEUIL_INCONFORT_IADI_GENE           24
@@ -37,8 +50,13 @@
 #define SEUIL_INCONFORT_IADI_INCONFORT      29
 #define SEUIL_INCONFORT_IADI_STRESS_INTENSE 32
 
-#include "mesures.h"
-#include "etats.h"
+#define SEUIL_ICONE_NUL        0.5
+#define SEUIL_ICONE_FAIBLE     1.5
+#define SEUIL_ICONE_MOYEN      2.5
+#define SEUIL_ICONE_ELEVE      3.5
+#define SEUIL_ICONE_TRES_ELEVE 4.5
+
+class BaseDeDonnees;
 
 class SalleEco : public QObject
 {
@@ -73,6 +91,7 @@ class SalleEco : public QObject
     QVector<EtatPresence>      etatsPresence;
     QVector<EtatFenetres>      etatsFenetres;
     QVector<EtatLumieres>      etatsLumieres;
+    BaseDeDonnees*             baseDeDonnees; //!< l'association vers la classe BaseDeDonnees
 
   public:
     explicit SalleEco(QObject* parent = nullptr);
@@ -118,8 +137,15 @@ class SalleEco : public QObject
   public slots:
     void traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee);
     void determinerIndiceQualiteAir();
+    void determinerIndiceConfinement();
+    void determinerIndiceIADI();
+    void determinerIndiceTHI();
 
   signals:
+    void nouvelIndiceQualiteAir(QString nomSalleEco);
+    void nouvelIndiceConfinement(QString nomSalleEco);
+    void nouvelIndiceIADI(QString nomSalleEco);
+    void nouvelIndiceTHI(QString nomSalleEco);
 };
 
 #endif // SALLEECO_H

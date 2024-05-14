@@ -1,9 +1,12 @@
 #include "salleeco.h"
 #include "indices.h"
+#include "basededonnees.h"
 #include <QDebug>
 
-SalleEco::SalleEco(QObject* parent) : QObject(parent)
+SalleEco::SalleEco(QObject* parent) : QObject(parent), baseDeDonnees(BaseDeDonnees::getInstance())
 {
+    qDebug() << Q_FUNC_INFO;
+    baseDeDonnees->connecter();
 }
 
 SalleEco::SalleEco(QString  idSalle,
@@ -12,13 +15,16 @@ SalleEco::SalleEco(QString  idSalle,
                    double   superficie,
                    QObject* parent) :
     QObject(parent),
-    idSalle(idSalle), nom(nom), description(description), superficie(superficie)
+    idSalle(idSalle), nom(nom), description(description), superficie(superficie),
+    baseDeDonnees(BaseDeDonnees::getInstance())
 {
     qDebug() << Q_FUNC_INFO << idSalle << nom << description << superficie;
+    baseDeDonnees->connecter();
 }
 
 SalleEco::~SalleEco()
 {
+    BaseDeDonnees::detruireInstance();
     qDebug() << Q_FUNC_INFO << idSalle << nom << description << superficie;
 }
 
@@ -219,34 +225,53 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
                  << "nomSalleEco" << nomSalleEco << "typeDonnee" << typeDonnee << "donnee"
                  << donnee;
 
+        QString requete;
+
         if(typeDonnee == "co2")
         {
             ajouterMesureCO2(donnee.toInt());
-            // @todo enregistrer cette donnée dans la base de données
-            // @todo déclencher des calculs en appelant les méthodes
-        }
 
+            requete = "INSERT INTO MesureCo2 (idSalle,co2,horodatage) VALUES (" + idSalle + "," +
+                      donnee + ",NOW())";
+            qDebug() << Q_FUNC_INFO << "requete" << requete;
+            baseDeDonnees->executer(requete);
+            determinerIndiceQualiteAir();
+            determinerIndiceConfinement();
+
+            // @todo Si changement d'indice, signaler nouvelIndiceQualiteAir(nom) et/ou
+            // nouvelIndiceConfinement(nom)
+        }
         else if(typeDonnee == "temperature")
         {
             ajouterMesureTemperature(donnee.toDouble());
-            // @todo enregistrer cette donnée dans la base de données
-            // @todo déclencher des calculs en appelant les méthodes
-        }
 
+            requete = "INSERT INTO MesureTemperature (idSalle,temperature,horodatage) VALUES (" +
+                      idSalle + "," + donnee + ",NOW())";
+            qDebug() << Q_FUNC_INFO << "requete" << requete;
+            baseDeDonnees->executer(requete);
+            determinerIndiceTHI();
+            determinerIndiceIADI();
+        }
         else if(typeDonnee == "humidite")
         {
             ajouterMesureHumidite(donnee.toInt());
-            // @todo enregistrer cette donnée dans la base de données
-            // @todo déclencher des calculs en appelant les méthodes
-        }
 
-        // @todo mettre à jour l'IHM correspondante par envoi de "signals"
+            requete = "INSERT INTO MesureHumidite (idSalle,humidite,horodatage) VALUES (" +
+                      idSalle + "," + donnee + ",NOW())";
+            qDebug() << Q_FUNC_INFO << "requete" << requete;
+            baseDeDonnees->executer(requete);
+            determinerIndiceTHI();
+            determinerIndiceIADI();
+        }
     }
 }
 
 void SalleEco::determinerIndiceQualiteAir()
 {
     MesureCO2 mesureCO2 = getMesureCO2();
+    qDebug() << Q_FUNC_INFO << "mesureCO2" << mesureCO2.co2;
+
+    int indiceCO2Precedent = indiceCO2;
 
     if(mesureCO2.co2 >= SEUIL_QUALITE_AIR_EXCELLENT_NIVEAU_MINIMUM &&
        mesureCO2.co2 <= SEUIL_QUALITE_AIR_EXCELLENT_NIVEAU_MAXIMUM)
@@ -276,5 +301,136 @@ void SalleEco::determinerIndiceQualiteAir()
     else
     {
         indiceCO2 = IndiceQualiteAir::Severe;
+    }
+
+    qDebug() << Q_FUNC_INFO << "indiceCO2" << indiceCO2;
+
+    if(indiceCO2 != indiceCO2Precedent)
+    {
+        emit nouvelIndiceQualiteAir(nom);
+    }
+}
+
+void SalleEco::determinerIndiceConfinement()
+{
+    int indiceConfinementPrecedent = indiceConfinement;
+
+    // @todo Calculer l'indice ICONE (Indice de CONfinement d’air dans les Ecoles)
+    // Formule : ICONE = (2.5 / log(2)) x log(1 + f1 + 3xf2)
+
+    // Pour l'instant : on utilisera le seuil maximal retenu pour une salle de classe de 1300 ppm
+    MesureCO2 mesureCO2 = getMesureCO2();
+    qDebug() << Q_FUNC_INFO << "mesureCO2" << mesureCO2.co2;
+
+    if(mesureCO2.co2 >= SEUIL_MAX_CO2_CLASSE)
+    {
+        indiceConfinement = IndiceConfinement::Eleve;
+    }
+    else
+    {
+        indiceConfinement = IndiceConfinement::Nul;
+    }
+
+    qDebug() << Q_FUNC_INFO << "indiceConfinement" << indiceConfinement;
+
+    if(indiceConfinement != indiceConfinementPrecedent)
+    {
+        emit nouvelIndiceConfinement(nom);
+    }
+}
+
+void SalleEco::determinerIndiceIADI()
+{
+    int indiceIADIPrecedent = indiceIADI;
+    // L’indice de confort thermique IADI (Indoor Air Disconfort Index) se calcule (Moschandreas et
+    // Sofuoglu, 2004) à partir de la température de l’air intérieur et l’humidité relative
+    qDebug() << Q_FUNC_INFO << "temperature" << getTemperature().temperature << "humidite"
+             << getHumidite().humidite;
+    double iadi = getTemperature().temperature - 0.55 * (1 - 0.01 * getHumidite().humidite) *
+                                                   (getTemperature().temperature - 14.5);
+    qDebug() << Q_FUNC_INFO << "iadi" << iadi;
+
+    if(iadi < SEUIL_INCONFORT_IADI_AUCUN)
+    {
+        indiceIADI = IndiceInconfortIADI::Aucun;
+    }
+    else if(iadi >= SEUIL_INCONFORT_IADI_AUCUN && iadi < SEUIL_INCONFORT_IADI_GENE)
+    {
+        indiceIADI = IndiceInconfortIADI::Gene;
+    }
+    else if(iadi >= SEUIL_INCONFORT_IADI_GENE && iadi < SEUIL_INCONFORT_IADI_MAL_ETRE)
+    {
+        indiceIADI = IndiceInconfortIADI::MalEtre;
+    }
+    else if(iadi >= SEUIL_INCONFORT_IADI_MAL_ETRE && iadi < SEUIL_INCONFORT_IADI_INCONFORT)
+    {
+        indiceIADI = IndiceInconfortIADI::Inconfort;
+    }
+    else if(iadi >= SEUIL_INCONFORT_IADI_INCONFORT && iadi < SEUIL_INCONFORT_IADI_STRESS_INTENSE)
+    {
+        indiceIADI = IndiceInconfortIADI::StressIntense;
+    }
+    else if(iadi >= SEUIL_INCONFORT_IADI_STRESS_INTENSE)
+    {
+        indiceIADI = IndiceInconfortIADI::UrgenceMedicale;
+    }
+
+    qDebug() << Q_FUNC_INFO << "indiceIADI" << indiceIADI;
+
+    if(indiceIADI != indiceIADIPrecedent)
+    {
+        emit nouvelIndiceIADI(nom);
+    }
+}
+
+void SalleEco::determinerIndiceTHI()
+{
+    int indiceTHIPrecedent = indiceTHI;
+    // L’indice THI (Temperature Humidity Index) de Thom se calcule selon la formule suivante :
+
+    qDebug() << Q_FUNC_INFO << "temperature" << getTemperature().temperature << "humidite"
+             << getHumidite().humidite;
+    double calculDeThom = getTemperature().temperature - ((0.55 - 0.0055 * getHumidite().humidite) *
+                                                          (getTemperature().temperature - 14.5));
+    qDebug() << Q_FUNC_INFO << "calculDeThom" << calculDeThom;
+
+    if(calculDeThom < SEUIL_CONFORT_THI_FROID)
+    {
+        indiceTHI = INDICE_CONFORT_THI_FROID;
+    }
+    else if(calculDeThom >= SEUIL_CONFORT_THI_FROID && calculDeThom < SEUIL_CONFORT_THI_FRAIS)
+    {
+        indiceTHI = INDICE_CONFORT_THI_FRAIS;
+    }
+    else if(calculDeThom >= SEUIL_CONFORT_THI_FRAIS &&
+            calculDeThom < SEUIL_CONFORT_THI_LEGEREMENT_FRAIS)
+    {
+        indiceTHI = INDICE_CONFORT_THI_LEGEREMENT_FRAIS;
+    }
+    else if(calculDeThom >= SEUIL_CONFORT_THI_LEGEREMENT_FRAIS &&
+            calculDeThom < SEUIL_CONFORT_THI_NEUTRE)
+    {
+        indiceTHI = INDICE_CONFORT_THI_NEUTRE;
+    }
+    else if(calculDeThom >= SEUIL_CONFORT_THI_NEUTRE &&
+            calculDeThom < SEUIL_CONFORT_THI_LEGEREMENT_TIEDE)
+    {
+        indiceTHI = INDICE_CONFORT_THI_LEGEREMENT_TIEDE;
+    }
+    else if(calculDeThom >= SEUIL_CONFORT_THI_LEGEREMENT_TIEDE &&
+            calculDeThom < SEUIL_CONFORT_THI_TIEDE)
+    {
+        indiceTHI = INDICE_CONFORT_THI_TIEDE;
+    }
+    else
+    {
+        indiceTHI = INDICE_CONFORT_THI_CHAUD;
+    }
+
+    qDebug() << Q_FUNC_INFO << "indiceTHI" << indiceTHI;
+
+    if(indiceTHI != indiceTHIPrecedent)
+    {
+        emit nouvelIndiceTHI(nom);
     }
 }
