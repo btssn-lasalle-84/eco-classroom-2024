@@ -365,32 +365,29 @@ void SalleEco::determinerIndiceConfinement()
 
     if(calculIcone < SEUIL_ICONE_NUL)
     {
-        indiceConfinement = INDICE_CONFINEMENT_NUL;
+        indiceConfinement = IndiceConfinement::Nul;
     }
     else if((calculIcone >= SEUIL_ICONE_NUL) && calculIcone < SEUIL_ICONE_FAIBLE)
     {
-        indiceConfinement = INDICE_CONFINEMENT_FAIBLE;
+        indiceConfinement = IndiceConfinement::Faible;
     }
     else if((calculIcone >= SEUIL_ICONE_FAIBLE) && calculIcone < SEUIL_ICONE_MOYEN)
     {
-        indiceConfinement = INDICE_CONFINEMENT_MOYEN;
+        indiceConfinement = IndiceConfinement::Moyen;
     }
     else if((calculIcone >= SEUIL_ICONE_MOYEN) && calculIcone < SEUIL_ICONE_ELEVE)
     {
-        indiceConfinement = INDICE_CONFINEMENT_ELEVE;
+        indiceConfinement = IndiceConfinement::Eleve;
     }
     else if((calculIcone >= SEUIL_ICONE_ELEVE) && calculIcone < SEUIL_ICONE_TRES_ELEVE)
     {
-        indiceConfinement = INDICE_CONFINEMENT_TRES_ELEVE;
+        indiceConfinement = IndiceConfinement::TresEleve;
     }
     else if(calculIcone >= SEUIL_ICONE_TRES_ELEVE)
     {
-        indiceConfinement = INDICE_CONFINEMENT_EXTREME;
+        indiceConfinement = IndiceConfinement::Extreme;
     }
 
-
-    // Pour l'instant : on utilisera le seuil maximal retenu pour une salle de classe de 1300
-    // ppm
     MesureCO2 mesureCO2 = getMesureCO2();
     qDebug() << Q_FUNC_INFO << "mesureCO2" << mesureCO2.co2;
 
