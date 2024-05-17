@@ -341,11 +341,53 @@ void SalleEco::determinerIndiceConfinement()
 {
     int indiceConfinementPrecedent = indiceConfinement;
 
-    double calculIcone =
-      (2.5 / log(2)) * log(1 + calculProportionBasse() + 3 * calculProportionHaute());
 
-    // @todo Calculer l'indice ICONE (Indice de CONfinement d’air dans les Ecoles)
-    // Formule : ICONE = (2.5 / log(2)) x log(1 + f1 + 3xf2)
+    int n0 = 0; // nombre de valeurs inférieures ou égales à 1000 ppm (n0)
+    int n1 = 0; // nombre de valeurs comprises entre 1000 et 1700 ppm inclus (n1)
+    int n2 = 0;  // nombre de valeurs supérieures à 1700 ppm (n2)
+    double f1 = 0.;
+    double f2 = 0.;
+
+    n1 = calculProportionBasse(); // nombre de valeurs comprises entre 1000 et 1700 ppm inclus (n1)
+    n2 = calculProportionHaute(); // nombre de valeurs supérieures à 1700 ppm (n2)
+    n0 = mesuresCO2.size() - n1 - n2;
+
+    // Division par zéro ?
+    if((n0 + n1 + n2) == 0)
+        return;
+
+    f1 = (double)n1 / (double)(n0 + n1 + n2);
+    f2 = (double)n2 / (double)(n0 + n1 + n2);
+
+    double calculIcone = (2.5 / log(2.)) * log(1. + f1 + 3. * f2);
+    qDebug() << Q_FUNC_INFO << "calculIcone" << calculIcone;
+
+
+    if(calculIcone < SEUIL_ICONE_NUL)
+    {
+        indiceConfinement = INDICE_CONFINEMENT_NUL;
+    }
+    else if((calculIcone >= SEUIL_ICONE_NUL) && calculIcone < SEUIL_ICONE_FAIBLE)
+    {
+        indiceConfinement = INDICE_CONFINEMENT_FAIBLE;
+    }
+    else if((calculIcone >= SEUIL_ICONE_FAIBLE) && calculIcone < SEUIL_ICONE_MOYEN)
+    {
+        indiceConfinement = INDICE_CONFINEMENT_MOYEN;
+    }
+    else if((calculIcone >= SEUIL_ICONE_MOYEN) && calculIcone < SEUIL_ICONE_ELEVE)
+    {
+        indiceConfinement = INDICE_CONFINEMENT_ELEVE;
+    }
+    else if((calculIcone >= SEUIL_ICONE_ELEVE) && calculIcone < SEUIL_ICONE_TRES_ELEVE)
+    {
+        indiceConfinement = INDICE_CONFINEMENT_TRES_ELEVE;
+    }
+    else if(calculIcone >= SEUIL_ICONE_TRES_ELEVE)
+    {
+        indiceConfinement = INDICE_CONFINEMENT_EXTREME;
+    }
+
 
     // Pour l'instant : on utilisera le seuil maximal retenu pour une salle de classe de 1300
     // ppm
