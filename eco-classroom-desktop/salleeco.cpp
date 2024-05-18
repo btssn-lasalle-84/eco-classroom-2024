@@ -231,19 +231,19 @@ QString SalleEco::getIndiceCO2(int indiceCO2)
     return QString();
 }
 
-SalleEco::getIndiceConfinement(int indiceConfinement)
+QString SalleEco::getIndiceConfinement(int indiceConfinement)
 {
     // @todo Retourner la désignation de l'indice de confinement
     return QString();
 }
 
-SalleEco::getIndiceIADI(int indiceIADI)
+QString SalleEco::getIndiceIADI(int indiceIADI)
 {
     // @todo Retourner la désignation de l'indice IADI
     return QString();
 }
 
-SalleEco::getIndiceTHI(int indiceTHI)
+QString SalleEco::getIndiceTHI(int indiceTHI)
 {
     // @todo Retourner la désignation de l'indice THI
     // @warning Il faut effectuer un décalage de l'indice pour l'amener à 0
