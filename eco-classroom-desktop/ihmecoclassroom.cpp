@@ -109,14 +109,19 @@ void IHMEcoClassroom::gererEvenements()
                 SIGNAL(nouvelIndiceQualiteAir(QString, QString)),
                 this,
                 SLOT(afficherIndiceQualiteAir(QString, QString)));
-        // @todo connecter le signal nouvelIndiceConfinement(QString) vers un slot de l'IHM pour
-        // mettre à jour l'indice correspondant
-        // @todo connecter le signal nouvelIndiceIADI(QString) vers un slot de l'IHM pour mettre à
-        // jour l'indice correspondant
-        // @todo connecter le signal nouvelIndiceTHI(QString) vers un slot de l'IHM pour mettre à
-        // jour l'indice correspondant
+        connect(sallesEco.value(),
+                SIGNAL(nouvelIndiceConfinement(QString, QString)),
+                this,
+                SLOT(afficherIndiceConfinement(QString, QString)));
+        connect(sallesEco.value(),
+                SIGNAL(nouvelIndiceIADI(QString, QString)),
+                this,
+                SLOT(afficherIndiceIADI(QString, QString)));
+        connect(sallesEco.value(),
+                SIGNAL(nouvelIndiceTHI(QString, QString)),
+                this,
+                SLOT(afficherIndiceTHI(QString, QString)));
     }
-
     // @todo connecter le signal nouvelleDonnee(QString, QString, QString) vers un slot de l'IHM
     // pour afficher la nouvelle donnée
 }
