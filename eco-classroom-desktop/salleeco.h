@@ -96,6 +96,13 @@ class SalleEco : public QObject
     QVector<EtatLumieres>      etatsLumieres;
     BaseDeDonnees*             baseDeDonnees; //!< l'association vers la classe BaseDeDonnees
 
+    void determinerIndiceQualiteAir();
+    int  calculProportionBasse();
+    int  calculProportionHaute();
+    void determinerIndiceConfinement();
+    void determinerIndiceIADI();
+    void determinerIndiceTHI();
+
   public:
     explicit SalleEco(QObject* parent = nullptr);
     explicit SalleEco(QString  idSalle,
@@ -128,29 +135,26 @@ class SalleEco : public QObject
     void setIndiceIADI(int indiceIADI);
     void setIndiceTHI(int indiceTHI);
     void setIndiceConfinement(int indiceConfinement);
-
     void ajouterMesureCO2(int co2);
     void ajouterMesureTemperature(double temperature);
     void ajouterMesureHumidite(int humidite);
-
     void ajouterEtatPresence(bool presence);
     void ajouterEtatFenetres(bool fenetres);
     void ajouterEtatLumieres(bool lumieres);
 
+    static QString getIndiceCO2(int indiceCO2);
+    static QString getIndiceConfinement(int indiceConfinement);
+    static QString getIndiceIADI(int indiceIADI);
+    static QString getIndiceTHI(int indiceTHI);
+
   public slots:
-    void   traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee);
-    void   determinerIndiceQualiteAir();
-    double calculProportionBasse();
-    double calculProportionHaute();
-    void   determinerIndiceConfinement();
-    void   determinerIndiceIADI();
-    void   determinerIndiceTHI();
+    void traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee);
 
   signals:
-    void nouvelIndiceQualiteAir(QString nomSalleEco);
-    void nouvelIndiceConfinement(QString nomSalleEco);
-    void nouvelIndiceIADI(QString nomSalleEco);
-    void nouvelIndiceTHI(QString nomSalleEco);
+    void nouvelIndiceQualiteAir(QString nomSalleEco, QString designationIndice);
+    void nouvelIndiceConfinement(QString nomSalleEco, QString designationIndice);
+    void nouvelIndiceIADI(QString nomSalleEco, QString designationIndice);
+    void nouvelIndiceTHI(QString nomSalleEco, QString designationIndice);
 };
 
 #endif // SALLEECO_H

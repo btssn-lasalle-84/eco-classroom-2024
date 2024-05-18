@@ -76,6 +76,25 @@ void IHMEcoClassroom::recupererSalles()
     qDebug() << Q_FUNC_INFO << "salles" << salles;
 }
 
+void IHMEcoClassroom::afficherIndiceQualiteAir(QString nomSalleEco, QString designationIndice)
+{
+    qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "designationIndice"
+             << designationIndice;
+    // recherche nomSalleEco dans le tableau des salles affichées
+    for(int i = 0; i < tableauSallesEco->rowCount(); i++)
+    {
+        QTableWidgetItem* elementNom = tableauSallesEco->item(i, COLONNE_SALLE_NOM);
+        qDebug() << Q_FUNC_INFO << "elementNom" << elementNom;
+        if(elementNom->data(0).toString() == nomSalleEco)
+        {
+            QTableWidgetItem* element = tableauSallesEco->item(i, COLONNE_SALLE_QUALITE_AIR);
+            if(element != nullptr)
+                element->setData(Qt::DisplayRole, designationIndice);
+            return;
+        }
+    }
+}
+
 void IHMEcoClassroom::gererEvenements()
 {
     QMapIterator<QString, SalleEco*> sallesEco(salles);
@@ -86,8 +105,10 @@ void IHMEcoClassroom::gererEvenements()
                 SIGNAL(nouvelleDonnee(QString, QString, QString)),
                 sallesEco.value(),
                 SLOT(traiterNouvelleDonnee(QString, QString, QString)));
-        // @todo connecter le signal nouvelIndiceQualiteAir(QString) vers un slot de l'IHM pour
-        // mettre à jour l'indice correspondant
+        connect(sallesEco.value(),
+                SIGNAL(nouvelIndiceQualiteAir(QString, QString)),
+                this,
+                SLOT(afficherIndiceQualiteAir(QString, QString)));
         // @todo connecter le signal nouvelIndiceConfinement(QString) vers un slot de l'IHM pour
         // mettre à jour l'indice correspondant
         // @todo connecter le signal nouvelIndiceIADI(QString) vers un slot de l'IHM pour mettre à
@@ -135,7 +156,7 @@ void IHMEcoClassroom::creerTableauSallesEco()
 
 void IHMEcoClassroom::ajouterSalleEcoTableau(const SalleEco& salle)
 {
-    qDebug() << Q_FUNC_INFO << "nom" << salle.getNom();
+    qDebug() << Q_FUNC_INFO << "nom" << salle.getNom() << "indiceCO2" << salle.getIndiceCO2();
 
     tableauSallesEco->setRowCount(tableauSallesEco->rowCount() + 1);
 
@@ -143,6 +164,21 @@ void IHMEcoClassroom::ajouterSalleEcoTableau(const SalleEco& salle)
     elementNom->setFlags(Qt::ItemIsEnabled);
     elementNom->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1, COLONNE_SALLE_NOM, elementNom);
+
+    QTableWidgetItem* elementDisponibilite = new QTableWidgetItem(QString());
+    elementDisponibilite->setFlags(Qt::ItemIsEnabled);
+    elementDisponibilite->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1,
+                              COLONNE_SALLE_DISPONIBILITE,
+                              elementDisponibilite);
+
+    QTableWidgetItem* elementQualiteAir =
+      new QTableWidgetItem(SalleEco::getIndiceCO2(salle.getIndiceCO2()));
+    elementQualiteAir->setFlags(Qt::ItemIsEnabled);
+    elementQualiteAir->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1,
+                              COLONNE_SALLE_QUALITE_AIR,
+                              elementQualiteAir);
 
     // @todo ajouter les éléments des autres colonnes
 }

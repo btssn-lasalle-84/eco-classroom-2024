@@ -13,7 +13,8 @@ enum IndiceQualiteAir
     Modere,
     Mauvais,
     TresMauvais,
-    Severe
+    Severe,
+    NbIndicesQualiteAir
 };
 
 /**
