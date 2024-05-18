@@ -73,6 +73,7 @@ class IHMEcoClassroom : public QWidget
 
   public slots:
     void recupererSalles();
+    void afficherIndiceQualiteAir(QString, QString);
 };
 
 #endif // IHMECOCLASSROOM_H

@@ -216,6 +216,40 @@ void SalleEco::ajouterEtatLumieres(bool lumieres)
     etatsLumieres.push_back(etatLumieres);
 }
 
+QString SalleEco::getIndiceCO2(int indiceCO2)
+{
+    QStringList designations;
+    designations << "Inconnu"
+                 << "Excellente"
+                 << "Très bien"
+                 << "Modéré"
+                 << "Mauvais"
+                 << "Très mauvais"
+                 << "Sévère";
+    if(indiceCO2 >= 0 && indiceCO2 < IndiceQualiteAir::NbIndicesQualiteAir)
+        return designations[indiceCO2];
+    return QString();
+}
+
+QString SalleEco::getIndiceConfinement(int indiceConfinement)
+{
+    // @todo Retourner la désignation de l'indice de confinement
+    return QString();
+}
+
+QString SalleEco::getIndiceIADI(int indiceIADI)
+{
+    // @todo Retourner la désignation de l'indice IADI
+    return QString();
+}
+
+QString SalleEco::getIndiceTHI(int indiceTHI)
+{
+    // @todo Retourner la désignation de l'indice THI
+    // @warning Il faut effectuer un décalage de l'indice pour l'amener à 0
+    return QString();
+}
+
 void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee)
 {
     // est-ce une donnée pour ma salle ?
@@ -237,9 +271,6 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
             baseDeDonnees->executer(requete);
             determinerIndiceQualiteAir();
             determinerIndiceConfinement();
-
-            // @todo Si changement d'indice, signaler nouvelIndiceQualiteAir(nom) et/ou
-            // nouvelIndiceConfinement(nom)
         }
         else if(typeDonnee == "temperature")
         {
@@ -303,47 +334,123 @@ void SalleEco::determinerIndiceQualiteAir()
         indiceCO2 = IndiceQualiteAir::Severe;
     }
 
-    qDebug() << Q_FUNC_INFO << "indiceCO2" << indiceCO2;
+    qDebug() << Q_FUNC_INFO << "indiceCO2" << indiceCO2 << SalleEco::getIndiceCO2(indiceCO2);
 
     if(indiceCO2 != indiceCO2Precedent)
     {
-        emit nouvelIndiceQualiteAir(nom);
+        emit nouvelIndiceQualiteAir(nom, SalleEco::getIndiceCO2(indiceCO2));
     }
+}
+
+int SalleEco::calculProportionBasse()
+{
+    int valeurProportionBasse = 0;
+
+    for(const MesureCO2& mesure: mesuresCO2)
+    {
+        if((mesure.co2 >= PROPORTION_VALEUR_BASSE) && (mesure.co2 <= PROPORTION_VALEUR_HAUTE))
+        {
+            valeurProportionBasse++;
+        }
+    }
+    return valeurProportionBasse;
+}
+
+int SalleEco::calculProportionHaute()
+{
+    int valeurProportionHaute = 0;
+
+    for(const MesureCO2& mesure: mesuresCO2)
+    {
+        if(mesure.co2 >= PROPORTION_VALEUR_HAUTE)
+        {
+            valeurProportionHaute++;
+        }
+    }
+    return valeurProportionHaute;
 }
 
 void SalleEco::determinerIndiceConfinement()
 {
     int indiceConfinementPrecedent = indiceConfinement;
 
-    // @todo Calculer l'indice ICONE (Indice de CONfinement d’air dans les Ecoles)
-    // Formule : ICONE = (2.5 / log(2)) x log(1 + f1 + 3xf2)
-
-    // Pour l'instant : on utilisera le seuil maximal retenu pour une salle de classe de 1300 ppm
-    MesureCO2 mesureCO2 = getMesureCO2();
-    qDebug() << Q_FUNC_INFO << "mesureCO2" << mesureCO2.co2;
-
-    if(mesureCO2.co2 >= SEUIL_MAX_CO2_CLASSE)
+    if(mesuresCO2.size() > 1)
     {
-        indiceConfinement = IndiceConfinement::Eleve;
+        int    n0 = 0; // nombre de valeurs inférieures ou égales à 1000 ppm (n0)
+        int    n1 = 0; // nombre de valeurs comprises entre 1000 et 1700 ppm inclus (n1)
+        int    n2 = 0; // nombre de valeurs supérieures à 1700 ppm (n2)
+        double f1 = 0.;
+        double f2 = 0.;
+
+        n1 =
+          calculProportionBasse(); // nombre de valeurs comprises entre 1000 et 1700 ppm inclus (n1)
+        n2 = calculProportionHaute(); // nombre de valeurs supérieures à 1700 ppm (n2)
+        n0 = mesuresCO2.size() - n1 - n2;
+
+        // Division par zéro ?
+        if((n0 + n1 + n2) == 0)
+            return;
+
+        f1 = (double)n1 / (double)(n0 + n1 + n2);
+        f2 = (double)n2 / (double)(n0 + n1 + n2);
+
+        qDebug() << Q_FUNC_INFO << "n0" << n0 << "n1" << n1 << "n2" << n2;
+        double calculIcone = (2.5 / log(2.)) * log(1. + f1 + 3. * f2);
+        qDebug() << Q_FUNC_INFO << "calculIcone" << calculIcone;
+
+        if(calculIcone < SEUIL_ICONE_NUL)
+        {
+            indiceConfinement = IndiceConfinement::Nul;
+        }
+        else if((calculIcone >= SEUIL_ICONE_NUL) && calculIcone < SEUIL_ICONE_FAIBLE)
+        {
+            indiceConfinement = IndiceConfinement::Faible;
+        }
+        else if((calculIcone >= SEUIL_ICONE_FAIBLE) && calculIcone < SEUIL_ICONE_MOYEN)
+        {
+            indiceConfinement = IndiceConfinement::Moyen;
+        }
+        else if((calculIcone >= SEUIL_ICONE_MOYEN) && calculIcone < SEUIL_ICONE_ELEVE)
+        {
+            indiceConfinement = IndiceConfinement::Eleve;
+        }
+        else if((calculIcone >= SEUIL_ICONE_ELEVE) && calculIcone < SEUIL_ICONE_TRES_ELEVE)
+        {
+            indiceConfinement = IndiceConfinement::TresEleve;
+        }
+        else if(calculIcone >= SEUIL_ICONE_TRES_ELEVE)
+        {
+            indiceConfinement = IndiceConfinement::Extreme;
+        }
     }
     else
     {
-        indiceConfinement = IndiceConfinement::Nul;
-    }
+        MesureCO2 mesureCO2 = getMesureCO2();
+        qDebug() << Q_FUNC_INFO << "mesureCO2" << mesureCO2.co2;
 
-    qDebug() << Q_FUNC_INFO << "indiceConfinement" << indiceConfinement;
+        if(mesureCO2.co2 >= SEUIL_MAX_CO2_CLASSE)
+        {
+            indiceConfinement = IndiceConfinement::Eleve;
+        }
+        else
+        {
+            indiceConfinement = IndiceConfinement::Nul;
+        }
+    }
+    qDebug() << Q_FUNC_INFO << "indiceConfinement" << indiceConfinement
+             << SalleEco::getIndiceConfinement(indiceConfinement);
 
     if(indiceConfinement != indiceConfinementPrecedent)
     {
-        emit nouvelIndiceConfinement(nom);
+        emit nouvelIndiceConfinement(nom, SalleEco::getIndiceConfinement(indiceConfinement));
     }
 }
 
 void SalleEco::determinerIndiceIADI()
 {
     int indiceIADIPrecedent = indiceIADI;
-    // L’indice de confort thermique IADI (Indoor Air Disconfort Index) se calcule (Moschandreas et
-    // Sofuoglu, 2004) à partir de la température de l’air intérieur et l’humidité relative
+    // L’indice de confort thermique IADI (Indoor Air Disconfort Index) se calcule (Moschandreas
+    // et Sofuoglu, 2004) à partir de la température de l’air intérieur et l’humidité relative
     qDebug() << Q_FUNC_INFO << "temperature" << getTemperature().temperature << "humidite"
              << getHumidite().humidite;
     double iadi = getTemperature().temperature - 0.55 * (1 - 0.01 * getHumidite().humidite) *
@@ -375,11 +482,11 @@ void SalleEco::determinerIndiceIADI()
         indiceIADI = IndiceInconfortIADI::UrgenceMedicale;
     }
 
-    qDebug() << Q_FUNC_INFO << "indiceIADI" << indiceIADI;
+    qDebug() << Q_FUNC_INFO << "indiceIADI" << indiceIADI << SalleEco::getIndiceIADI(indiceIADI);
 
     if(indiceIADI != indiceIADIPrecedent)
     {
-        emit nouvelIndiceIADI(nom);
+        emit nouvelIndiceIADI(nom, SalleEco::getIndiceIADI(indiceIADI));
     }
 }
 
@@ -427,10 +534,10 @@ void SalleEco::determinerIndiceTHI()
         indiceTHI = INDICE_CONFORT_THI_CHAUD;
     }
 
-    qDebug() << Q_FUNC_INFO << "indiceTHI" << indiceTHI;
+    qDebug() << Q_FUNC_INFO << "indiceTHI" << indiceTHI << SalleEco::getIndiceTHI(indiceTHI);
 
     if(indiceTHI != indiceTHIPrecedent)
     {
-        emit nouvelIndiceTHI(nom);
+        emit nouvelIndiceTHI(nom, SalleEco::getIndiceTHI(indiceTHI));
     }
 }
