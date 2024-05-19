@@ -95,6 +95,25 @@ void IHMEcoClassroom::afficherIndiceQualiteAir(QString nomSalleEco, QString desi
     }
 }
 
+void IHMEcoClassroom::afficherConfortThermique(QString nomSalleEco, QString designationIndice)
+{
+    qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "designationIndice"
+             << designationIndice;
+    // recherche nomSalleEco dans le tableau des salles affichées
+    for(int i = 0; i < tableauSallesEco->rowCount(); i++)
+    {
+        QTableWidgetItem* elementNom = tableauSallesEco->item(i, COLONNE_SALLE_NOM);
+        qDebug() << Q_FUNC_INFO << "elementNom" << elementNom;
+        if(elementNom->data(0).toString() == nomSalleEco)
+        {
+            QTableWidgetItem* element = tableauSallesEco->item(i, COLONNE_SALLE_CONFORT_THERMIQUE);
+            if(element != nullptr)
+                element->setData(Qt::DisplayRole, designationIndice);
+            return;
+        }
+    }
+}
+
 void IHMEcoClassroom::gererEvenements()
 {
     QMapIterator<QString, SalleEco*> sallesEco(salles);
@@ -184,6 +203,28 @@ void IHMEcoClassroom::ajouterSalleEcoTableau(const SalleEco& salle)
     tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1,
                               COLONNE_SALLE_QUALITE_AIR,
                               elementQualiteAir);
+
+    QTableWidgetItem* elementConfortThermique =
+      new QTableWidgetItem(SalleEco::getIndiceTHI(salle.getIndiceTHI()));
+    elementConfortThermique->setFlags(Qt::ItemIsEnabled);
+    elementConfortThermique->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1,
+                              COLONNE_SALLE_CONFORT_THERMIQUE,
+                              elementConfortThermique);
+
+    QTableWidgetItem* elementFenetres = new QTableWidgetItem(QString());
+    elementFenetres->setFlags(Qt::ItemIsEnabled);
+    elementFenetres->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1,
+                              COLONNE_SALLE_FENETRES,
+                              elementFenetres);
+
+    QTableWidgetItem* elementLumieres = new QTableWidgetItem(QString());
+    elementLumieres->setFlags(Qt::ItemIsEnabled);
+    elementLumieres->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1,
+                              COLONNE_SALLE_FENETRES,
+                              elementLumieres);
 
     // @todo ajouter les éléments des autres colonnes
 }

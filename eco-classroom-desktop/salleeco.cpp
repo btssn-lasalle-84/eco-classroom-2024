@@ -234,6 +234,16 @@ QString SalleEco::getIndiceCO2(int indiceCO2)
 QString SalleEco::getIndiceConfinement(int indiceConfinement)
 {
     // @todo Retourner la désignation de l'indice de confinement
+
+    QStringList designations;
+    designations << "Nul"
+                 << "Faible"
+                 << "Moyen"
+                 << "Eleve"
+                 << "Tres Eleve"
+                 << "Extreme";
+    if(indiceConfinement >= 0 && indiceConfinement < IndiceConfinement::NbIndicesConfinement)
+        return designations[indiceConfinement];
     return QString();
 }
 
