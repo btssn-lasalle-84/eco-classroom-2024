@@ -239,9 +239,9 @@ QString SalleEco::getIndiceConfinement(int indiceConfinement)
     designations << "Nul"
                  << "Faible"
                  << "Moyen"
-                 << "Eleve"
-                 << "Tres Eleve"
-                 << "Extreme";
+                 << "Élevé"
+                 << "Très Élevé"
+                 << "Extrême";
     if(indiceConfinement >= 0 && indiceConfinement < IndiceConfinement::NbIndicesConfinement)
         return designations[indiceConfinement];
     return QString();
