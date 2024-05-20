@@ -248,33 +248,33 @@ QString SalleEco::getIndiceConfinement(int indiceConfinement)
 QString SalleEco::getIndiceIADI(int indiceIADI)
 {
     QStringList designations;
-        designations << "Aucun"
-                     << "Gêne"
-                     << "Mal-être"
-                     << "Inconfort"
-                     << "Stress intense"
-                     << "Urgence médicale";
-        if(indiceIADI >= 0 && indiceIADI < IndiceInconfortIADI::NbIndicesIADI)
-            return designations[indiceIADI];
+    designations << "Aucun"
+                 << "Gêne"
+                 << "Mal-être"
+                 << "Inconfort"
+                 << "Stress intense"
+                 << "Urgence médicale";
+    if(indiceIADI >= 0 && indiceIADI < IndiceInconfortIADI::NbIndicesIADI)
+        return designations[indiceIADI];
     return QString();
 }
 
 QString SalleEco::getIndiceTHI(int indiceTHI)
 {
     QStringList designations;
-        designations << "Inconnu"
-                     << "Froid"
-                     << "Frais"
-                     << "Légèrement frais"
-                     << "Neutre"
-                     << "Légèrement tiède"
-                     << "Tiède"
-                     << "Chaud";
+    designations << "Inconnu"
+                 << "Froid"
+                 << "Frais"
+                 << "Légèrement frais"
+                 << "Neutre"
+                 << "Légèrement tiède"
+                 << "Tiède"
+                 << "Chaud";
 
-        int decalageIndiceTHI = indiceTHI + 4;
+    int decalageIndiceTHI = indiceTHI + 4;
 
-        if(decalageIndiceTHI >= 0 && decalageIndiceTHI < IndiceTHI::NbIndicesTHI)
-            return designations[decalageIndiceTHI];
+    if(indiceTHI >= IndiceTHI::InconnuTHI && indiceTHI < IndiceTHI::NbIndicesTHI)
+        return designations[decalageIndiceTHI];
     return QString();
 }
 
