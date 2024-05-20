@@ -84,7 +84,6 @@ void IHMEcoClassroom::afficherIndiceQualiteAir(QString nomSalleEco, QString desi
     for(int i = 0; i < tableauSallesEco->rowCount(); i++)
     {
         QTableWidgetItem* elementNom = tableauSallesEco->item(i, COLONNE_SALLE_NOM);
-        qDebug() << Q_FUNC_INFO << "elementNom" << elementNom;
         if(elementNom->data(0).toString() == nomSalleEco)
         {
             QTableWidgetItem* element = tableauSallesEco->item(i, COLONNE_SALLE_QUALITE_AIR);
@@ -103,7 +102,6 @@ void IHMEcoClassroom::afficherIndiceIADI(QString nomSalleEco, QString designatio
     for(int i = 0; i < tableauSallesEco->rowCount(); i++)
     {
         QTableWidgetItem* elementNom = tableauSallesEco->item(i, COLONNE_SALLE_NOM);
-        qDebug() << Q_FUNC_INFO << "elementNom" << elementNom;
         if(elementNom->data(0).toString() == nomSalleEco)
         {
             QTableWidgetItem* element = tableauSallesEco->item(i, COLONNE_SALLE_CONFORT_THERMIQUE);
@@ -122,7 +120,6 @@ void IHMEcoClassroom::afficherIndiceTHI(QString nomSalleEco, QString designation
     for(int i = 0; i < tableauSallesEco->rowCount(); i++)
     {
         QTableWidgetItem* elementNom = tableauSallesEco->item(i, COLONNE_SALLE_NOM);
-        qDebug() << Q_FUNC_INFO << "elementNom" << elementNom;
         if(elementNom->data(0).toString() == nomSalleEco)
         {
             QTableWidgetItem* element = tableauSallesEco->item(i, COLONNE_SALLE_CONFORT_THERMIQUE);
@@ -141,7 +138,6 @@ void IHMEcoClassroom::afficherIndiceConfinement(QString nomSalleEco, QString des
     for(int i = 0; i < tableauSallesEco->rowCount(); i++)
     {
         QTableWidgetItem* elementNom = tableauSallesEco->item(i, COLONNE_SALLE_NOM);
-        qDebug() << Q_FUNC_INFO << "elementNom" << elementNom;
         if(elementNom->data(0).toString() == nomSalleEco)
         {
             QTableWidgetItem* element = tableauSallesEco->item(i, COLONNE_SALLE_ICONE);
