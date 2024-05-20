@@ -30,7 +30,8 @@ enum IndiceTHI
     Neutre,
     LegerementTiede,
     Tiede,
-    Chaud
+    Chaud,
+    NbIndicesTHI
 };
 
 /**
@@ -44,7 +45,8 @@ enum IndiceInconfortIADI
     MalEtre,
     Inconfort,
     StressIntense,
-    UrgenceMedicale
+    UrgenceMedicale,
+    NbIndicesIADI
 };
 
 /**

@@ -60,7 +60,6 @@ class IHMEcoClassroom : public QWidget
         COLONNE_SALLE_DISPONIBILITE,     //!< La disponibilité de la salle
         COLONNE_SALLE_QUALITE_AIR,       //!< La qualité de l'air
         COLONNE_SALLE_CONFORT_THERMIQUE, //!< Le confort thermique
-        COLONNE_SALLE_ICONE,             //!< Le confinement
         COLONNE_SALLE_FENETRES,          //!< L'état des fenétres
         COLONNE_SALLE_LUMIERES,          //!< L'état des lumières
         NB_COLONNES_TABLEAU
@@ -75,11 +74,7 @@ class IHMEcoClassroom : public QWidget
   public slots:
     void recupererSalles();
     void afficherIndiceQualiteAir(QString, QString);
-    void afficherIndiceIADI(QString, QString);
     void afficherIndiceTHI(QString, QString);
-    void afficherIndiceConfinement(QString, QString);
-
-
 };
 
 #endif // IHMECOCLASSROOM_H

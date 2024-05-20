@@ -94,24 +94,6 @@ void IHMEcoClassroom::afficherIndiceQualiteAir(QString nomSalleEco, QString desi
     }
 }
 
-void IHMEcoClassroom::afficherIndiceIADI(QString nomSalleEco, QString designationIndice)
-{
-    qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "designationIndice"
-             << designationIndice;
-    // recherche nomSalleEco dans le tableau des salles affichées
-    for(int i = 0; i < tableauSallesEco->rowCount(); i++)
-    {
-        QTableWidgetItem* elementNom = tableauSallesEco->item(i, COLONNE_SALLE_NOM);
-        if(elementNom->data(0).toString() == nomSalleEco)
-        {
-            QTableWidgetItem* element = tableauSallesEco->item(i, COLONNE_SALLE_CONFORT_THERMIQUE);
-            if(element != nullptr)
-                element->setData(Qt::DisplayRole, designationIndice);
-            return;
-        }
-    }
-}
-
 void IHMEcoClassroom::afficherIndiceTHI(QString nomSalleEco, QString designationIndice)
 {
     qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "designationIndice"
@@ -123,24 +105,6 @@ void IHMEcoClassroom::afficherIndiceTHI(QString nomSalleEco, QString designation
         if(elementNom->data(0).toString() == nomSalleEco)
         {
             QTableWidgetItem* element = tableauSallesEco->item(i, COLONNE_SALLE_CONFORT_THERMIQUE);
-            if(element != nullptr)
-                element->setData(Qt::DisplayRole, designationIndice);
-            return;
-        }
-    }
-}
-
-void IHMEcoClassroom::afficherIndiceConfinement(QString nomSalleEco, QString designationIndice)
-{
-    qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "designationIndice"
-             << designationIndice;
-    // recherche nomSalleEco dans le tableau des salles affichées
-    for(int i = 0; i < tableauSallesEco->rowCount(); i++)
-    {
-        QTableWidgetItem* elementNom = tableauSallesEco->item(i, COLONNE_SALLE_NOM);
-        if(elementNom->data(0).toString() == nomSalleEco)
-        {
-            QTableWidgetItem* element = tableauSallesEco->item(i, COLONNE_SALLE_ICONE);
             if(element != nullptr)
                 element->setData(Qt::DisplayRole, designationIndice);
             return;
@@ -162,14 +126,6 @@ void IHMEcoClassroom::gererEvenements()
                 SIGNAL(nouvelIndiceQualiteAir(QString, QString)),
                 this,
                 SLOT(afficherIndiceQualiteAir(QString, QString)));
-        connect(sallesEco.value(),
-                SIGNAL(nouvelIndiceConfinement(QString, QString)),
-                this,
-                SLOT(afficherIndiceConfinement(QString, QString)));
-        connect(sallesEco.value(),
-                SIGNAL(nouvelIndiceIADI(QString, QString)),
-                this,
-                SLOT(afficherIndiceIADI(QString, QString)));
         connect(sallesEco.value(),
                 SIGNAL(nouvelIndiceTHI(QString, QString)),
                 this,
