@@ -30,7 +30,8 @@ enum IndiceTHI
     Neutre,
     LegerementTiede,
     Tiede,
-    Chaud
+    Chaud,
+    NbIndicesTHI
 };
 
 /**
@@ -44,7 +45,8 @@ enum IndiceInconfortIADI
     MalEtre,
     Inconfort,
     StressIntense,
-    UrgenceMedicale
+    UrgenceMedicale,
+    NbIndicesIADI
 };
 
 /**
@@ -58,7 +60,8 @@ enum IndiceConfinement
     Moyen,
     Eleve,
     TresEleve,
-    Extreme
+    Extreme,
+    NbIndicesConfinement
 };
 
 #endif // INDICES_H
