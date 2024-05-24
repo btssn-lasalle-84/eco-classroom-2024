@@ -50,8 +50,6 @@ class DialogueMQTT
     emit nouvelleDonnee(champs.at(StructureTopic::NOM_SALLE_ECO),
                         champs.at(StructureTopic::TYPE_DONNEE_MODULE),
                         message);
-
-    // @todo Il faudra connecter ce signal dans l'IHM pour traiter les données reçues
 !!!128898.cpp!!!	gererConnexion() : void
     qDebug() << Q_FUNC_INFO;
     emit brokerConnecte();
