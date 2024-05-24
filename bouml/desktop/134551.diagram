@@ -2,58 +2,79 @@ format 224
 
 classcanvas 128002 class_ref 134570 // BaseDeDonnees
   classdiagramsettings member_max_width 0 end
-  xyz 1013 46 3005
+  xyz 1589.8 538.8 3005
 end
 classcanvas 128023 class_ref 134679 // IHMEcoClassroom
   classdiagramsettings member_max_width 0 end
-  xyz 317.8 12 2000
+  xyz 352.4 435 2000
 end
-classcanvas 128151 class_ref 135063 // SalleEco
+classcanvas 128170 class_ref 134914 // MesureCO2
   classdiagramsettings member_max_width 0 end
-  xyz 21 348.8 2000
+  xyz 317.2 2063.2 3005
 end
-classcanvas 128279 class_ref 134935 // Mesures
+classcanvas 128426 class_ref 134786 // EtatPresence
   classdiagramsettings member_max_width 0 end
-  xyz 96 1131 2000
-end
-classcanvas 128407 class_ref 134551 // Etats
-  classdiagramsettings member_max_width 0 end
-  xyz 489 1124 2000
+  xyz 1412.2 1338.4 2006
 end
 classcanvas 128642 class_ref 134530 // DialogueMQTT
   classdiagramsettings member_max_width 0 end
-  xyz 1128 520.2 3005
+  xyz 287.8 28.8 3005
+end
+classcanvas 128682 class_ref 148010 // MesureTemperature
+  classdiagramsettings member_max_width 0 end
+  xyz 638 2088.4 2000
+end
+classcanvas 128810 class_ref 148138 // MesureHumidite
+  classdiagramsettings member_max_width 0 end
+  xyz 948.8 2098.6 2011
+end
+classcanvas 128938 class_ref 147754 // EtatFenetres
+  classdiagramsettings member_max_width 0 end
+  xyz 1428 1517.2 2000
+end
+classcanvas 129066 class_ref 147882 // EtatLumieres
+  classdiagramsettings member_max_width 0 end
+  xyz 1417.6 1684.8 2000
+end
+classcanvas 129194 class_ref 135063 // SalleEco
+  classdiagramsettings member_max_width 0 end
+  xyz 212.6 797.6 3011
 end
 relationcanvas 128130 relation_ref 134570 // <unidirectional association>
-  from ref 128002 z 3006 to point 966 37
-  line 128258 z 3006 to point 966 87
+  from ref 128002 z 3006 to point 1542.4 529.2
+  line 128258 z 3006 to point 1542.4 579.2
   line 128386 z 3006 to ref 128002
-  role_a_pos 968 73 3000 no_role_b
+  role_a_pos 1538 562 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128514 relation_ref 134698 // <unidirectional association>
   from ref 128023 z 3006 to ref 128002
-  role_a_pos 883 100 3000 no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 128535 relation_ref 134807 // <unidirectional association>
-  from ref 128151 z 2001 stereotype "<<QVector>>" xyz 192 1093 3000 to ref 128279
-  role_a_pos 239 1103 3000 no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 128663 relation_ref 134935 // <unidirectional association>
-  from ref 128151 z 2001 stereotype "<<QVector>>" xyz 510 1090 3000 to ref 128407
-  role_a_pos 577 1096 3000 no_role_b
+  role_a_pos 1433 601 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128770 relation_ref 128130 // <unidirectional association>
   from ref 128023 z 3006 to ref 128642
-  role_a_pos 1179 496 3000 no_role_b
+  role_a_pos 787 352 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 128791 relation_ref 135063 // <unidirectional association>
-  from ref 128023 z 2001 stereotype "<<QMap>>" xyz 498.5 263 3000 to ref 128151
-  role_a_pos 489 296 3000 no_role_b
+relationcanvas 129322 relation_ref 128258 // <directional composition>
+  from ref 129194 z 3012 stereotype "<<QVector>>" xyz 435 1989 3012 to ref 128170
+  role_a_pos 471 2040 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129450 relation_ref 128642 // <directional composition>
+  from ref 129194 z 3012 stereotype "<<QVector>>" xyz 1280 1392 3012 to ref 128426
+  role_a_pos 1274 1370 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129578 relation_ref 141226 // <unidirectional association>
+  from ref 129194 z 3012 to ref 128002
+  role_a_pos 1809 804 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129706 relation_ref 135063 // <unidirectional association>
+  from ref 128023 z 3012 stereotype "<<QMap>>" xyz 675 745.5 3012 to ref 129194
+  role_a_pos 735 799 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 end
