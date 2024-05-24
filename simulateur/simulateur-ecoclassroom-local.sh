@@ -2,7 +2,7 @@
 
 VERSION="0.1"
 MOSQUITTO_PUB="mosquitto_pub"
-BROKER_MQTT="192.168.1.20" # pc
+BROKER_MQTT="127.0.0.1" # pc
 #BROKER_MQTT="127.0.0.1" # localhost
 HEURE_DEBUT=$(date +%k)
 PERIODE=${1-"10"}

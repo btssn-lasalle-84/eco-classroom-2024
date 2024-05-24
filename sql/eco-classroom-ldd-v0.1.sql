@@ -145,7 +145,6 @@ CREATE TABLE IF NOT EXISTS `MesureTemperature` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `MesureTemperature`
-  ADD UNIQUE KEY `horodatage` (`horodatage`),
   ADD KEY `MesureTemperature_fk_1` (`idSalle`);
 
 ALTER TABLE `MesureTemperature`
@@ -161,7 +160,6 @@ CREATE TABLE IF NOT EXISTS `MesureHumidite` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `MesureHumidite`
-  ADD UNIQUE KEY `horodatage` (`horodatage`),
   ADD KEY `MesureHumidite_fk_1` (`idSalle`);
 
 ALTER TABLE `MesureHumidite`
@@ -177,7 +175,6 @@ CREATE TABLE IF NOT EXISTS `MesureLuminosite` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `MesureLuminosite`
-  ADD UNIQUE KEY `horodatage` (`horodatage`),
   ADD KEY `MesureLuminosite_fk_1` (`idSalle`);
 
 ALTER TABLE `MesureLuminosite`
@@ -193,7 +190,6 @@ CREATE TABLE IF NOT EXISTS `MesureCo2` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `MesureCo2`
-  ADD UNIQUE KEY `horodatage` (`horodatage`),
   ADD KEY `MesureCo2_fk_1` (`idSalle`);
 
 ALTER TABLE `MesureCo2`
@@ -209,7 +205,6 @@ CREATE TABLE IF NOT EXISTS `EtatPresence` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `EtatPresence`
-  ADD UNIQUE KEY `horodatage` (`horodatage`),
   ADD KEY `EtatPresence_fk_1` (`idSalle`);
 
 ALTER TABLE `EtatPresence`
@@ -225,7 +220,6 @@ CREATE TABLE IF NOT EXISTS `EtatLumieres` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `EtatLumieres`
-  ADD UNIQUE KEY `horodatage` (`horodatage`),
   ADD KEY `EtatLumieres_fk_1` (`idSalle`);
 
 ALTER TABLE `EtatLumieres`
@@ -241,7 +235,6 @@ CREATE TABLE IF NOT EXISTS `EtatFenetres` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `EtatFenetres`
-  ADD UNIQUE KEY `horodatage` (`horodatage`),
   ADD KEY `EtatFenetres_fk_1` (`idSalle`);
 
 ALTER TABLE `EtatFenetres`

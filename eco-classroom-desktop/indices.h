@@ -13,7 +13,8 @@ enum IndiceQualiteAir
     Modere,
     Mauvais,
     TresMauvais,
-    Severe
+    Severe,
+    NbIndicesQualiteAir
 };
 
 /**
@@ -29,7 +30,8 @@ enum IndiceTHI
     Neutre,
     LegerementTiede,
     Tiede,
-    Chaud
+    Chaud,
+    NbIndicesTHI
 };
 
 /**
@@ -43,7 +45,8 @@ enum IndiceInconfortIADI
     MalEtre,
     Inconfort,
     StressIntense,
-    UrgenceMedicale
+    UrgenceMedicale,
+    NbIndicesIADI
 };
 
 /**
@@ -56,8 +59,9 @@ enum IndiceConfinement
     Faible = 1,
     Moyen,
     Eleve,
-    TresElev,
-    Extreme
+    TresEleve,
+    Extreme,
+    NbIndicesConfinement
 };
 
 #endif // INDICES_H

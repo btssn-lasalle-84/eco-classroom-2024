@@ -3,17 +3,25 @@
 
 #include <QDateTime>
 
-class Etats
+struct EtatPresence
 {
-  private:
     bool      presence;
+    QDateTime horodatage;
+    bool      valide = false;
+};
+
+struct EtatFenetres
+{
     bool      fenetres;
+    QDateTime horodatage;
+    bool      valide = false;
+};
+
+struct EtatLumieres
+{
     bool      lumieres;
     QDateTime horodatage;
-
-  public:
-    Etats();
-    ~Etats();
+    bool      valide = false;
 };
 
 #endif // ETATS_H

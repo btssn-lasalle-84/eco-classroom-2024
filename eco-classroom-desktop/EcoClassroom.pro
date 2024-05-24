@@ -1,4 +1,4 @@
-QT       += core gui sql
+QT       += core gui sql mqtt
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -8,19 +8,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    basededonnees.cpp \
-    etats.cpp \
+    dialoguemqtt.cpp \
     main.cpp \
+    basededonnees.cpp \    
     ihmecoclassroom.cpp \
-    mesures.cpp \
     salleeco.cpp
 
 HEADERS += \
     basededonnees.h \
-    etats.h \
+    dialoguemqtt.h \
     ihmecoclassroom.h \
     indices.h \
     mesures.h \
+    etats.h \
     salleeco.h
 
 CONFIG(release, debug|release):DEFINES+=QT_NO_DEBUG_OUTPUT
