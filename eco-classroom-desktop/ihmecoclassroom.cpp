@@ -131,8 +131,10 @@ void IHMEcoClassroom::gererEvenements()
                 this,
                 SLOT(afficherIndiceTHI(QString, QString)));
     }
-    // @todo connecter le signal nouvelleDonnee(QString, QString, QString) vers un slot de l'IHM
-    // pour afficher la nouvelle donnée
+    connect(dialogueMQTT,
+            SIGNAL(nouvelleDonnee(QString, QString, QString)),
+            this,
+            SLOT(afficherNouvelleDonnee(QString, QString, QString)));
 }
 
 void IHMEcoClassroom::creerTableauSallesEco()
