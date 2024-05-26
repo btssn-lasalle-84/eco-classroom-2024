@@ -231,3 +231,9 @@ void IHMEcoClassroom::afficherSallesEco()
         ajouterSalleEcoTableau(*sallesEco.value());
     }
 }
+
+void IHMEcoClassroom::afficherNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee)
+{
+    qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "typeDonnee" << typeDonnee << "donnee"
+                 << donnee;
+}
