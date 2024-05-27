@@ -155,6 +155,9 @@ class SalleEco : public QObject
     void nouvelIndiceConfinement(QString nomSalleEco, QString designationIndice);
     void nouvelIndiceIADI(QString nomSalleEco, QString designationIndice);
     void nouvelIndiceTHI(QString nomSalleEco, QString designationIndice);
+    // @todo déclarer le signal nouvelEtatLumiere(QString nomSalleEco, QString etat)
+    // @todo déclarer le signal nouvelEtatPresence(QString nomSalleEco, QString etat)
+    // @todo déclarer le signal nouvelEtatFenetre(QString nomSalleEco, QString etat)
 };
 
 #endif // SALLEECO_H

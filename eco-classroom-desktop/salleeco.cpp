@@ -322,6 +322,40 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
             determinerIndiceTHI();
             determinerIndiceIADI();
         }
+        else if(typeDonnee == "lumiere")
+        {
+            // @todo ajouter le nouvel etat dans le QVector
+
+            // @todo insérer le nouvel etat dans la base de données
+
+            // @todo définir la valeur du QString etat à afficher dans le tableau
+
+            // @todo émettre le signal nouvelEtatLumiere(nom, etat)
+        }
+        else if(typeDonnee == "presence")
+        {
+            // @todo ajouter le nouvel etat dans le QVector
+
+            // @todo insérer le nouvel etat dans la base de données
+
+            // @todo définir la valeur du QString etat à afficher dans le tableau
+
+            // @todo émettre le signal nouvelEtatPresence(nom, etat)
+        }
+        else if(typeDonnee == "fenetre")
+        {
+            // @todo ajouter le nouvel etat dans le QVector
+
+            // @todo insérer le nouvel etat dans la base de données
+
+            // @todo définir la valeur du QString etat à afficher dans le tableau
+
+            // @todo émettre le signal nouvelEtatFenetre(nom, etat)
+        }
+        else
+        {
+            qDebug() << Q_FUNC_INFO << "typeDonnee" << typeDonnee << "inconnu";
+        }
     }
 }
 

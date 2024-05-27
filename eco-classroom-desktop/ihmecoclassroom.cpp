@@ -112,6 +112,10 @@ void IHMEcoClassroom::afficherIndiceTHI(QString nomSalleEco, QString designation
     }
 }
 
+// @todo définir le slot afficherEtatLumiere(QString nomSalleEco, QString etat)
+// @todo définir le slot afficherEtatPresence(QString nomSalleEco, QString etat)
+// @todo définir le slot afficherEtatFenetre(QString nomSalleEco, QString etat)
+
 void IHMEcoClassroom::gererEvenements()
 {
     QMapIterator<QString, SalleEco*> sallesEco(salles);
@@ -232,8 +236,10 @@ void IHMEcoClassroom::afficherSallesEco()
     }
 }
 
-void IHMEcoClassroom::afficherNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee)
+void IHMEcoClassroom::afficherNouvelleDonnee(QString nomSalleEco,
+                                             QString typeDonnee,
+                                             QString donnee)
 {
-    qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "typeDonnee" << typeDonnee << "donnee"
-                 << donnee;
+    qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "typeDonnee" << typeDonnee
+             << "donnee" << donnee;
 }
