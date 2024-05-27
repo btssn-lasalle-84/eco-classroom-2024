@@ -278,6 +278,15 @@ QString SalleEco::getIndiceTHI(int indiceTHI)
     return QString();
 }
 
+QString SalleEco::getFenetres(const EtatFenetres& etatFenetre)
+{
+    QStringList etats;
+    etats << "Ouvertes"
+          << "Fermées";
+
+    return etatFenetre.fenetres ? etats[0] : etats[1];
+}
+
 void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee)
 {
     // est-ce une donnée pour ma salle ?
@@ -344,13 +353,16 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
         }
         else if(typeDonnee == "fenetre")
         {
-            // @todo ajouter le nouvel etat dans le QVector
+            int nouvelEtat = donnee.toInt();
 
-            // @todo insérer le nouvel etat dans la base de données
+            requete = "INSERT INTO EtatFenetres (idSalle,etatFenetres,horodatage) VALUES (" +
+                      idSalle + "," + donnee + ",NOW())";
+            qDebug() << Q_FUNC_INFO << "requete" << requete;
+            baseDeDonnees->executer(requete);
 
-            // @todo définir la valeur du QString etat à afficher dans le tableau
+            QString etat = nouvelEtat ? "Ouvertes" : "Fermées";
 
-            // @todo émettre le signal nouvelEtatFenetre(nom, etat)
+            emit nouvelEtatFenetre(nom, etat);
         }
         else
         {
