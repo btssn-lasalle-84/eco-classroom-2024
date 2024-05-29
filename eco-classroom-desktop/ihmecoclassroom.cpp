@@ -146,6 +146,22 @@ void IHMEcoClassroom::afficherEtatLumiere(QString nomSalleEco, QString etat)
     }
 }
 
+void IHMEcoClassroom::afficherEtatPresence(QString nomSalleEco, QString etat)
+{
+    qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "etat" << etat;
+    // recherche nomSalleEco dans le tableau des salles affichées
+    for(int i = 0; i < tableauSallesEco->rowCount(); i++)
+    {
+        QTableWidgetItem* elementNom = tableauSallesEco->item(i, COLONNE_SALLE_NOM);
+        if(elementNom->data(0).toString() == nomSalleEco)
+        {
+            QTableWidgetItem* element = tableauSallesEco->item(i, COLONNE_SALLE_DISPONIBILITE);
+            if(element != nullptr)
+                element->setData(Qt::DisplayRole, etat);
+            return;
+        }
+    }
+}
 // @todo définir le slot afficherEtatPresence(QString nomSalleEco, QString etat)
 
 void IHMEcoClassroom::gererEvenements()
@@ -174,6 +190,10 @@ void IHMEcoClassroom::gererEvenements()
                 SIGNAL(nouvelEtatLumiere(QString, QString)),
                 this,
                 SLOT(afficherEtatLumiere(QString, QString)));
+        connect(sallesEco.value(),
+                SIGNAL(nouvelEtatPresence(QString, QString)),
+                this,
+                SLOT(afficherEtatPresence(QString, QString)));
     }
     connect(dialogueMQTT,
             SIGNAL(nouvelleDonnee(QString, QString, QString)),
@@ -225,7 +245,8 @@ void IHMEcoClassroom::ajouterSalleEcoTableau(const SalleEco& salle)
     elementNom->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1, COLONNE_SALLE_NOM, elementNom);
 
-    QTableWidgetItem* elementDisponibilite = new QTableWidgetItem(QString());
+    QTableWidgetItem* elementDisponibilite =
+      new QTableWidgetItem(SalleEco::getPresence(salle.getEtatPresence()));
     elementDisponibilite->setFlags(Qt::ItemIsEnabled);
     elementDisponibilite->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1,

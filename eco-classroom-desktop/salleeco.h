@@ -148,6 +148,7 @@ class SalleEco : public QObject
     static QString getIndiceTHI(int indiceTHI);
     static QString getFenetres(const EtatFenetres& etatFenetre);
     static QString getLumieres(const EtatLumieres& etatLumiere);
+    static QString getPresence(const EtatPresence& etatPresence);
 
   public slots:
     void traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee);
@@ -159,8 +160,7 @@ class SalleEco : public QObject
     void nouvelIndiceTHI(QString nomSalleEco, QString designationIndice);
     void nouvelEtatFenetre(QString nomSalleEco, QString etat);
     void nouvelEtatLumiere(QString nomSalleEco, QString etat);
-
-    // @todo déclarer le signal nouvelEtatPresence(QString nomSalleEco, QString etat)
+    void nouvelEtatPresence(QString nomSalleEco, QString etat);
 };
 
 #endif // SALLEECO_H

@@ -296,6 +296,15 @@ QString SalleEco::getLumieres(const EtatLumieres& etatLumiere)
     return etatLumiere.lumieres ? etats[0] : etats[1];
 }
 
+QString SalleEco::getPresence(const EtatPresence& etatPresence)
+{
+    QStringList etats;
+    etats << "Occupée"
+          << "Disponible";
+
+    return etatPresence.presence ? etats[0] : etats[1];
+}
+
 void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee)
 {
     // est-ce une donnée pour ma salle ?
@@ -355,13 +364,16 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
         }
         else if(typeDonnee == "presence")
         {
-            // @todo ajouter le nouvel etat dans le QVector
+            int nouvelEtat = donnee.toInt();
 
-            // @todo insérer le nouvel etat dans la base de données
+            requete = "INSERT INTO EtatPresence (idSalle,presence,horodatage) VALUES (" + idSalle +
+                      "," + donnee + ",NOW())";
+            qDebug() << Q_FUNC_INFO << "requete" << requete;
+            baseDeDonnees->executer(requete);
 
-            // @todo définir la valeur du QString etat à afficher dans le tableau
+            QString etat = nouvelEtat ? "Occupée" : "Disponible  ";
 
-            // @todo émettre le signal nouvelEtatPresence(nom, etat)
+            emit nouvelEtatPresence(nom, etat);
         }
         else if(typeDonnee == "fenetre")
         {

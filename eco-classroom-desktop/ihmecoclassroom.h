@@ -76,10 +76,10 @@ class IHMEcoClassroom : public QWidget
     void afficherIndiceQualiteAir(QString, QString);
     void afficherIndiceTHI(QString, QString);
 
-    // @todo déclarer le slot afficherEtatPresence(QString nomSalleEco, QString etat)
-
     void afficherEtatFenetre(QString nomSalleEco, QString etat);
     void afficherEtatLumiere(QString nomSalleEco, QString etat);
+    void afficherEtatPresence(QString nomSalleEco, QString etat);
+
     void afficherNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee);
 };
 
