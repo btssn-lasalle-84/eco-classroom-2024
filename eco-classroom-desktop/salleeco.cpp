@@ -278,6 +278,33 @@ QString SalleEco::getIndiceTHI(int indiceTHI)
     return QString();
 }
 
+QString SalleEco::getFenetres(const EtatFenetres& etatFenetre)
+{
+    QStringList etats;
+    etats << "Ouvertes"
+          << "Fermées";
+
+    return etatFenetre.fenetres ? etats[0] : etats[1];
+}
+
+QString SalleEco::getLumieres(const EtatLumieres& etatLumiere)
+{
+    QStringList etats;
+    etats << "Allumées"
+          << "Éteintes";
+
+    return etatLumiere.lumieres ? etats[0] : etats[1];
+}
+
+QString SalleEco::getPresence(const EtatPresence& etatPresence)
+{
+    QStringList etats;
+    etats << "Occupée"
+          << "Disponible";
+
+    return etatPresence.presence ? etats[0] : etats[1];
+}
+
 void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee)
 {
     // est-ce une donnée pour ma salle ?
@@ -321,6 +348,49 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
             baseDeDonnees->executer(requete);
             determinerIndiceTHI();
             determinerIndiceIADI();
+        }
+        else if(typeDonnee == "lumiere")
+        {
+            int nouvelEtat = donnee.toInt();
+
+            requete = "INSERT INTO EtatLumieres (idSalle,etatLumieres,horodatage) VALUES (" +
+                      idSalle + "," + donnee + ",NOW())";
+            qDebug() << Q_FUNC_INFO << "requete" << requete;
+            baseDeDonnees->executer(requete);
+
+            QString etat = nouvelEtat ? "Allumées" : "Éteintes  ";
+
+            emit nouvelEtatLumiere(nom, etat);
+        }
+        else if(typeDonnee == "presence")
+        {
+            int nouvelEtat = donnee.toInt();
+
+            requete = "INSERT INTO EtatPresence (idSalle,presence,horodatage) VALUES (" + idSalle +
+                      "," + donnee + ",NOW())";
+            qDebug() << Q_FUNC_INFO << "requete" << requete;
+            baseDeDonnees->executer(requete);
+
+            QString etat = nouvelEtat ? "Occupée" : "Disponible  ";
+
+            emit nouvelEtatPresence(nom, etat);
+        }
+        else if(typeDonnee == "fenetre")
+        {
+            int nouvelEtat = donnee.toInt();
+
+            requete = "INSERT INTO EtatFenetres (idSalle,etatFenetres,horodatage) VALUES (" +
+                      idSalle + "," + donnee + ",NOW())";
+            qDebug() << Q_FUNC_INFO << "requete" << requete;
+            baseDeDonnees->executer(requete);
+
+            QString etat = nouvelEtat ? "Ouvertes" : "Fermées";
+
+            emit nouvelEtatFenetre(nom, etat);
+        }
+        else
+        {
+            qDebug() << Q_FUNC_INFO << "typeDonnee" << typeDonnee << "inconnu";
         }
     }
 }
