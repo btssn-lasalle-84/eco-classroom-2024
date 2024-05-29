@@ -114,8 +114,7 @@ void IHMEcoClassroom::afficherIndiceTHI(QString nomSalleEco, QString designation
 
 void IHMEcoClassroom::afficherEtatFenetre(QString nomSalleEco, QString etat)
 {
-    qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "etat"
-             << etat;
+    qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "etat" << etat;
     // recherche nomSalleEco dans le tableau des salles affichées
     for(int i = 0; i < tableauSallesEco->rowCount(); i++)
     {
@@ -229,16 +228,13 @@ void IHMEcoClassroom::ajouterSalleEcoTableau(const SalleEco& salle)
                               COLONNE_SALLE_CONFORT_THERMIQUE,
                               elementConfortThermique);
 
-
-    EtatFenetres etatFenetre = salle.getEtatFenetres();
-    QString etatFenetreTexte = SalleEco::getFenetres(etatFenetre);
-
-    QTableWidgetItem* elementFenetres = new QTableWidgetItem(etatFenetreTexte);
+    QTableWidgetItem* elementFenetres =
+      new QTableWidgetItem(SalleEco::getFenetres(salle.getEtatFenetres()));
     elementFenetres->setFlags(Qt::ItemIsEnabled);
     elementFenetres->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1,
-                                  COLONNE_SALLE_FENETRES,
-                                  elementFenetres);
+                              COLONNE_SALLE_FENETRES,
+                              elementFenetres);
 
     QTableWidgetItem* elementLumieres = new QTableWidgetItem(QString());
     elementLumieres->setFlags(Qt::ItemIsEnabled);
