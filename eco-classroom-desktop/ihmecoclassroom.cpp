@@ -21,7 +21,7 @@
  */
 IHMEcoClassroom::IHMEcoClassroom(QWidget* parent) :
     QWidget(parent), baseDeDonnees(BaseDeDonnees::getInstance()),
-    dialogueMQTT(new DialogueMQTT(this))
+    dialogueMQTT(new DialogueMQTT(this)), filtrageCourant(Filtrage::Toutes)
 {
     qDebug() << Q_FUNC_INFO;
     baseDeDonnees->connecter();
@@ -199,6 +199,8 @@ void IHMEcoClassroom::gererEvenements()
             SIGNAL(nouvelleDonnee(QString, QString, QString)),
             this,
             SLOT(afficherNouvelleDonnee(QString, QString, QString)));
+    // @todo connecter le signal currentIndexChanged(int) de choixFiltrage vers le slot
+    // selectionnerFiltrage(int)
 }
 
 void IHMEcoClassroom::creerFenetrePrincipale()
@@ -252,7 +254,7 @@ void IHMEcoClassroom::creerSelectionFiltrage()
     choixFiltrage = new QComboBox(this);
 
     choixFiltrage->addItem("Toutes");
-    choixFiltrage->addItem("Disponible");
+    choixFiltrage->addItem("Disponibles");
     choixFiltrage->addItem("Interventions");
 
     QVBoxLayout* hLayout1 = new QVBoxLayout();
@@ -321,7 +323,20 @@ void IHMEcoClassroom::afficherSallesEco()
     while(sallesEco.hasNext())
     {
         sallesEco.next();
-        ajouterSalleEcoTableau(*sallesEco.value());
+        if(sallesEco.value()->estFiltre(filtrageCourant))
+            ajouterSalleEcoTableau(*sallesEco.value());
+    }
+}
+
+void IHMEcoClassroom::effacerTableauSallesEco()
+{
+    // on réinitialise la tableau
+    int nb = tableauSallesEco->rowCount();
+    if(nb != 0)
+    {
+        // on les efface
+        for(int n = 0; n < nb; n++)
+            tableauSallesEco->removeRow(0);
     }
 }
 
@@ -331,4 +346,14 @@ void IHMEcoClassroom::afficherNouvelleDonnee(QString nomSalleEco,
 {
     qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "typeDonnee" << typeDonnee
              << "donnee" << donnee;
+}
+
+void IHMEcoClassroom::selectionnerFiltrage(int indexFiltrage)
+{
+    qDebug() << Q_FUNC_INFO << "indexFiltrage" << indexFiltrage;
+    filtrageCourant = (Filtrage)indexFiltrage;
+
+    // @todo effacer les salles du tableau
+
+    // @todo afficher les salles dans le tableau
 }

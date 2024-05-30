@@ -37,11 +37,24 @@ class DialogueMQTT;
 class IHMEcoClassroom : public QWidget
 {
     Q_OBJECT
+  public:
+    /**
+     * @enum Filtrage
+     * @brief Les différentes filtrages
+     */
+    enum Filtrage
+    {
+        Toutes,
+        Disponibles,
+        Interventions,
+        NbFiltres
+    };
 
   private:
     QMap<QString, SalleEco*> salles;        //!< Les salles
     BaseDeDonnees*           baseDeDonnees; //!< l'association vers la classe BaseDeDonnees
     DialogueMQTT*            dialogueMQTT;  //!< l'association vers la classe DialogueMQTT
+    Filtrage                 filtrageCourant;
     // Widgets
     QTableWidget* tableauSallesEco;
     QComboBox*    choixFiltrage;
@@ -54,6 +67,7 @@ class IHMEcoClassroom : public QWidget
 
     void ajouterSalleEcoTableau(const SalleEco& salle);
     void afficherSallesEco();
+    void effacerTableauSallesEco();
 
     /**
      * @enum ColonneTableauSallesEco
@@ -86,6 +100,8 @@ class IHMEcoClassroom : public QWidget
     void afficherEtatPresence(QString nomSalleEco, QString etat);
 
     void afficherNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee);
+
+    void selectionnerFiltrage(int indexFiltrage);
 };
 
 #endif // IHMECOCLASSROOM_H

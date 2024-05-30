@@ -122,6 +122,13 @@ EtatLumieres SalleEco::getEtatLumieres() const
     return EtatLumieres();
 }
 
+bool SalleEco::estFiltre(IHMEcoClassroom::Filtrage filtrage)
+{
+    qDebug() << Q_FUNC_INFO << "filtrage" << filtrage;
+    // @todo déterminer si la salle doit être filtrée
+    return true;
+}
+
 void SalleEco::setIDSalle(QString idSalle)
 {
     this->idSalle = idSalle;
