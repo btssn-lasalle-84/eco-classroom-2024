@@ -44,9 +44,14 @@ class IHMEcoClassroom : public QWidget
     DialogueMQTT*            dialogueMQTT;  //!< l'association vers la classe DialogueMQTT
     // Widgets
     QTableWidget* tableauSallesEco;
+    QComboBox*    choixFiltrage;
+    QVBoxLayout*  mainLayout;
 
     void gererEvenements();
+    void creerFenetrePrincipale();
     void creerTableauSallesEco();
+    void creerSelectionFiltrage();
+
     void ajouterSalleEcoTableau(const SalleEco& salle);
     void afficherSallesEco();
 

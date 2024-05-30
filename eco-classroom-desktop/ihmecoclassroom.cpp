@@ -27,7 +27,7 @@ IHMEcoClassroom::IHMEcoClassroom(QWidget* parent) :
     baseDeDonnees->connecter();
 
     recupererSalles();
-    creerTableauSallesEco();
+    creerFenetrePrincipale();
     afficherSallesEco();
 
     gererEvenements();
@@ -201,6 +201,19 @@ void IHMEcoClassroom::gererEvenements()
             SLOT(afficherNouvelleDonnee(QString, QString, QString)));
 }
 
+void IHMEcoClassroom::creerFenetrePrincipale()
+{
+    mainLayout = new QVBoxLayout;
+
+    creerSelectionFiltrage();
+    creerTableauSallesEco();
+
+    mainLayout->addWidget(choixFiltrage);
+    mainLayout->addWidget(tableauSallesEco);
+
+    setLayout(mainLayout);
+}
+
 void IHMEcoClassroom::creerTableauSallesEco()
 {
     QStringList labelsColonnes;
@@ -229,9 +242,22 @@ void IHMEcoClassroom::creerTableauSallesEco()
     // tableauSallesEco->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     // Positionnement du QTableWidget
-    QVBoxLayout* layout = new QVBoxLayout();
+    QHBoxLayout* layout = new QHBoxLayout();
     layout->addWidget(tableauSallesEco);
-    setLayout(layout);
+    mainLayout->addLayout(layout);
+}
+
+void IHMEcoClassroom::creerSelectionFiltrage()
+{
+    choixFiltrage = new QComboBox(this);
+
+    choixFiltrage->addItem("Toutes");
+    choixFiltrage->addItem("Disponible");
+    choixFiltrage->addItem("Interventions");
+
+    QVBoxLayout* hLayout1 = new QVBoxLayout();
+    hLayout1->addWidget(choixFiltrage);
+    mainLayout->addLayout(hLayout1);
 }
 
 void IHMEcoClassroom::ajouterSalleEcoTableau(const SalleEco& salle)
