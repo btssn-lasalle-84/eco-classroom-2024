@@ -149,6 +149,9 @@ void IHMEcoClassroom::afficherEtatLumiere(QString nomSalleEco, QString etat)
 void IHMEcoClassroom::afficherEtatPresence(QString nomSalleEco, QString etat)
 {
     qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "etat" << etat;
+    // @todo si le filtrageCourant est égal à Disponibles alors il faut d'abord rafraichir le
+    // tableau (effacerTableauSallesEco() puis afficherSallesEco())
+
     // recherche nomSalleEco dans le tableau des salles affichées
     for(int i = 0; i < tableauSallesEco->rowCount(); i++)
     {
@@ -210,6 +213,7 @@ void IHMEcoClassroom::creerFenetrePrincipale()
 
     layoutPrincipal->addWidget(choixFiltrage);
     layoutPrincipal->addWidget(tableauSallesEco);
+    layoutPrincipal->addStretch();
 
     setLayout(layoutPrincipal);
 }
@@ -262,7 +266,12 @@ void IHMEcoClassroom::creerSelectionFiltrage()
 
 void IHMEcoClassroom::ajouterSalleEcoTableau(const SalleEco& salle)
 {
-    qDebug() << Q_FUNC_INFO << "nom" << salle.getNom() << "indiceCO2" << salle.getIndiceCO2();
+    qDebug() << Q_FUNC_INFO << "elementNom" << salle.getNom() << "elementDisponibilite"
+             << SalleEco::getPresence(salle.getEtatPresence()) << "elementQualiteAir"
+             << SalleEco::getIndiceCO2(salle.getIndiceCO2()) << "elementConfortThermique"
+             << SalleEco::getIndiceTHI(salle.getIndiceTHI()) << "elementFenetres"
+             << SalleEco::getFenetres(salle.getEtatFenetres()) << "elementLumieres"
+             << SalleEco::getLumieres(salle.getEtatLumieres());
 
     tableauSallesEco->setRowCount(tableauSallesEco->rowCount() + 1);
 
@@ -310,8 +319,6 @@ void IHMEcoClassroom::ajouterSalleEcoTableau(const SalleEco& salle)
     tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1,
                               COLONNE_SALLE_LUMIERES,
                               elementLumieres);
-
-    // @todo ajouter les éléments des autres colonnes
 }
 
 void IHMEcoClassroom::afficherSallesEco()
