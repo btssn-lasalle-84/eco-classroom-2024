@@ -58,7 +58,7 @@ class IHMEcoClassroom : public QWidget
     // Widgets
     QTableWidget* tableauSallesEco;
     QComboBox*    choixFiltrage;
-    QVBoxLayout*  mainLayout;
+    QVBoxLayout*  layoutPrincipal;
 
     void gererEvenements();
     void creerFenetrePrincipale();

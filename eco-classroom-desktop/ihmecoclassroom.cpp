@@ -162,7 +162,6 @@ void IHMEcoClassroom::afficherEtatPresence(QString nomSalleEco, QString etat)
         }
     }
 }
-// @todo définir le slot afficherEtatPresence(QString nomSalleEco, QString etat)
 
 void IHMEcoClassroom::gererEvenements()
 {
@@ -199,21 +198,20 @@ void IHMEcoClassroom::gererEvenements()
             SIGNAL(nouvelleDonnee(QString, QString, QString)),
             this,
             SLOT(afficherNouvelleDonnee(QString, QString, QString)));
-    // @todo connecter le signal currentIndexChanged(int) de choixFiltrage vers le slot
-    // selectionnerFiltrage(int)
+    connect(choixFiltrage, SIGNAL(currentIndexChanged(int)), this, SLOT(selectionnerFiltrage(int)));
 }
 
 void IHMEcoClassroom::creerFenetrePrincipale()
 {
-    mainLayout = new QVBoxLayout;
+    layoutPrincipal = new QVBoxLayout;
 
     creerSelectionFiltrage();
     creerTableauSallesEco();
 
-    mainLayout->addWidget(choixFiltrage);
-    mainLayout->addWidget(tableauSallesEco);
+    layoutPrincipal->addWidget(choixFiltrage);
+    layoutPrincipal->addWidget(tableauSallesEco);
 
-    setLayout(mainLayout);
+    setLayout(layoutPrincipal);
 }
 
 void IHMEcoClassroom::creerTableauSallesEco()
@@ -246,7 +244,7 @@ void IHMEcoClassroom::creerTableauSallesEco()
     // Positionnement du QTableWidget
     QHBoxLayout* layout = new QHBoxLayout();
     layout->addWidget(tableauSallesEco);
-    mainLayout->addLayout(layout);
+    layoutPrincipal->addLayout(layout);
 }
 
 void IHMEcoClassroom::creerSelectionFiltrage()
@@ -259,7 +257,7 @@ void IHMEcoClassroom::creerSelectionFiltrage()
 
     QVBoxLayout* hLayout1 = new QVBoxLayout();
     hLayout1->addWidget(choixFiltrage);
-    mainLayout->addLayout(hLayout1);
+    layoutPrincipal->addLayout(hLayout1);
 }
 
 void IHMEcoClassroom::ajouterSalleEcoTableau(const SalleEco& salle)
@@ -353,7 +351,6 @@ void IHMEcoClassroom::selectionnerFiltrage(int indexFiltrage)
     qDebug() << Q_FUNC_INFO << "indexFiltrage" << indexFiltrage;
     filtrageCourant = (Filtrage)indexFiltrage;
 
-    // @todo effacer les salles du tableau
-
-    // @todo afficher les salles dans le tableau
+    effacerTableauSallesEco();
+    afficherSallesEco();
 }
