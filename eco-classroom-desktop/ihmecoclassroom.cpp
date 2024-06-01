@@ -149,13 +149,12 @@ void IHMEcoClassroom::afficherEtatLumiere(QString nomSalleEco, QString etat)
 void IHMEcoClassroom::afficherEtatPresence(QString nomSalleEco, QString etat)
 {
     qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "etat" << etat;
-
     if(filtrageCourant == Disponibles)
-       {
-           // Rafraîchit le tableau
-           effacerTableauSallesEco();
-           afficherSallesEco();
-       }
+    {
+        // Rafraîchit le tableau
+        effacerTableauSallesEco();
+        afficherSallesEco();
+    }
     // recherche nomSalleEco dans le tableau des salles affichées
     for(int i = 0; i < tableauSallesEco->rowCount(); i++)
     {
