@@ -371,8 +371,9 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
         }
         else if(typeDonnee == "lumiere")
         {
+            int precedentEtat = (int)getEtatLumieres().lumieres;
             int nouvelEtat = donnee.toInt();
-            // @todo ajouter le nouvel état
+            ajouterEtatLumieres(nouvelEtat);
 
             requete = "INSERT INTO EtatLumieres (idSalle,etatLumieres,horodatage) VALUES (" +
                       idSalle + "," + donnee + ",NOW())";
@@ -381,8 +382,8 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
 
             QString etat = nouvelEtat ? "Allumées" : "Éteintes  ";
 
-            // @todo seulement si changement d'état
-            emit nouvelEtatLumiere(nom, etat);
+            if(precedentEtat != nouvelEtat)
+                emit nouvelEtatLumiere(nom, etat);
         }
         else if(typeDonnee == "presence")
         {
@@ -402,8 +403,9 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
         }
         else if(typeDonnee == "fenetre")
         {
-            // @todo ajouter le nouvel état
+            int precedentEtat = (int)getEtatFenetres().fenetres;
             int nouvelEtat = donnee.toInt();
+            ajouterEtatFenetres(nouvelEtat);
 
             requete = "INSERT INTO EtatFenetres (idSalle,etatFenetres,horodatage) VALUES (" +
                       idSalle + "," + donnee + ",NOW())";
@@ -412,8 +414,8 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
 
             QString etat = nouvelEtat ? "Ouvertes" : "Fermées";
 
-            // @todo seulement si changement d'état
-            emit nouvelEtatFenetre(nom, etat);
+            if(precedentEtat != nouvelEtat)
+                emit nouvelEtatFenetre(nom, etat);
         }
         else
         {

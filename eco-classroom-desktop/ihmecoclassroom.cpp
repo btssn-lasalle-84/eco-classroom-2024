@@ -149,9 +149,13 @@ void IHMEcoClassroom::afficherEtatLumiere(QString nomSalleEco, QString etat)
 void IHMEcoClassroom::afficherEtatPresence(QString nomSalleEco, QString etat)
 {
     qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "etat" << etat;
-    // @todo si le filtrageCourant est égal à Disponibles alors il faut d'abord rafraichir le
-    // tableau (effacerTableauSallesEco() puis afficherSallesEco())
 
+    if(filtrageCourant == Disponibles)
+       {
+           // Rafraîchit le tableau
+           effacerTableauSallesEco();
+           afficherSallesEco();
+       }
     // recherche nomSalleEco dans le tableau des salles affichées
     for(int i = 0; i < tableauSallesEco->rowCount(); i++)
     {
