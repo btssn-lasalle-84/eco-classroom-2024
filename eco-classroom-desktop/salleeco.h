@@ -5,6 +5,7 @@
 #include <QString>
 #include <QVector>
 
+#include "ihmecoclassroom.h"
 #include "mesures.h"
 #include "etats.h"
 
@@ -126,6 +127,7 @@ class SalleEco : public QObject
     EtatPresence      getEtatPresence() const;
     EtatFenetres      getEtatFenetres() const;
     EtatLumieres      getEtatLumieres() const;
+    bool              estFiltre(IHMEcoClassroom::Filtrage filtrage);
 
     void setIDSalle(QString idSalle);
     void setNom(QString nom);

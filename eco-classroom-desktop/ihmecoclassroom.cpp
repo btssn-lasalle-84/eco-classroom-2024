@@ -21,13 +21,13 @@
  */
 IHMEcoClassroom::IHMEcoClassroom(QWidget* parent) :
     QWidget(parent), baseDeDonnees(BaseDeDonnees::getInstance()),
-    dialogueMQTT(new DialogueMQTT(this))
+    dialogueMQTT(new DialogueMQTT(this)), filtrageCourant(Filtrage::Toutes)
 {
     qDebug() << Q_FUNC_INFO;
     baseDeDonnees->connecter();
 
     recupererSalles();
-    creerTableauSallesEco();
+    creerFenetrePrincipale();
     afficherSallesEco();
 
     gererEvenements();
@@ -149,6 +149,12 @@ void IHMEcoClassroom::afficherEtatLumiere(QString nomSalleEco, QString etat)
 void IHMEcoClassroom::afficherEtatPresence(QString nomSalleEco, QString etat)
 {
     qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "etat" << etat;
+    if(filtrageCourant == Disponibles)
+    {
+        // Rafraîchit le tableau
+        effacerTableauSallesEco();
+        afficherSallesEco();
+    }
     // recherche nomSalleEco dans le tableau des salles affichées
     for(int i = 0; i < tableauSallesEco->rowCount(); i++)
     {
@@ -162,7 +168,6 @@ void IHMEcoClassroom::afficherEtatPresence(QString nomSalleEco, QString etat)
         }
     }
 }
-// @todo définir le slot afficherEtatPresence(QString nomSalleEco, QString etat)
 
 void IHMEcoClassroom::gererEvenements()
 {
@@ -199,6 +204,21 @@ void IHMEcoClassroom::gererEvenements()
             SIGNAL(nouvelleDonnee(QString, QString, QString)),
             this,
             SLOT(afficherNouvelleDonnee(QString, QString, QString)));
+    connect(choixFiltrage, SIGNAL(currentIndexChanged(int)), this, SLOT(selectionnerFiltrage(int)));
+}
+
+void IHMEcoClassroom::creerFenetrePrincipale()
+{
+    layoutPrincipal = new QVBoxLayout;
+
+    creerSelectionFiltrage();
+    creerTableauSallesEco();
+
+    layoutPrincipal->addWidget(choixFiltrage);
+    layoutPrincipal->addWidget(tableauSallesEco);
+    layoutPrincipal->addStretch();
+
+    setLayout(layoutPrincipal);
 }
 
 void IHMEcoClassroom::creerTableauSallesEco()
@@ -229,14 +249,32 @@ void IHMEcoClassroom::creerTableauSallesEco()
     // tableauSallesEco->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     // Positionnement du QTableWidget
-    QVBoxLayout* layout = new QVBoxLayout();
+    QHBoxLayout* layout = new QHBoxLayout();
     layout->addWidget(tableauSallesEco);
-    setLayout(layout);
+    layoutPrincipal->addLayout(layout);
+}
+
+void IHMEcoClassroom::creerSelectionFiltrage()
+{
+    choixFiltrage = new QComboBox(this);
+
+    choixFiltrage->addItem("Toutes");
+    choixFiltrage->addItem("Disponibles");
+    choixFiltrage->addItem("Interventions");
+
+    QVBoxLayout* hLayout1 = new QVBoxLayout();
+    hLayout1->addWidget(choixFiltrage);
+    layoutPrincipal->addLayout(hLayout1);
 }
 
 void IHMEcoClassroom::ajouterSalleEcoTableau(const SalleEco& salle)
 {
-    qDebug() << Q_FUNC_INFO << "nom" << salle.getNom() << "indiceCO2" << salle.getIndiceCO2();
+    qDebug() << Q_FUNC_INFO << "elementNom" << salle.getNom() << "elementDisponibilite"
+             << SalleEco::getPresence(salle.getEtatPresence()) << "elementQualiteAir"
+             << SalleEco::getIndiceCO2(salle.getIndiceCO2()) << "elementConfortThermique"
+             << SalleEco::getIndiceTHI(salle.getIndiceTHI()) << "elementFenetres"
+             << SalleEco::getFenetres(salle.getEtatFenetres()) << "elementLumieres"
+             << SalleEco::getLumieres(salle.getEtatLumieres());
 
     tableauSallesEco->setRowCount(tableauSallesEco->rowCount() + 1);
 
@@ -284,8 +322,6 @@ void IHMEcoClassroom::ajouterSalleEcoTableau(const SalleEco& salle)
     tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1,
                               COLONNE_SALLE_LUMIERES,
                               elementLumieres);
-
-    // @todo ajouter les éléments des autres colonnes
 }
 
 void IHMEcoClassroom::afficherSallesEco()
@@ -295,7 +331,20 @@ void IHMEcoClassroom::afficherSallesEco()
     while(sallesEco.hasNext())
     {
         sallesEco.next();
-        ajouterSalleEcoTableau(*sallesEco.value());
+        if(sallesEco.value()->estFiltre(filtrageCourant))
+            ajouterSalleEcoTableau(*sallesEco.value());
+    }
+}
+
+void IHMEcoClassroom::effacerTableauSallesEco()
+{
+    // on réinitialise la tableau
+    int nb = tableauSallesEco->rowCount();
+    if(nb != 0)
+    {
+        // on les efface
+        for(int n = 0; n < nb; n++)
+            tableauSallesEco->removeRow(0);
     }
 }
 
@@ -305,4 +354,13 @@ void IHMEcoClassroom::afficherNouvelleDonnee(QString nomSalleEco,
 {
     qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "typeDonnee" << typeDonnee
              << "donnee" << donnee;
+}
+
+void IHMEcoClassroom::selectionnerFiltrage(int indexFiltrage)
+{
+    qDebug() << Q_FUNC_INFO << "indexFiltrage" << indexFiltrage;
+    filtrageCourant = (Filtrage)indexFiltrage;
+
+    effacerTableauSallesEco();
+    afficherSallesEco();
 }
