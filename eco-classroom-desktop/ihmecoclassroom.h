@@ -45,10 +45,23 @@ class IHMEcoClassroom : public QWidget
     // Widgets
     QTableWidget* tableauSallesEco;
 
+
+    // Labels
+    QLabel* nomSalle;
+    QLabel* superficieSalle;
+    QLabel* descriptionSalle;
+    QLabel* qualiteAirSalle;
+    QLabel* temperatureSalle;
+    QLabel* humiditeSalle;
+    QLabel* c02Salle;
+
     void gererEvenements();
     void creerTableauSallesEco();
     void ajouterSalleEcoTableau(const SalleEco& salle);
     void afficherSallesEco();
+    void creerSalleSpecifique();
+
+
 
     /**
      * @enum ColonneTableauSallesEco

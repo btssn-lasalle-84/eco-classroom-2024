@@ -29,6 +29,7 @@ IHMEcoClassroom::IHMEcoClassroom(QWidget* parent) :
     recupererSalles();
     creerTableauSallesEco();
     afficherSallesEco();
+    creerSalleSpecifique();
 
     gererEvenements();
 
@@ -228,4 +229,38 @@ void IHMEcoClassroom::afficherSallesEco()
         sallesEco.next();
         ajouterSalleEcoTableau(*sallesEco.value());
     }
+}
+
+void IHMEcoClassroom::creerSalleSpecifique()
+{
+
+    QVBoxLayout* layoutFenetreSpecifique = new QVBoxLayout(this);
+
+    nomSalle              = new QLabel(this);
+    superficieSalle       = new QLabel(this);
+    descriptionSalle      = new QLabel(this);
+    qualiteAirSalle       = new QLabel(this);
+    temperatureSalle      = new QLabel(this);
+    humiditeSalle         = new QLabel(this);
+    c02Salle              = new QLabel(this);
+
+
+    layoutFenetreSpecifique->addWidget(new QLabel("Nom:", this));
+    layoutFenetreSpecifique->addWidget(nomSalle);
+    layoutFenetreSpecifique->addWidget(new QLabel("Superficie:", this));
+    layoutFenetreSpecifique->addWidget(superficieSalle);
+    layoutFenetreSpecifique->addWidget(new QLabel("Description:", this));
+    layoutFenetreSpecifique->addWidget(descriptionSalle);
+    layoutFenetreSpecifique->addWidget(new QLabel("Qualité d'air:", this));
+    layoutFenetreSpecifique->addWidget(qualiteAirSalle);
+    layoutFenetreSpecifique->addWidget(new QLabel("Température:", this));
+    layoutFenetreSpecifique->addWidget(temperatureSalle);
+    layoutFenetreSpecifique->addWidget(new QLabel("Humidité:", this));
+    layoutFenetreSpecifique->addWidget(humiditeSalle);
+    layoutFenetreSpecifique->addWidget(new QLabel("C02:", this));
+    layoutFenetreSpecifique->addWidget(c02Salle);
+
+
+    setLayout(layoutFenetreSpecifique);
+
 }
