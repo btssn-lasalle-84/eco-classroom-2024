@@ -5,6 +5,7 @@
 #include <QString>
 #include <QVector>
 
+#include "ihmecoclassroom.h"
 #include "mesures.h"
 #include "etats.h"
 
@@ -126,6 +127,7 @@ class SalleEco : public QObject
     EtatPresence      getEtatPresence() const;
     EtatFenetres      getEtatFenetres() const;
     EtatLumieres      getEtatLumieres() const;
+    bool              estFiltre(IHMEcoClassroom::Filtrage filtrage);
 
     void setIDSalle(QString idSalle);
     void setNom(QString nom);
@@ -146,6 +148,9 @@ class SalleEco : public QObject
     static QString getIndiceConfinement(int indiceConfinement);
     static QString getIndiceIADI(int indiceIADI);
     static QString getIndiceTHI(int indiceTHI);
+    static QString getFenetres(const EtatFenetres& etatFenetre);
+    static QString getLumieres(const EtatLumieres& etatLumiere);
+    static QString getPresence(const EtatPresence& etatPresence);
 
   public slots:
     void traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee);
@@ -155,6 +160,9 @@ class SalleEco : public QObject
     void nouvelIndiceConfinement(QString nomSalleEco, QString designationIndice);
     void nouvelIndiceIADI(QString nomSalleEco, QString designationIndice);
     void nouvelIndiceTHI(QString nomSalleEco, QString designationIndice);
+    void nouvelEtatFenetre(QString nomSalleEco, QString etat);
+    void nouvelEtatLumiere(QString nomSalleEco, QString etat);
+    void nouvelEtatPresence(QString nomSalleEco, QString etat);
 };
 
 #endif // SALLEECO_H

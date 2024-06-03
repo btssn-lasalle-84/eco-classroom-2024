@@ -37,13 +37,28 @@ class DialogueMQTT;
 class IHMEcoClassroom : public QWidget
 {
     Q_OBJECT
+  public:
+    /**
+     * @enum Filtrage
+     * @brief Les différentes filtrages
+     */
+    enum Filtrage
+    {
+        Toutes,
+        Disponibles,
+        Interventions,
+        NbFiltres
+    };
 
   private:
     QMap<QString, SalleEco*> salles;        //!< Les salles
     BaseDeDonnees*           baseDeDonnees; //!< l'association vers la classe BaseDeDonnees
     DialogueMQTT*            dialogueMQTT;  //!< l'association vers la classe DialogueMQTT
+    Filtrage                 filtrageCourant;
     // Widgets
     QTableWidget* tableauSallesEco;
+    QComboBox*    choixFiltrage;
+    QVBoxLayout*  layoutPrincipal;
 
 
     // Labels
@@ -56,12 +71,17 @@ class IHMEcoClassroom : public QWidget
     QLabel* c02Salle;
 
     void gererEvenements();
+    void creerFenetrePrincipale();
     void creerTableauSallesEco();
+    void creerSelectionFiltrage();
+
     void ajouterSalleEcoTableau(const SalleEco& salle);
     void afficherSallesEco();
     void creerSalleSpecifique();
 
 
+
+    void effacerTableauSallesEco();
 
     /**
      * @enum ColonneTableauSallesEco
@@ -88,6 +108,14 @@ class IHMEcoClassroom : public QWidget
     void recupererSalles();
     void afficherIndiceQualiteAir(QString, QString);
     void afficherIndiceTHI(QString, QString);
+
+    void afficherEtatFenetre(QString nomSalleEco, QString etat);
+    void afficherEtatLumiere(QString nomSalleEco, QString etat);
+    void afficherEtatPresence(QString nomSalleEco, QString etat);
+
+    void afficherNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee);
+
+    void selectionnerFiltrage(int indexFiltrage);
 };
 
 #endif // IHMECOCLASSROOM_H

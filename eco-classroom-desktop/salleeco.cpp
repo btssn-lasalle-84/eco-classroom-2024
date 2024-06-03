@@ -122,6 +122,26 @@ EtatLumieres SalleEco::getEtatLumieres() const
     return EtatLumieres();
 }
 
+bool SalleEco::estFiltre(IHMEcoClassroom::Filtrage filtrage)
+{
+    switch(filtrage)
+    {
+        case IHMEcoClassroom::Toutes:
+            // qDebug() << Q_FUNC_INFO << "nom" << nom << "filtrage Toutes";
+            return true;
+        case IHMEcoClassroom::Disponibles:
+            qDebug() << Q_FUNC_INFO << "nom" << nom << "filtrage Disponibles"
+                     << !getEtatPresence().presence;
+            return !getEtatPresence().presence;
+        case IHMEcoClassroom::Interventions:
+            qDebug() << Q_FUNC_INFO << "nom" << nom << "filtrage Interventions";
+            // @todo faire le filtrage pour les interventions
+            return false;
+        default:
+            return true;
+    }
+}
+
 void SalleEco::setIDSalle(QString idSalle)
 {
     this->idSalle = idSalle;
@@ -278,6 +298,33 @@ QString SalleEco::getIndiceTHI(int indiceTHI)
     return QString();
 }
 
+QString SalleEco::getFenetres(const EtatFenetres& etatFenetre)
+{
+    QStringList etats;
+    etats << "Ouvertes"
+          << "Fermées";
+
+    return etatFenetre.fenetres ? etats[0] : etats[1];
+}
+
+QString SalleEco::getLumieres(const EtatLumieres& etatLumiere)
+{
+    QStringList etats;
+    etats << "Allumées"
+          << "Éteintes";
+
+    return etatLumiere.lumieres ? etats[0] : etats[1];
+}
+
+QString SalleEco::getPresence(const EtatPresence& etatPresence)
+{
+    QStringList etats;
+    etats << "Occupée"
+          << "Disponible";
+
+    return etatPresence.presence ? etats[0] : etats[1];
+}
+
 void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee)
 {
     // est-ce une donnée pour ma salle ?
@@ -321,6 +368,58 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
             baseDeDonnees->executer(requete);
             determinerIndiceTHI();
             determinerIndiceIADI();
+        }
+        else if(typeDonnee == "lumiere")
+        {
+            int precedentEtat = (int)getEtatLumieres().lumieres;
+            int nouvelEtat = donnee.toInt();
+            ajouterEtatLumieres(nouvelEtat);
+
+            requete = "INSERT INTO EtatLumieres (idSalle,etatLumieres,horodatage) VALUES (" +
+                      idSalle + "," + donnee + ",NOW())";
+            qDebug() << Q_FUNC_INFO << "requete" << requete;
+            baseDeDonnees->executer(requete);
+
+            QString etat = nouvelEtat ? "Allumées" : "Éteintes  ";
+
+            if(precedentEtat != nouvelEtat)
+                emit nouvelEtatLumiere(nom, etat);
+        }
+        else if(typeDonnee == "presence")
+        {
+            int precedentEtat = (int)getEtatPresence().presence;
+            int nouvelEtat    = donnee.toInt();
+            ajouterEtatPresence(nouvelEtat);
+
+            requete = "INSERT INTO EtatPresence (idSalle,presence,horodatage) VALUES (" + idSalle +
+                      "," + donnee + ",NOW())";
+            qDebug() << Q_FUNC_INFO << "requete" << requete;
+            baseDeDonnees->executer(requete);
+
+            QString etat = nouvelEtat ? "Occupée" : "Disponible  ";
+
+            if(precedentEtat != nouvelEtat)
+                emit nouvelEtatPresence(nom, etat);
+        }
+        else if(typeDonnee == "fenetre")
+        {
+            int precedentEtat = (int)getEtatFenetres().fenetres;
+            int nouvelEtat = donnee.toInt();
+            ajouterEtatFenetres(nouvelEtat);
+
+            requete = "INSERT INTO EtatFenetres (idSalle,etatFenetres,horodatage) VALUES (" +
+                      idSalle + "," + donnee + ",NOW())";
+            qDebug() << Q_FUNC_INFO << "requete" << requete;
+            baseDeDonnees->executer(requete);
+
+            QString etat = nouvelEtat ? "Ouvertes" : "Fermées";
+
+            if(precedentEtat != nouvelEtat)
+                emit nouvelEtatFenetre(nom, etat);
+        }
+        else
+        {
+            qDebug() << Q_FUNC_INFO << "typeDonnee" << typeDonnee << "inconnu";
         }
     }
 }
