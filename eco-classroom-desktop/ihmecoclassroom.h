@@ -77,6 +77,7 @@ class IHMEcoClassroom : public QWidget
 
     void ajouterSalleEcoTableau(const SalleEco& salle);
     void afficherSallesEco();
+    void afficherSalleSpecifique(SalleEco* salleEco);
     void creerSalleSpecifique();
 
 
@@ -114,7 +115,7 @@ class IHMEcoClassroom : public QWidget
     void afficherEtatPresence(QString nomSalleEco, QString etat);
 
     void afficherNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee);
-
+    void afficherEcoClassroom(int ligne, int colonne);
     void selectionnerFiltrage(int indexFiltrage);
 };
 

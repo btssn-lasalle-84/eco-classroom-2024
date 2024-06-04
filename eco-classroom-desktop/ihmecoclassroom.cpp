@@ -200,6 +200,7 @@ void IHMEcoClassroom::gererEvenements()
                 SIGNAL(nouvelEtatPresence(QString, QString)),
                 this,
                 SLOT(afficherEtatPresence(QString, QString)));
+        connect(tableauSallesEco, SIGNAL(cellClicked(int, int)), this, SLOT(afficherEcoClassroom(int, int)));
     }
     connect(dialogueMQTT,
             SIGNAL(nouvelleDonnee(QString, QString, QString)),
@@ -395,4 +396,23 @@ void IHMEcoClassroom::selectionnerFiltrage(int indexFiltrage)
 
     effacerTableauSallesEco();
     afficherSallesEco();
+}
+
+void IHMEcoClassroom::afficherEcoClassroom(int ligne, int colonne)
+{
+    QTableWidgetItem* salleEco = tableauSallesEco->item(ligne, COLONNE_SALLE_NOM);
+
+    QString nomSalleEco = salleEco->data(0).toString();
+
+    if (salleEco != nullptr)
+    {
+        SalleEco* salle = salles.value(nomSalleEco, nullptr);
+
+        afficherSalleSpecifique();
+
+    }
+}
+
+void IHMEcoClassroom::afficherSalleSpecifique(SalleEco* salleEco)
+{
 }
