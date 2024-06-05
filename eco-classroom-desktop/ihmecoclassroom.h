@@ -56,8 +56,20 @@ class IHMEcoClassroom : public QWidget
     DialogueMQTT*            dialogueMQTT;  //!< l'association vers la classe DialogueMQTT
     Filtrage                 filtrageCourant;
     // Widgets
+    QVBoxLayout*  layoutPrincipal;
+    QVBoxLayout*  layoutVueGenerale;
+    QHBoxLayout*  layoutVueFiltrage;
+    QHBoxLayout*  layoutVueTableau;
+    QVBoxLayout*  layoutVueSpecifique;
+    QHBoxLayout*  layoutVueInformations;
+    QHBoxLayout*  layoutVueDescription;
+    QHBoxLayout*  layoutVueDonnees;
+    QVBoxLayout*  layoutVueGauche;
+    QVBoxLayout*  layoutVueCentrale;
+    QVBoxLayout*  layoutVueDroite;
     QComboBox*    choixFiltrage;
     QTableWidget* tableauSallesEco;
+    QFrame*       cadreSalleSpecifique;
     QLabel*       nomSalle;
     QLabel*       superficieSalle;
     QLabel*       descriptionSalle;
@@ -72,9 +84,11 @@ class IHMEcoClassroom : public QWidget
     QLabel*       alertesSalle;
 
     void creerFenetrePrincipale();
+    void creerStructureFenetrePrincipale();
     void creerSelectionFiltrage();
     void creerTableauSallesEco();
     void creerSalleSpecifique();
+    void positionnerElementsFenetrePrincipale();
     void gererEvenements();
 
     void ajouterSalleEcoTableau(const SalleEco& salle);

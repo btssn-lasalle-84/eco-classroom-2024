@@ -222,54 +222,47 @@ void IHMEcoClassroom::afficherSalleSpecifique(SalleEco* salleEco)
 
 void IHMEcoClassroom::creerFenetrePrincipale()
 {
-    QVBoxLayout* layoutPrincipal       = new QVBoxLayout;
-    QVBoxLayout* layoutVueGenerale     = new QVBoxLayout;
-    QHBoxLayout* layoutVueFiltrage     = new QHBoxLayout;
-    QHBoxLayout* layoutVueTableau      = new QHBoxLayout;
-    QVBoxLayout* layoutVueSpecifique   = new QVBoxLayout;
-    QHBoxLayout* layoutVueInformations = new QHBoxLayout;
-    QHBoxLayout* layoutVueDescription  = new QHBoxLayout;
-    QHBoxLayout* layoutVueDonnees      = new QHBoxLayout;
-    QVBoxLayout* layoutVueGauche       = new QVBoxLayout;
-    QVBoxLayout* layoutVueCentrale     = new QVBoxLayout;
-    QVBoxLayout* layoutVueDroite       = new QVBoxLayout;
+    creerStructureFenetrePrincipale();
+    creerSelectionFiltrage();
+    creerTableauSallesEco();
+    creerSalleSpecifique();
+    positionnerElementsFenetrePrincipale();
+}
+
+void IHMEcoClassroom::creerStructureFenetrePrincipale()
+{
+    layoutPrincipal       = new QVBoxLayout;
+    layoutVueGenerale     = new QVBoxLayout;
+    layoutVueFiltrage     = new QHBoxLayout;
+    layoutVueTableau      = new QHBoxLayout;
+    cadreSalleSpecifique  = new QFrame(this);
+    layoutVueSpecifique   = new QVBoxLayout;
+    layoutVueInformations = new QHBoxLayout;
+    layoutVueDescription  = new QHBoxLayout;
+    layoutVueDonnees      = new QHBoxLayout;
+    layoutVueGauche       = new QVBoxLayout;
+    layoutVueCentrale     = new QVBoxLayout;
+    layoutVueDroite       = new QVBoxLayout;
+
     layoutVueGenerale->addLayout(layoutVueFiltrage);
     layoutVueGenerale->addLayout(layoutVueTableau);
     layoutVueSpecifique->addLayout(layoutVueInformations);
     layoutVueSpecifique->addLayout(layoutVueDescription);
+    layoutVueGauche->setAlignment(Qt::AlignCenter);
     layoutVueDonnees->addLayout(layoutVueGauche);
+    layoutVueCentrale->setAlignment(Qt::AlignCenter);
     layoutVueDonnees->addLayout(layoutVueCentrale);
+    layoutVueDroite->setAlignment(Qt::AlignCenter);
     layoutVueDonnees->addLayout(layoutVueDroite);
     layoutVueSpecifique->addLayout(layoutVueDonnees);
     layoutPrincipal->addLayout(layoutVueGenerale);
-    layoutPrincipal->addStretch();
-    layoutPrincipal->addLayout(layoutVueSpecifique);
-    layoutVueSpecifique->addStretch();
+    layoutPrincipal->addSpacing(50);
+    cadreSalleSpecifique->setFrameStyle(QFrame::Panel | QFrame::Raised);
+    cadreSalleSpecifique->setLineWidth(2);
+    cadreSalleSpecifique->setLayout(layoutVueSpecifique);
+    layoutPrincipal->addWidget(cadreSalleSpecifique);
 
     setLayout(layoutPrincipal);
-
-    layoutVueGauche->setAlignment(Qt::AlignCenter);
-
-    creerSelectionFiltrage();
-    creerTableauSallesEco();
-    creerSalleSpecifique();
-
-    layoutVueFiltrage->addWidget(choixFiltrage);
-    layoutVueFiltrage->addStretch();
-    layoutVueTableau->addWidget(tableauSallesEco);
-    layoutVueInformations->addWidget(nomSalle);
-    layoutVueFiltrage->addStretch();
-    layoutVueInformations->addWidget(superficieSalle);
-    layoutVueDescription->addWidget(descriptionSalle);
-    layoutVueGauche->addWidget(co2Salle);
-    layoutVueGauche->addWidget(presenceSalle);
-    layoutVueGauche->addWidget(qualiteAirSalle);
-    layoutVueCentrale->addWidget(temperatureSalle);
-    layoutVueCentrale->addWidget(lumieresSalle);
-    layoutVueCentrale->addWidget(confortSalle);
-    layoutVueDroite->addWidget(humiditeSalle);
-    layoutVueDroite->addWidget(fenetresSalle);
-    layoutVueDroite->addWidget(alertesSalle);
 }
 
 void IHMEcoClassroom::creerSelectionFiltrage()
@@ -311,22 +304,52 @@ void IHMEcoClassroom::creerTableauSallesEco()
 
 void IHMEcoClassroom::creerSalleSpecifique()
 {
-    nomSalle = new QLabel("---", this);
+    this->setStyleSheet("QLabel { font-family: 'Open Sans'; font-size: 24px; }");
+    nomSalle = new QLabel("---", cadreSalleSpecifique);
     // nomSalle->setObjectName("nomSalle"); // QSS : QLabel#nomSalle { }
     nomSalle->setStyleSheet("font-size: 50px; color: red; font: bold;");
-    superficieSalle = new QLabel(this);
-    superficieSalle->setStyleSheet("font-size: 20px;");
-    descriptionSalle = new QLabel(this);
-    descriptionSalle->setStyleSheet("font-size: 20px; font: bold;");
-    co2Salle         = new QLabel(this);
-    temperatureSalle = new QLabel(this);
-    humiditeSalle    = new QLabel(this);
-    presenceSalle    = new QLabel(this);
-    lumieresSalle    = new QLabel(this);
-    fenetresSalle    = new QLabel(this);
-    qualiteAirSalle  = new QLabel(this);
-    confortSalle     = new QLabel(this);
-    alertesSalle     = new QLabel(this);
+    superficieSalle = new QLabel(cadreSalleSpecifique);
+    superficieSalle->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    descriptionSalle = new QLabel(cadreSalleSpecifique);
+    descriptionSalle->setStyleSheet("font: bold;");
+    co2Salle = new QLabel(cadreSalleSpecifique);
+    co2Salle->setAlignment(Qt::AlignCenter);
+    temperatureSalle = new QLabel(cadreSalleSpecifique);
+    temperatureSalle->setAlignment(Qt::AlignCenter);
+    humiditeSalle = new QLabel(cadreSalleSpecifique);
+    humiditeSalle->setAlignment(Qt::AlignCenter);
+    presenceSalle = new QLabel(cadreSalleSpecifique);
+    presenceSalle->setAlignment(Qt::AlignCenter);
+    lumieresSalle = new QLabel(cadreSalleSpecifique);
+    lumieresSalle->setAlignment(Qt::AlignCenter);
+    fenetresSalle = new QLabel(cadreSalleSpecifique);
+    fenetresSalle->setAlignment(Qt::AlignCenter);
+    qualiteAirSalle = new QLabel(cadreSalleSpecifique);
+    qualiteAirSalle->setAlignment(Qt::AlignCenter);
+    confortSalle = new QLabel(cadreSalleSpecifique);
+    confortSalle->setAlignment(Qt::AlignCenter);
+    alertesSalle = new QLabel(cadreSalleSpecifique);
+    alertesSalle->setAlignment(Qt::AlignCenter);
+}
+
+void IHMEcoClassroom::positionnerElementsFenetrePrincipale()
+{
+    layoutVueFiltrage->addWidget(choixFiltrage);
+    layoutVueFiltrage->addStretch();
+    layoutVueTableau->addWidget(tableauSallesEco);
+    layoutVueInformations->addWidget(nomSalle);
+    layoutVueInformations->addStretch();
+    layoutVueInformations->addWidget(superficieSalle);
+    layoutVueDescription->addWidget(descriptionSalle);
+    layoutVueGauche->addWidget(co2Salle);
+    layoutVueGauche->addWidget(presenceSalle);
+    layoutVueGauche->addWidget(qualiteAirSalle);
+    layoutVueCentrale->addWidget(temperatureSalle);
+    layoutVueCentrale->addWidget(fenetresSalle);
+    layoutVueCentrale->addWidget(confortSalle);
+    layoutVueDroite->addWidget(humiditeSalle);
+    layoutVueDroite->addWidget(lumieresSalle);
+    layoutVueDroite->addWidget(alertesSalle);
 }
 
 void IHMEcoClassroom::gererEvenements()
