@@ -56,17 +56,44 @@ class IHMEcoClassroom : public QWidget
     DialogueMQTT*            dialogueMQTT;  //!< l'association vers la classe DialogueMQTT
     Filtrage                 filtrageCourant;
     // Widgets
-    QTableWidget* tableauSallesEco;
-    QComboBox*    choixFiltrage;
     QVBoxLayout*  layoutPrincipal;
+    QVBoxLayout*  layoutVueGenerale;
+    QHBoxLayout*  layoutVueFiltrage;
+    QHBoxLayout*  layoutVueTableau;
+    QVBoxLayout*  layoutVueSpecifique;
+    QHBoxLayout*  layoutVueInformations;
+    QHBoxLayout*  layoutVueDescription;
+    QHBoxLayout*  layoutVueDonnees;
+    QVBoxLayout*  layoutVueGauche;
+    QVBoxLayout*  layoutVueCentrale;
+    QVBoxLayout*  layoutVueDroite;
+    QComboBox*    choixFiltrage;
+    QTableWidget* tableauSallesEco;
+    QFrame*       cadreSalleSpecifique;
+    QLabel*       nomSalle;
+    QLabel*       superficieSalle;
+    QLabel*       descriptionSalle;
+    QLabel*       co2Salle;
+    QLabel*       temperatureSalle;
+    QLabel*       humiditeSalle;
+    QLabel*       presenceSalle;
+    QLabel*       lumieresSalle;
+    QLabel*       fenetresSalle;
+    QLabel*       qualiteAirSalle;
+    QLabel*       confortSalle;
+    QLabel*       alertesSalle;
 
-    void gererEvenements();
     void creerFenetrePrincipale();
-    void creerTableauSallesEco();
+    void creerStructureFenetrePrincipale();
     void creerSelectionFiltrage();
+    void creerTableauSallesEco();
+    void creerSalleSpecifique();
+    void positionnerElementsFenetrePrincipale();
+    void gererEvenements();
 
     void ajouterSalleEcoTableau(const SalleEco& salle);
     void afficherSallesEco();
+    void afficherSalleSpecifique(SalleEco* salleEco);
     void effacerTableauSallesEco();
 
     /**
@@ -100,7 +127,7 @@ class IHMEcoClassroom : public QWidget
     void afficherEtatPresence(QString nomSalleEco, QString etat);
 
     void afficherNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee);
-
+    void selectionnerSalleSpecifique(int ligne, int colonne);
     void selectionnerFiltrage(int indexFiltrage);
 };
 
