@@ -175,11 +175,9 @@ void IHMEcoClassroom::afficherIntervention(QString nomSalleEco, QString interven
     qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "intervention" << intervention;
     if(filtrageCourant == Interventions)
     {
-        // Rafraîchit le tableau
         effacerTableauSallesEco();
         afficherSallesEco();
     }
-    // recherche nomSalleEco dans le tableau des salles affichées
     for(int i = 0; i < tableauSallesEco->rowCount(); i++)
     {
         QTableWidgetItem* elementInterventions = tableauSallesEco->item(i, COLONNE_SALLE_NOM);
@@ -473,12 +471,15 @@ void IHMEcoClassroom::ajouterSalleEcoTableau(const SalleEco& salle)
                               COLONNE_SALLE_LUMIERES,
                               elementLumieres);
 
+    QString messageIntervention;
+    if (salle.getFiltreeIntervention())
+        messageIntervention = salle.getMessageIntervention();
+
     QTableWidgetItem* elementInterventions = new QTableWidgetItem();
     elementInterventions->setFlags(Qt::ItemIsEnabled);
     elementInterventions->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1,
-                              COLONNE_SALLE_INTERVENTIONS,
-                              elementInterventions);
+    elementInterventions->setText(messageIntervention);
+    tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1, COLONNE_SALLE_INTERVENTIONS, elementInterventions);
 }
 
 void IHMEcoClassroom::afficherSallesEco()

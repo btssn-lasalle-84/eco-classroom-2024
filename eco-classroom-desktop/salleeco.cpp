@@ -3,7 +3,7 @@
 #include "basededonnees.h"
 #include <QDebug>
 
-SalleEco::SalleEco(QObject* parent) : QObject(parent), baseDeDonnees(BaseDeDonnees::getInstance())
+SalleEco::SalleEco(QObject* parent) : QObject(parent), filtreeIntervention(false), baseDeDonnees(BaseDeDonnees::getInstance())
 {
     qDebug() << Q_FUNC_INFO;
     baseDeDonnees->connecter();
@@ -122,6 +122,15 @@ EtatLumieres SalleEco::getEtatLumieres() const
     return EtatLumieres();
 }
 
+bool SalleEco::getFiltreeIntervention() const
+{
+    return filtreeIntervention;
+}
+
+QString SalleEco::getMessageIntervention() const
+{
+    return messageIntervention;
+}
 bool SalleEco::estFiltre(IHMEcoClassroom::Filtrage filtrage)
 {
     switch(filtrage)
@@ -134,8 +143,14 @@ bool SalleEco::estFiltre(IHMEcoClassroom::Filtrage filtrage)
                      << !getEtatPresence().presence;
             return !getEtatPresence().presence;
         case IHMEcoClassroom::Interventions:
-            qDebug() << Q_FUNC_INFO << "nom" << nom << "filtrage Interventions";
-            // @todo faire le filtrage pour les interventions
+                qDebug() << Q_FUNC_INFO << "nom" << nom << "filtrage Interventions";
+                if (!mesuresCO2.isEmpty() && mesuresCO2.last().co2 > 1100 && !getEtatFenetres().fenetres)
+                {
+                    messageIntervention = "Ouvrir les fenêtres";
+                    filtreeIntervention = true;
+                    return true;
+                }
+                filtreeIntervention = false;
             return false;
         default:
             return true;
