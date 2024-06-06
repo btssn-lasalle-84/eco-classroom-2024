@@ -95,7 +95,7 @@ class SalleEco : public QObject
     QVector<EtatPresence>      etatsPresence;
     QVector<EtatFenetres>      etatsFenetres;
     QVector<EtatLumieres>      etatsLumieres;
-    bool                       filtree;
+    bool                       filtreeIntervention;
     BaseDeDonnees*             baseDeDonnees; //!< l'association vers la classe BaseDeDonnees
 
     void determinerIndiceQualiteAir();
@@ -128,7 +128,7 @@ class SalleEco : public QObject
     EtatPresence      getEtatPresence() const;
     EtatFenetres      getEtatFenetres() const;
     EtatLumieres      getEtatLumieres() const;
-    bool              getFiltree() const;
+    bool              getFiltreeIntervention() const;
     bool              estFiltre(IHMEcoClassroom::Filtrage filtrage);
 
     void setIDSalle(QString idSalle);

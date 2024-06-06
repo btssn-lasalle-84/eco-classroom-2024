@@ -4,7 +4,7 @@
 #include <QDebug>
 
 SalleEco::SalleEco(QObject* parent) :
-    QObject(parent), filtree(false), baseDeDonnees(BaseDeDonnees::getInstance())
+    QObject(parent), filtreeIntervention(false), baseDeDonnees(BaseDeDonnees::getInstance())
 {
     qDebug() << Q_FUNC_INFO;
     baseDeDonnees->connecter();
@@ -123,9 +123,9 @@ EtatLumieres SalleEco::getEtatLumieres() const
     return EtatLumieres();
 }
 
-bool SalleEco::getFiltree() const
+bool SalleEco::getFiltreeIntervention() const
 {
-    return filtree;
+    return filtreeIntervention;
 }
 
 bool SalleEco::estFiltre(IHMEcoClassroom::Filtrage filtrage)
@@ -145,10 +145,11 @@ bool SalleEco::estFiltre(IHMEcoClassroom::Filtrage filtrage)
             if(!mesuresCO2.isEmpty() && mesuresCO2.last().co2 > 1100 && !getEtatFenetres().fenetres)
             {
                 // @todo générer les message d'intervention
-                filtree = true;
+                filtreeIntervention = true;
                 return true;
             }
-            filtree = false;
+
+            filtreeIntervention = false;
             return false;
         default:
             return true;

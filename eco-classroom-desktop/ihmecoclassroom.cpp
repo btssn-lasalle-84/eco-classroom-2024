@@ -473,6 +473,9 @@ void IHMEcoClassroom::ajouterSalleEcoTableau(const SalleEco& salle)
                               COLONNE_SALLE_LUMIERES,
                               elementLumieres);
 
+    QString messageIntervention;
+    if(salle.getFiltreeIntervention())
+        messageIntervention = salle.getMessageIntervention();
     QTableWidgetItem* elementInterventions = new QTableWidgetItem();
     elementInterventions->setFlags(Qt::ItemIsEnabled);
     elementInterventions->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
