@@ -170,6 +170,29 @@ void IHMEcoClassroom::afficherEtatPresence(QString nomSalleEco, QString etat)
     }
 }
 
+void IHMEcoClassroom::afficherIntervention(QString nomSalleEco, QString intervention)
+{
+    qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "intervention" << intervention;
+    if(filtrageCourant == Interventions)
+    {
+        // Rafraîchit le tableau
+        effacerTableauSallesEco();
+        afficherSallesEco();
+    }
+    // recherche nomSalleEco dans le tableau des salles affichées
+    for(int i = 0; i < tableauSallesEco->rowCount(); i++)
+    {
+        QTableWidgetItem* elementInterventions = tableauSallesEco->item(i, COLONNE_SALLE_NOM);
+        if(elementInterventions->data(0).toString() == nomSalleEco)
+        {
+            QTableWidgetItem* element = tableauSallesEco->item(i, COLONNE_SALLE_INTERVENTIONS);
+            if(element != nullptr)
+                element->setData(Qt::DisplayRole, intervention);
+            return;
+        }
+    }
+}
+
 void IHMEcoClassroom::afficherNouvelleDonnee(QString nomSalleEco,
                                              QString typeDonnee,
                                              QString donnee)
@@ -449,6 +472,13 @@ void IHMEcoClassroom::ajouterSalleEcoTableau(const SalleEco& salle)
     tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1,
                               COLONNE_SALLE_LUMIERES,
                               elementLumieres);
+
+    QTableWidgetItem* elementInterventions = new QTableWidgetItem();
+    elementInterventions->setFlags(Qt::ItemIsEnabled);
+    elementInterventions->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1,
+                              COLONNE_SALLE_INTERVENTIONS,
+                              elementInterventions);
 }
 
 void IHMEcoClassroom::afficherSallesEco()

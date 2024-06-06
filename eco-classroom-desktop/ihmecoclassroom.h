@@ -108,6 +108,7 @@ class IHMEcoClassroom : public QWidget
         COLONNE_SALLE_CONFORT_THERMIQUE, //!< Le confort thermique
         COLONNE_SALLE_FENETRES,          //!< L'état des fenétres
         COLONNE_SALLE_LUMIERES,          //!< L'état des lumières
+        COLONNE_SALLE_INTERVENTIONS,
         NB_COLONNES_TABLEAU
     };
 
@@ -125,6 +126,8 @@ class IHMEcoClassroom : public QWidget
     void afficherEtatFenetre(QString nomSalleEco, QString etat);
     void afficherEtatLumiere(QString nomSalleEco, QString etat);
     void afficherEtatPresence(QString nomSalleEco, QString etat);
+
+    void afficherIntervention(QString nomSalleEco, QString intervention);
 
     void afficherNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee);
     void selectionnerSalleSpecifique(int ligne, int colonne);
