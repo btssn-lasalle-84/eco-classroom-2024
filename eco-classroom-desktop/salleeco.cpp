@@ -4,6 +4,7 @@
 #include <QDebug>
 
 SalleEco::SalleEco(QObject* parent) : QObject(parent), filtreeIntervention(false), baseDeDonnees(BaseDeDonnees::getInstance())
+
 {
     qDebug() << Q_FUNC_INFO;
     baseDeDonnees->connecter();
@@ -127,10 +128,12 @@ bool SalleEco::getFiltreeIntervention() const
     return filtreeIntervention;
 }
 
+
 QString SalleEco::getMessageIntervention() const
 {
     return messageIntervention;
 }
+
 bool SalleEco::estFiltre(IHMEcoClassroom::Filtrage filtrage)
 {
     switch(filtrage)
@@ -151,6 +154,16 @@ bool SalleEco::estFiltre(IHMEcoClassroom::Filtrage filtrage)
                     return true;
                 }
                 filtreeIntervention = false;
+            qDebug() << Q_FUNC_INFO << "nom" << nom << "filtrage Interventions";
+            // @todo faire le filtrage pour les interventions
+            if(!mesuresCO2.isEmpty() && mesuresCO2.last().co2 > 1100 && !getEtatFenetres().fenetres)
+            {
+                // @todo générer les message d'intervention
+                filtreeIntervention = true;
+                return true;
+            }
+
+            filtreeIntervention = false;
             return false;
         default:
             return true;
@@ -387,7 +400,7 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
         else if(typeDonnee == "lumiere")
         {
             int precedentEtat = (int)getEtatLumieres().lumieres;
-            int nouvelEtat = donnee.toInt();
+            int nouvelEtat    = donnee.toInt();
             ajouterEtatLumieres(nouvelEtat);
 
             requete = "INSERT INTO EtatLumieres (idSalle,etatLumieres,horodatage) VALUES (" +
@@ -419,7 +432,7 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
         else if(typeDonnee == "fenetre")
         {
             int precedentEtat = (int)getEtatFenetres().fenetres;
-            int nouvelEtat = donnee.toInt();
+            int nouvelEtat    = donnee.toInt();
             ajouterEtatFenetres(nouvelEtat);
 
             requete = "INSERT INTO EtatFenetres (idSalle,etatFenetres,horodatage) VALUES (" +

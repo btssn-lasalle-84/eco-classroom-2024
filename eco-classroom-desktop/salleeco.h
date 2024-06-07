@@ -131,6 +131,7 @@ class SalleEco : public QObject
     EtatLumieres      getEtatLumieres() const;
     bool getFiltreeIntervention() const;
     QString getMessageIntervention() const;
+    bool              getFiltreeIntervention() const;
     bool              estFiltre(IHMEcoClassroom::Filtrage filtrage);
 
     void setIDSalle(QString idSalle);

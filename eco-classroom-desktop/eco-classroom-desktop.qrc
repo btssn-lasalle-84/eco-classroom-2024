@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="">
+        <file>eco-classroom-desktop.qss</file>
+    </qresource>
+    <qresource prefix="">
+        <file>arrow-down.png</file>
+    </qresource>
+</RCC>

@@ -388,7 +388,7 @@ void IHMEcoClassroom::gererEvenements()
                 this,
                 SLOT(afficherIndiceQualiteAir(QString, QString)));
         connect(sallesEco.value(),
-                SIGNAL(nouvelIndiceTHI(QString, QString)),
+                SIGNAL(nouvelIn diceTHI(QString, QString)),
                 this,
                 SLOT(afficherIndiceTHI(QString, QString)));
         connect(sallesEco.value(),
@@ -472,9 +472,8 @@ void IHMEcoClassroom::ajouterSalleEcoTableau(const SalleEco& salle)
                               elementLumieres);
 
     QString messageIntervention;
-    if (salle.getFiltreeIntervention())
+    if(salle.getFiltreeIntervention())
         messageIntervention = salle.getMessageIntervention();
-
     QTableWidgetItem* elementInterventions = new QTableWidgetItem();
     elementInterventions->setFlags(Qt::ItemIsEnabled);
     elementInterventions->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
@@ -490,7 +489,9 @@ void IHMEcoClassroom::afficherSallesEco()
     {
         sallesEco.next();
         if(sallesEco.value()->estFiltre(filtrageCourant))
+        {
             ajouterSalleEcoTableau(*sallesEco.value());
+        }
     }
 }
 

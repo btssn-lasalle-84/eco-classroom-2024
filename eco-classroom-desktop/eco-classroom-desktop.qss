@@ -1,0 +1,95 @@
+/* Mode sombre */
+/*
+QWidget
+{
+    background-color: #555555;
+    color: #fffff8;
+}
+*/
+
+QComboBox
+{
+    selection-color: #c17c51;
+    selection-background-color: transparent;
+    background-color: transparent;
+    border: 2px solid grey;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 12px;
+    min-width: 10em;
+    color: #317AC1;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+/*QComboBox::item:hover
+{
+    background-color: wheat;
+}*/
+
+QComboBox::drop-down {
+    /*subcontrol-origin: padding;
+    subcontrol-position: top right;*/
+    width: 36px;
+    border-left-width: 2px;
+    border-left-color: darkgray;
+    border-left-style: solid;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+QComboBox::down-arrow {
+    image: url(":arrow-down.png");
+}
+
+QTableWidget
+{
+    font-size: 15px;
+    font-weight: 600;
+    color: #317AC1;
+    background-color: transparent;
+    gridline-color: #555555;
+    border: 2px outset #555555;
+}
+
+QTableWidget::item
+{
+    background-color: #D3D3D3;
+}
+
+QTableWidget::item:hover
+{
+    background-color: transparent;
+    border: 2px solid #bfcde4;
+}
+
+QTableView QHeaderView::section:horizontal
+{
+    font-size: 15px;
+    height: 48px;
+    border-style: none;
+    border-left: 1px solid #ecedef;
+    border-top: 1px solid #161618;
+    border-right: 1px solid #b1b1b5;
+    border-bottom: 1px solid #161618;
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #f4f4f6, stop:1 #ceced6);
+}
+
+QTableView QTableCornerButton::section {
+    background: red;
+    border: 2px outset red;
+}
+
+QLabel
+{
+    font-family: 'Open Sans';
+    font-size: 28px;
+    color: #317AC1;
+}
+
+QLabel#nomSalle
+{
+    font-size: 50px;
+    font: bold;
+    color: #AD956B;
+}

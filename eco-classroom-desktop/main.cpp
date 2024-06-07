@@ -18,6 +18,12 @@ int main(int argc, char* argv[])
     QApplication    a(argc, argv);
     IHMEcoClassroom ihm;
 
+    QFile fichier(":eco-classroom-desktop.qss");
+    if(fichier.open(QFile::ReadOnly))
+    {
+        QString feuilleStyle = QLatin1String(fichier.readAll());
+        a.setStyleSheet(feuilleStyle);
+    }
     ihm.show();
 
     return a.exec();
