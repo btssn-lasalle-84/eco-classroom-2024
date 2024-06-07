@@ -4,7 +4,8 @@
 #include <QDebug>
 
 SalleEco::SalleEco(QObject* parent) :
-    QObject(parent), filtreeIntervention(false), baseDeDonnees(BaseDeDonnees::getInstance())
+    QObject(parent), intervention(false), filtreeIntervention(false),
+    baseDeDonnees(BaseDeDonnees::getInstance())
 
 {
     qDebug() << Q_FUNC_INFO;
@@ -18,7 +19,7 @@ SalleEco::SalleEco(QString  idSalle,
                    QObject* parent) :
     QObject(parent),
     idSalle(idSalle), nom(nom), description(description), superficie(superficie),
-    baseDeDonnees(BaseDeDonnees::getInstance())
+    intervention(false), filtreeIntervention(false), baseDeDonnees(BaseDeDonnees::getInstance())
 {
     qDebug() << Q_FUNC_INFO << idSalle << nom << description << superficie;
     baseDeDonnees->connecter();
@@ -146,40 +147,10 @@ bool SalleEco::estFiltre(IHMEcoClassroom::Filtrage filtrage)
                      << !getEtatPresence().presence;
             return !getEtatPresence().presence;
         case IHMEcoClassroom::Interventions:
-            qDebug() << Q_FUNC_INFO << "nom" << nom << "filtrage Interventions";
-            if(!mesuresCO2.isEmpty() &&
-               mesuresCO2.last().co2 > SEUIL_QUALITE_AIR_MODERE_NIVEAU_MAXIMUM &&
-               !getEtatFenetres().fenetres)
-            {
-                messageIntervention = "Ouvrir les fenêtres";
-                filtreeIntervention = true;
-                return true;
-            }
-            if(!getEtatPresence().presence && getEtatLumieres().lumieres)
-            {
-                messageIntervention = "Eteindre les lumières";
-                filtreeIntervention = true;
-                return true;
-            }
-            if(!getEtatPresence().presence && getEtatFenetres().fenetres &&
-               mesuresCO2.last().co2 < SEUIL_QUALITE_AIR_MODERE_NIVEAU_MINIMUM &&
-               mesuresTemperature.last().temperature > SEUIL_CONFORT_THI_NEUTRE &&
-               mesuresTemperature.last().temperature < SEUIL_CONFORT_THI_LEGEREMENT_TIEDE)
-            {
-                messageIntervention = "Fermer les fenêtres";
-                filtreeIntervention = true;
-                return true;
-            }
-            if(!getEtatFenetres().fenetres &&
-               mesuresCO2.last().co2 > SEUIL_QUALITE_AIR_MODERE_NIVEAU_MAXIMUM)
-            {
-                messageIntervention = "Confinement";
-                filtreeIntervention = true;
-                return true;
-            }
-
-            filtreeIntervention = false;
-            return false;
+            filtreeIntervention = determinerIntervention();
+            qDebug() << Q_FUNC_INFO << "nom" << nom << "filtrage Interventions"
+                     << filtreeIntervention;
+            return filtreeIntervention;
         default:
             return true;
     }
@@ -463,8 +434,8 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
         else
         {
             qDebug() << Q_FUNC_INFO << "typeDonnee" << typeDonnee << "inconnu";
-            return;
         }
+        determinerIntervention();
     }
 }
 
@@ -711,4 +682,47 @@ void SalleEco::determinerIndiceTHI()
     {
         emit nouvelIndiceTHI(nom, SalleEco::getIndiceTHI(indiceTHI));
     }
+}
+
+bool SalleEco::determinerIntervention()
+{
+    bool interventionPrecedent = intervention;
+
+    intervention        = false;
+    messageIntervention = "";
+    if(!mesuresCO2.isEmpty() && mesuresCO2.last().co2 > SEUIL_QUALITE_AIR_MODERE_NIVEAU_MAXIMUM &&
+       !getEtatFenetres().fenetres)
+    {
+        messageIntervention = "Ouvrir les fenêtres";
+        intervention        = true;
+    }
+    if(!getEtatPresence().presence && getEtatLumieres().lumieres)
+    {
+        messageIntervention = "Eteindre les lumières";
+        intervention        = true;
+    }
+    if(!getEtatPresence().presence && getEtatFenetres().fenetres && !mesuresCO2.isEmpty() &&
+       mesuresCO2.last().co2 < SEUIL_QUALITE_AIR_MODERE_NIVEAU_MINIMUM &&
+       !mesuresTemperature.isEmpty() &&
+       mesuresTemperature.last().temperature > SEUIL_CONFORT_THI_NEUTRE &&
+       mesuresTemperature.last().temperature < SEUIL_CONFORT_THI_LEGEREMENT_TIEDE)
+    {
+        messageIntervention = "Fermer les fenêtres";
+        intervention        = true;
+    }
+    if(!getEtatFenetres().fenetres && !mesuresCO2.isEmpty() &&
+       mesuresCO2.last().co2 > SEUIL_QUALITE_AIR_MODERE_NIVEAU_MAXIMUM)
+    {
+        messageIntervention = "Confinement";
+        intervention        = true;
+    }
+
+    qDebug() << Q_FUNC_INFO << "intervention" << intervention << messageIntervention;
+
+    if(intervention != interventionPrecedent)
+    {
+        emit nouvelleIntervention(nom, messageIntervention);
+    }
+
+    return intervention;
 }
