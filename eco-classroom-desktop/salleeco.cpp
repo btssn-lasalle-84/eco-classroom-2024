@@ -3,7 +3,8 @@
 #include "basededonnees.h"
 #include <QDebug>
 
-SalleEco::SalleEco(QObject* parent) : QObject(parent), filtreeIntervention(false), baseDeDonnees(BaseDeDonnees::getInstance())
+SalleEco::SalleEco(QObject* parent) :
+    QObject(parent), filtreeIntervention(false), baseDeDonnees(BaseDeDonnees::getInstance())
 
 {
     qDebug() << Q_FUNC_INFO;
@@ -128,7 +129,6 @@ bool SalleEco::getFiltreeIntervention() const
     return filtreeIntervention;
 }
 
-
 QString SalleEco::getMessageIntervention() const
 {
     return messageIntervention;
@@ -146,19 +146,34 @@ bool SalleEco::estFiltre(IHMEcoClassroom::Filtrage filtrage)
                      << !getEtatPresence().presence;
             return !getEtatPresence().presence;
         case IHMEcoClassroom::Interventions:
-                qDebug() << Q_FUNC_INFO << "nom" << nom << "filtrage Interventions";
-                if (!mesuresCO2.isEmpty() && mesuresCO2.last().co2 > 1100 && !getEtatFenetres().fenetres)
-                {
-                    messageIntervention = "Ouvrir les fenêtres";
-                    filtreeIntervention = true;
-                    return true;
-                }
-                filtreeIntervention = false;
             qDebug() << Q_FUNC_INFO << "nom" << nom << "filtrage Interventions";
-            // @todo faire le filtrage pour les interventions
-            if(!mesuresCO2.isEmpty() && mesuresCO2.last().co2 > 1100 && !getEtatFenetres().fenetres)
+            if(!mesuresCO2.isEmpty() &&
+               mesuresCO2.last().co2 > SEUIL_QUALITE_AIR_MODERE_NIVEAU_MAXIMUM &&
+               !getEtatFenetres().fenetres)
             {
-                // @todo générer les message d'intervention
+                messageIntervention = "Ouvrir les fenêtres";
+                filtreeIntervention = true;
+                return true;
+            }
+            if(!getEtatPresence().presence && getEtatLumieres().lumieres)
+            {
+                messageIntervention = "Eteindre les lumières";
+                filtreeIntervention = true;
+                return true;
+            }
+            if(!getEtatPresence().presence && getEtatFenetres().fenetres &&
+               mesuresCO2.last().co2 < SEUIL_QUALITE_AIR_MODERE_NIVEAU_MINIMUM &&
+               mesuresTemperature.last().temperature > SEUIL_CONFORT_THI_NEUTRE &&
+               mesuresTemperature.last().temperature < SEUIL_CONFORT_THI_LEGEREMENT_TIEDE)
+            {
+                messageIntervention = "Fermer les fenêtres";
+                filtreeIntervention = true;
+                return true;
+            }
+            if(!getEtatFenetres().fenetres &&
+               mesuresCO2.last().co2 > SEUIL_QUALITE_AIR_MODERE_NIVEAU_MAXIMUM)
+            {
+                messageIntervention = "Confinement";
                 filtreeIntervention = true;
                 return true;
             }
@@ -448,6 +463,7 @@ void SalleEco::traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QS
         else
         {
             qDebug() << Q_FUNC_INFO << "typeDonnee" << typeDonnee << "inconnu";
+            return;
         }
     }
 }

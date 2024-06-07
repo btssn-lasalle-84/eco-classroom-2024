@@ -388,7 +388,7 @@ void IHMEcoClassroom::gererEvenements()
                 this,
                 SLOT(afficherIndiceQualiteAir(QString, QString)));
         connect(sallesEco.value(),
-                SIGNAL(nouvelIn diceTHI(QString, QString)),
+                SIGNAL(nouvelIndiceTHI(QString, QString)),
                 this,
                 SLOT(afficherIndiceTHI(QString, QString)));
         connect(sallesEco.value(),
@@ -478,7 +478,9 @@ void IHMEcoClassroom::ajouterSalleEcoTableau(const SalleEco& salle)
     elementInterventions->setFlags(Qt::ItemIsEnabled);
     elementInterventions->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     elementInterventions->setText(messageIntervention);
-    tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1, COLONNE_SALLE_INTERVENTIONS, elementInterventions);
+    tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1,
+                              COLONNE_SALLE_INTERVENTIONS,
+                              elementInterventions);
 }
 
 void IHMEcoClassroom::afficherSallesEco()
