@@ -1,7 +1,7 @@
 format 224
 "eco-classroom-desktop" // eco-classroom-desktop
-  revision 7
-  modified_by 2 "btssn2"
+  revision 8
+  modified_by 42 "tv"
   // class settings
   
   classdiagramsettings member_max_width 0 end
@@ -179,6 +179,63 @@ ${inlines}
 	mysql ""
       end
 
+      class 154666 "Filtrage"
+	visibility package stereotype "enum"
+	cpp_decl "${comment}enum ${name} {
+${items}};
+"
+	java_decl ""
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 163754 "Toutes"
+	  public type class_ref 154666 // Filtrage
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 163882 "Disponibles"
+	  public type class_ref 154666 // Filtrage
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 164010 "Interventions"
+	  public type class_ref 154666 // Filtrage
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 164138 "NbFiltres"
+	  public type class_ref 154666 // Filtrage
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+      end
+
       classrelation 135063 // salles (<unidirectional association>)
 	relation 135063 --->
 	  stereotype "QMap"
@@ -210,8 +267,17 @@ ${inlines}
 	  b parent class_ref 134530 // DialogueMQTT
       end
 
-      attribute 141866 "tableauSallesEco"
-	private explicit_type "QTableWidget"
+      classrelation 147754 // filtrageCourant (<directional composition>)
+	relation 147754 *-->
+	  a role_name "filtrageCourant" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 147754 // filtrageCourant (<directional composition>)
+	  b parent class_ref 154666 // Filtrage
+      end
+
+      attribute 164266 "layoutPrincipal"
+	private explicit_type "QVBoxLayout"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
 	java_decl ""
@@ -224,7 +290,335 @@ ${inlines}
 "
       end
 
-      operation 157994 "gererEvenements"
+      attribute 164394 "layoutVueGenerale"
+	private explicit_type "QVBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 164522 "layoutVueFiltrage"
+	private explicit_type "QHBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 164650 "layoutVueTableau"
+	private explicit_type "QHBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 164778 "layoutVueSpecifique"
+	private explicit_type "QVBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 164906 "layoutVueInformations"
+	private explicit_type "QHBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 165034 "layoutVueDescription"
+	private explicit_type "QHBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 165162 "layoutVueDonnees"
+	private explicit_type "QHBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 165290 "layoutVueGauche"
+	private explicit_type "QVBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 165418 "layoutVueCentrale"
+	private explicit_type "QVBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 165546 "layoutVueDroite"
+	private explicit_type "QVBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 165674 "choixFiltrage"
+	private explicit_type "QComboBox"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 141866 "tableauSallesEco"
+	private explicit_type "QTableWidget"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 165802 "cadreSalleSpecifique"
+	private explicit_type "QFrame"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 165930 "nomSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 166058 "superficieSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 166186 "descriptionSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 166314 "co2Salle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 166442 "temperatureSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 166570 "humiditeSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 166698 "presenceSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 166826 "lumieresSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 166954 "fenetresSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 167082 "qualiteAirSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 167210 "confortSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 167338 "alertesSalle"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 166698 "creerFenetrePrincipale"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 166826 "creerStructureFenetrePrincipale"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 166954 "creerSelectionFiltrage"
 	preserve_cpp_body_indent private explicit_return_type "void"
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
@@ -239,6 +633,48 @@ ${inlines}
       end
 
       operation 142762 "creerTableauSallesEco"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167082 "creerSalleSpecifique"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167210 "positionnerElementsFenetrePrincipale"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 157994 "gererEvenements"
 	preserve_cpp_body_indent private explicit_return_type "void"
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
@@ -274,6 +710,35 @@ ${body}}
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167338 "afficherSalleSpecifique"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param inout name "salleEco" type class_ref 135063 // SalleEco
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167466 "effacerTableauSallesEco"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
 "
 	
 	
@@ -359,6 +824,17 @@ ${items}};
 	  MysqlColumn
 	end
 
+	attribute 167466 "COLONNE_SALLE_INTERVENTIONS"
+	  public type class_ref 141226 // ColonneTableauSallesEco
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
 	attribute 142762 "NB_COLONNES_TABLEAU"
 	  public type class_ref 141226 // ColonneTableauSallesEco
 	  cpp_decl "  ${name}${value},${comment}"
@@ -392,26 +868,9 @@ ${items}};
 //fenêtre principale de l'application
 //
 
-//@file ihmecoclassroom.cpp
-//
-//@brief Définition de la classe IHMEcoClassroom
-//@author Thomas VIGNAL
-//@version 0.1
-//
-//
-//@brief Constructeur de la classe IHMEcoClassroom
-//
-//@fn IHMEcoClassroom::IHMEcoClassroom
-//@param parent L'adresse de l'objet parent, si nullptr IHMEcoClassroom sera la
-//fenêtre principale de l'application
-//
-
 ${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} :
     QWidget(parent), baseDeDonnees(BaseDeDonnees::getInstance()),
-    dialogueMQTT(new DialogueMQTT(this))
- :
-    QWidget(parent), baseDeDonnees(BaseDeDonnees::getInstance()),
-    dialogueMQTT(new DialogueMQTT(this))
+    dialogueMQTT(new DialogueMQTT(this)), filtrageCourant(Filtrage::Toutes)
 ${throw}{
 ${body}}
 "
@@ -427,9 +886,6 @@ ${body}}
 	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
 "
 	cpp_def "//@brief Destructeur de la classe IHMEcoClassroom
-//
-
-//@brief Destructeur de la classe IHMEcoClassroom
 //
 
 ${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
@@ -470,10 +926,6 @@ ${body}}
 //@brief Récupérer les salles depuis la base de données
 //
 
-//@fn IHMEcoClassroom::recupererSalles
-//@brief Récupérer les salles depuis la base de données
-//
-
 ${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
@@ -490,8 +942,8 @@ ${body}}
 	  param in name "designationIndice" explicit_type "QString"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -505,6 +957,118 @@ ${body}}
 	  param in name "nomSalleEco" explicit_type "QString"
 	  param in name "designationIndice" explicit_type "QString"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167594 "afficherEtatFenetre"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 2
+	  param in name "nomSalleEco" explicit_type "QString"
+	  param in name "etat" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167722 "afficherEtatLumiere"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 2
+	  param in name "nomSalleEco" explicit_type "QString"
+	  param in name "etat" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167850 "afficherEtatPresence"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 2
+	  param in name "nomSalleEco" explicit_type "QString"
+	  param in name "etat" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 167978 "afficherIntervention"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 2
+	  param in name "nomSalleEco" explicit_type "QString"
+	  param in name "intervention" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168106 "afficherNouvelleDonnee"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 3
+	  param in name "nomSalleEco" explicit_type "QString"
+	  param in name "typeDonnee" explicit_type "QString"
+	  param in name "donnee" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168234 "selectionnerSalleSpecifique"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 2
+	  param in name "ligne" explicit_type "int"
+	  param in name "colonne" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168362 "selectionnerFiltrage"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "indexFiltrage" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
   ${body}}
@@ -805,6 +1369,18 @@ ${items}};
 	MysqlColumn
       end
 
+      attribute 167594 "intervention"
+	private explicit_type "bool"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
       classrelation 128258 // mesuresCO2 (<directional composition>)
 	relation 128258 *-->
 	  stereotype "QVector"
@@ -813,26 +1389,6 @@ ${items}};
 "
 	    classrelation_ref 128258 // mesuresCO2 (<directional composition>)
 	  b parent class_ref 134914 // MesureCO2
-      end
-
-      classrelation 128386 // mesuresTemperature (<directional composition>)
-	relation 128386 *-->
-	  stereotype "QVector"
-	  a role_name "mesuresTemperature" private
-	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
-"
-	    classrelation_ref 128386 // mesuresTemperature (<directional composition>)
-	  b parent class_ref 136599 // MesureTemperature
-      end
-
-      classrelation 128514 // mesuresHumidite (<directional composition>)
-	relation 128514 *-->
-	  stereotype "QVector"
-	  a role_name "mesuresHumidite" private
-	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
-"
-	    classrelation_ref 128514 // mesuresHumidite (<directional composition>)
-	  b parent class_ref 136727 // MesureHumidite
       end
 
       classrelation 128642 // etatsPresence (<directional composition>)
@@ -845,24 +1401,28 @@ ${items}};
 	  b parent class_ref 134786 // EtatPresence
       end
 
-      classrelation 128770 // etatsFenetres (<directional composition>)
-	relation 128770 *-->
-	  stereotype "QVector"
-	  a role_name "etatsFenetres" private
-	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+      attribute 167722 "filtreeIntervention"
+	private explicit_type "bool"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
 "
-	    classrelation_ref 128770 // etatsFenetres (<directional composition>)
-	  b parent class_ref 137367 // EtatFenetres
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
       end
 
-      classrelation 128898 // etatsLumieres (<directional composition>)
-	relation 128898 *-->
-	  stereotype "QVector"
-	  a role_name "etatsLumieres" private
-	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+      attribute 167850 "messageIntervention"
+	private explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
 "
-	    classrelation_ref 128898 // etatsLumieres (<directional composition>)
-	  b parent class_ref 137239 // EtatLumieres
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
       end
 
       classrelation 141226 // baseDeDonnees (<unidirectional association>)
@@ -881,7 +1441,7 @@ ${items}};
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -895,7 +1455,7 @@ ${items}};
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -909,7 +1469,7 @@ ${items}};
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -923,7 +1483,7 @@ ${items}};
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -937,7 +1497,7 @@ ${items}};
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+${body}}
 "
 	
 	
@@ -947,6 +1507,20 @@ ${items}};
 
       operation 159018 "determinerIndiceTHI"
 	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168490 "determinerIntervention"
+	preserve_cpp_body_indent private explicit_return_type "bool"
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
@@ -966,8 +1540,10 @@ ${items}};
 	    defaultvalue "nullptr"
 	cpp_decl "    ${comment}${inline}explicit ${name}${(}${t0} * ${p0}${v0}${)}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} : QObject(parent), baseDeDonnees(BaseDeDonnees::getInstance())
- : QObject(parent), baseDeDonnees(BaseDeDonnees::getInstance())
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} :
+    QObject(parent), intervention(false), filtreeIntervention(false),
+    baseDeDonnees(BaseDeDonnees::getInstance())
+
 ${throw}{
 ${body}}
 "
@@ -991,11 +1567,7 @@ ${body}}
 	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} * ${p4}${)} :
     QObject(parent),
     idSalle(idSalle), nom(nom), description(description), superficie(superficie),
-    baseDeDonnees(BaseDeDonnees::getInstance())
- :
-    QObject(parent),
-    idSalle(idSalle), nom(nom), description(description), superficie(superficie),
-    baseDeDonnees(BaseDeDonnees::getInstance())
+    intervention(false), filtreeIntervention(false), baseDeDonnees(BaseDeDonnees::getInstance())
 ${throw}{
 ${body}}
 "
@@ -1208,6 +1780,49 @@ ${body}}
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168618 "getFiltreeIntervention"
+	preserve_cpp_body_indent const public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168746 "getMessageIntervention"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 168874 "estFiltre"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 1
+	  param in name "filtrage" type class_ref 154666 // Filtrage
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
 "
 	
 	
@@ -1431,8 +2046,8 @@ ${body}}
 	  param in name "indiceCO2" explicit_type "int"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -1446,8 +2061,8 @@ ${body}}
 	  param in name "indiceConfinement" explicit_type "int"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -1461,8 +2076,8 @@ ${body}}
 	  param in name "indiceIADI" explicit_type "int"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -1475,6 +2090,51 @@ ${body}}
 	nparams 1
 	  param in name "indiceTHI" explicit_type "int"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 169002 "getFenetres"
+	class_operation preserve_cpp_body_indent public explicit_return_type "QString"
+	nparams 1
+	  param in name "etatFenetre" type class_ref 137367 // EtatFenetres
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 169130 "getLumieres"
+	class_operation preserve_cpp_body_indent public explicit_return_type "QString"
+	nparams 1
+	  param in name "etatLumiere" type class_ref 137239 // EtatLumieres
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 169258 "getPresence"
+	class_operation preserve_cpp_body_indent public explicit_return_type "QString"
+	nparams 1
+	  param in name "etatPresence" type class_ref 134786 // EtatPresence
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
   ${body}}
@@ -1503,8 +2163,8 @@ ${body}}
 	  param in name "donnee" explicit_type "QString"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${const}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -1574,6 +2234,58 @@ ${body}}
 	
       end
 
+      operation 169386 "nouvelEtatFenetre"
+	public explicit_return_type "void"
+	nparams 2
+	  param in name "nomSalleEco" explicit_type "QString"
+	  param in name "etat" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 169514 "nouvelEtatLumiere"
+	public explicit_return_type "void"
+	nparams 2
+	  param in name "nomSalleEco" explicit_type "QString"
+	  param in name "etat" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 169642 "nouvelEtatPresence"
+	public explicit_return_type "void"
+	nparams 2
+	  param in name "nomSalleEco" explicit_type "QString"
+	  param in name "etat" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 169770 "nouvelleIntervention"
+	public explicit_return_type "void"
+	nparams 2
+	  param in name "nomSalleEco" explicit_type "QString"
+	  param in name "message" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
       classrelation 135426 // <composition>
 	relation 135426 *---
 	  a role_name "" private
@@ -1605,43 +2317,43 @@ ${body}}
 	  b parent class_ref 134914 // MesureCO2
       end
 
-      classrelation 135938 // <directional composition>
+      classrelation 135938 // mesuresHumidite (<directional composition>)
 	relation 135810 *-->
 	  stereotype "QVector"
-	  a role_name "" private
+	  a role_name "mesuresHumidite" private
 	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
 "
-	    classrelation_ref 135938 // <directional composition>
+	    classrelation_ref 135938 // mesuresHumidite (<directional composition>)
 	  b parent class_ref 148138 // MesureHumidite
       end
 
-      classrelation 136066 // <directional composition>
+      classrelation 136066 // mesurssTemperature (<directional composition>)
 	relation 135938 *-->
 	  stereotype "QVector"
-	  a role_name "" private
+	  a role_name "mesurssTemperature" private
 	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
 "
-	    classrelation_ref 136066 // <directional composition>
+	    classrelation_ref 136066 // mesurssTemperature (<directional composition>)
 	  b parent class_ref 148010 // MesureTemperature
       end
 
-      classrelation 136194 // <directional composition>
+      classrelation 136194 // etatsLumieres (<directional composition>)
 	relation 136066 *-->
 	  stereotype "QVector"
-	  a role_name "" private
+	  a role_name "etatsLumieres" private
 	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
 "
-	    classrelation_ref 136194 // <directional composition>
+	    classrelation_ref 136194 // etatsLumieres (<directional composition>)
 	  b parent class_ref 147882 // EtatLumieres
       end
 
-      classrelation 136322 // <directional composition>
+      classrelation 136322 // etatsFenetres (<directional composition>)
 	relation 136194 *-->
 	  stereotype "QVector"
-	  a role_name "" private
+	  a role_name "etatsFenetres" private
 	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
 "
-	    classrelation_ref 136322 // <directional composition>
+	    classrelation_ref 136322 // etatsFenetres (<directional composition>)
 	  b parent class_ref 147754 // EtatFenetres
       end
     end
@@ -2064,13 +2776,6 @@ ${inlines}
 //@return BaseDeDonnees l'instance unique
 //
 
-//@brief Définition méthode getInstance()
-//@fn BaseDeDonnees::getInstance
-//@details Permet l'instanciation d'un objet BaseDeDonnees en vérifiant qu'il
-//n'en existe pas déja un
-//@return BaseDeDonnees l'instance unique
-//
-
 ${inline}${typeprefix}${type} * ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
@@ -2086,12 +2791,6 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@brief Définition méthode detruireInstance()
-//@fn BaseDeDonnees::detruireInstance
-//@details Détruit l'instance de la BaseDeDonnees si elle existe et si personne
-//l'utilise
-//
-
-//@brief Définition méthode detruireInstance()
 //@fn BaseDeDonnees::detruireInstance
 //@details Détruit l'instance de la BaseDeDonnees si elle existe et si personne
 //l'utilise
@@ -2129,16 +2828,6 @@ ${body}}
 //@return bool
 //
 
-//@brief Définition méthode connecter()
-//@fn BaseDeDonnees::connecter
-//@details Permet de se connecter à la base de données
-//@param[in] nomBase le nom de la base de données MySQL
-//@param[in] username l'identifiant d'accès à la base de données
-//@param[in] password le mot de passe d'accès à la base de données
-//@param[in] serveur l'adresse du serveur MySQL
-//@return bool
-//
-
 ${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${const}${throw}${staticnl}{
 ${body}}
 "
@@ -2154,12 +2843,6 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@brief Retourne l'état de connexion à la base de données
-//@fn BaseDeDonnees::estConnectee
-//@details Retourne l'état de connexion à la base de données
-//@return bool true si la base de données est connectée sinon false
-//
-
-//@brief Retourne l'état de connexion à la base de données
 //@fn BaseDeDonnees::estConnectee
 //@details Retourne l'état de connexion à la base de données
 //@return bool true si la base de données est connectée sinon false
@@ -2181,13 +2864,6 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@brief Exécute une requête SQL de type UPDATE, INSERT et DELETE
-//@fn bool BaseDeDonnees::executer(QString requete)
-//@details Exécute une requête SQL de type UPDATE, INSERT et DELETE
-//@param[in] requete une requête SQL de type UPDATE, INSERT et DELETE
-//@return bool true si la requête a été exécutée avec succès sinon false
-//
-
-//@brief Exécute une requête SQL de type UPDATE, INSERT et DELETE
 //@fn bool BaseDeDonnees::executer(QString requete)
 //@details Exécute une requête SQL de type UPDATE, INSERT et DELETE
 //@param[in] requete une requête SQL de type UPDATE, INSERT et DELETE
@@ -2219,14 +2895,6 @@ ${body}}
 //@return bool true si la requête a été exécutée avec succès sinon false
 //
 
-//@brief Exécute une requête SQL de type SELECT et récupère un champ d'un seul
-//enregistrement
-//@fn bool BaseDeDonnees::recuperer(QString requete, QString &donnees)
-//@param[in] requete une requête SQL de type SELECT
-//@param[out] donnees le champ QString récupéré
-//@return bool true si la requête a été exécutée avec succès sinon false
-//
-
 ${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} & ${p1}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
@@ -2245,15 +2913,6 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} & ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@brief Exécute une requête SQL de type SELECT et récupère plusieurs champs
-//d'un seul enregistrement
-//@fn bool BaseDeDonnees::recuperer(QString requete, QStringList &donnees)
-//@param[in] requete une requête SQL de type SELECT
-//@param[out] donnees plusieurs champs d'un seul enregistrement dans un
-//QStringList
-//@return bool true si la requête a été exécutée avec succès sinon false
-//
-
-//@brief Exécute une requête SQL de type SELECT et récupère plusieurs champs
 //d'un seul enregistrement
 //@fn bool BaseDeDonnees::recuperer(QString requete, QStringList &donnees)
 //@param[in] requete une requête SQL de type SELECT
@@ -2288,15 +2947,6 @@ ${body}}
 //@return bool true si la requête a été exécutée avec succès sinon false
 //
 
-//@brief Exécute une requête SQL de type SELECT et récupère un seul champ de
-//plusieurs enregistrements
-//@fn bool BaseDeDonnees::recuperer(QString requete, QVector<QString> &donnees)
-//@param[in] requete une requête SQL de type SELECT
-//@param[out] donnees un seul champ de plusieurs enregistrements dans un
-//QVector de QString
-//@return bool true si la requête a été exécutée avec succès sinon false
-//
-
 ${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} & ${p1}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
@@ -2315,14 +2965,6 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} & ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@brief Exécute une requête SQL de type SELECT et récupère plusieurs champs de
-//plusieurs enregistrements
-//@param[in] requete une requête SQL de type SELECT
-//@param[out] donnees : plusieurs champs de plusieurs enregistrements dans un
-//QVector de QStringList
-//@return bool true si la requête a été exécutée avec succès sinon false
-//
-
-//@brief Exécute une requête SQL de type SELECT et récupère plusieurs champs de
 //plusieurs enregistrements
 //@param[in] requete une requête SQL de type SELECT
 //@param[out] donnees : plusieurs champs de plusieurs enregistrements dans un
@@ -2350,11 +2992,6 @@ ${body}}
 //@details Initialise le type MySQL pour la connexion à la base de données
 //
 
-//@brief Définition du constructeur par défaut de la classe BaseDeDonnees
-//@fn BaseDeDonnees::BaseDeDonnees
-//@details Initialise le type MySQL pour la connexion à la base de données
-//
-
 ${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
 ${body}}
 "
@@ -2371,11 +3008,6 @@ ${body}}
 	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
 "
 	cpp_def "//@brief Définition du destructeur de la classe BaseDeDonnees
-//@fn BaseDeDonnees::~BaseDeDonnees
-//@details Destructeur de la classe BaseDeDonnees
-//
-
-//@brief Définition du destructeur de la classe BaseDeDonnees
 //@fn BaseDeDonnees::~BaseDeDonnees
 //@details Destructeur de la classe BaseDeDonnees
 //
@@ -2529,7 +3161,6 @@ ${items}};
 	cpp_decl "    ${comment}${inline}explicit ${name}${(}${t0} * ${p0}${v0}${)}${volatile}${throw}${abstract};
 "
 	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} : QObject(parent), clientMQTT(new QMqttClient(this))
- : QObject(parent), clientMQTT(new QMqttClient(this))
 ${throw}{
 ${body}}
 "
@@ -3068,8 +3699,6 @@ ${members}
 ${namespace_end}"
       associated_elems
 	class_ref 134786 // EtatPresence
-	class_ref 147754 // EtatFenetres
-	class_ref 147882 // EtatLumieres
       end
     end
 
@@ -3116,8 +3745,6 @@ ${members}
 ${namespace_end}"
       associated_elems
 	class_ref 134914 // MesureCO2
-	class_ref 148010 // MesureTemperature
-	class_ref 148138 // MesureHumidite
       end
     end
 
@@ -3164,6 +3791,12 @@ int main(int argc, char* argv[])
     QApplication    a(argc, argv);
     IHMEcoClassroom ihm;
 
+    QFile fichier(\":eco-classroom-desktop.qss\");
+    if(fichier.open(QFile::ReadOnly))
+    {
+        QString feuilleStyle = QLatin1String(fichier.readAll());
+        a.setStyleSheet(feuilleStyle);
+    }
     ihm.show();
 
     return a.exec();
