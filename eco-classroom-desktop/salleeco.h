@@ -77,7 +77,6 @@ class SalleEco : public QObject
         CHAMP_NOM,
         CHAMP_DESCRIPTION,
         CHAMP_SUPERFICIE
-        // @todo à complèter
     };
 
   private:
@@ -89,6 +88,7 @@ class SalleEco : public QObject
     int                        indiceIADI;
     int                        indiceTHI;
     int                        indiceConfinement;
+    bool                       intervention;
     QVector<MesureCO2>         mesuresCO2;
     QVector<MesureTemperature> mesuresTemperature;
     QVector<MesureHumidite>    mesuresHumidite;
@@ -96,6 +96,7 @@ class SalleEco : public QObject
     QVector<EtatFenetres>      etatsFenetres;
     QVector<EtatLumieres>      etatsLumieres;
     bool                       filtreeIntervention;
+    QString                    messageIntervention;
     BaseDeDonnees*             baseDeDonnees; //!< l'association vers la classe BaseDeDonnees
 
     void determinerIndiceQualiteAir();
@@ -104,6 +105,7 @@ class SalleEco : public QObject
     void determinerIndiceConfinement();
     void determinerIndiceIADI();
     void determinerIndiceTHI();
+    bool determinerIntervention();
 
   public:
     explicit SalleEco(QObject* parent = nullptr);
@@ -129,6 +131,7 @@ class SalleEco : public QObject
     EtatFenetres      getEtatFenetres() const;
     EtatLumieres      getEtatLumieres() const;
     bool              getFiltreeIntervention() const;
+    QString           getMessageIntervention() const;
     bool              estFiltre(IHMEcoClassroom::Filtrage filtrage);
 
     void setIDSalle(QString idSalle);
@@ -165,6 +168,7 @@ class SalleEco : public QObject
     void nouvelEtatFenetre(QString nomSalleEco, QString etat);
     void nouvelEtatLumiere(QString nomSalleEco, QString etat);
     void nouvelEtatPresence(QString nomSalleEco, QString etat);
+    void nouvelleIntervention(QString nomSalleEco, QString message);
 };
 
 #endif // SALLEECO_H

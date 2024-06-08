@@ -1,7 +1,7 @@
 format 224
 "eco-classroom-desktop" // eco-classroom-desktop
-  revision 6
-  modified_by 42 "tv"
+  revision 7
+  modified_by 2 "btssn2"
   // class settings
   
   classdiagramsettings member_max_width 0 end
@@ -1574,6 +1574,76 @@ ${body}}
 	
       end
 
+      classrelation 135426 // <composition>
+	relation 135426 *---
+	  a role_name "" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 135426 // <composition>
+	  b role_name "" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 135554 // <composition>
+      end
+
+      classrelation 135682 // <directional composition>
+	relation 135554 *-->
+	  a role_name "" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 135682 // <directional composition>
+	  b parent class_ref 148010 // MesureTemperature
+      end
+
+      classrelation 135810 // <directional composition>
+	relation 135682 *-->
+	  stereotype "QVector"
+	  a role_name "" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 135810 // <directional composition>
+	  b parent class_ref 134914 // MesureCO2
+      end
+
+      classrelation 135938 // <directional composition>
+	relation 135810 *-->
+	  stereotype "QVector"
+	  a role_name "" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 135938 // <directional composition>
+	  b parent class_ref 148138 // MesureHumidite
+      end
+
+      classrelation 136066 // <directional composition>
+	relation 135938 *-->
+	  stereotype "QVector"
+	  a role_name "" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 136066 // <directional composition>
+	  b parent class_ref 148010 // MesureTemperature
+      end
+
+      classrelation 136194 // <directional composition>
+	relation 136066 *-->
+	  stereotype "QVector"
+	  a role_name "" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 136194 // <directional composition>
+	  b parent class_ref 147882 // EtatLumieres
+      end
+
+      classrelation 136322 // <directional composition>
+	relation 136194 *-->
+	  stereotype "QVector"
+	  a role_name "" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 136322 // <directional composition>
+	  b parent class_ref 147754 // EtatFenetres
+      end
     end
 
     class 135191 "typedef2"
@@ -1590,7 +1660,7 @@ ${body}}
     end
 
     classdiagram 134551 "diagramme de classes"
-      classdiagramsettings draw_all_relations yes show_members_full_definition yes show_members_visibility yes show_members_stereotype yes show_members_multiplicity yes show_members_initialization yes member_max_width 0 show_relation_visibility yes end
+      classdiagramsettings draw_all_relations no show_members_full_definition yes show_members_visibility yes show_members_stereotype yes show_members_multiplicity yes show_members_initialization yes member_max_width 0 show_relation_visibility yes end
       size A0
     end
 
@@ -2916,6 +2986,10 @@ ${inlines}
 	mysql_decl ""
 	MysqlColumn
       end
+
+      classrelation 135554 // <composition>
+	relation_ref 135426 // <composition>
+      end
     end
 
     class 148138 "MesureHumidite"
@@ -2968,7 +3042,6 @@ ${inlines}
 	MysqlColumn
       end
     end
-
   end
 
   deploymentview 134551 "eco-classroom-desktop"

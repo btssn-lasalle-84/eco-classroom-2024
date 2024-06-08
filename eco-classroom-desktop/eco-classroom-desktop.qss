@@ -93,3 +93,10 @@ QLabel#nomSalle
     font: bold;
     color: #AD956B;
 }
+
+QLabel#alertesSalle
+{
+    font-size: 50px;
+    font: bold;
+    color: red;
+}

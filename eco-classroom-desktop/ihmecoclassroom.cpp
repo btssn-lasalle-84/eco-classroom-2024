@@ -175,17 +175,17 @@ void IHMEcoClassroom::afficherIntervention(QString nomSalleEco, QString interven
     qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "intervention" << intervention;
     if(filtrageCourant == Interventions)
     {
-        // Rafraîchit le tableau
         effacerTableauSallesEco();
         afficherSallesEco();
     }
-    // recherche nomSalleEco dans le tableau des salles affichées
     for(int i = 0; i < tableauSallesEco->rowCount(); i++)
     {
         QTableWidgetItem* elementInterventions = tableauSallesEco->item(i, COLONNE_SALLE_NOM);
         if(elementInterventions->data(0).toString() == nomSalleEco)
         {
             QTableWidgetItem* element = tableauSallesEco->item(i, COLONNE_SALLE_INTERVENTIONS);
+            qDebug() << Q_FUNC_INFO << "nomSalleEco" << nomSalleEco << "ancienne intervention"
+                     << element->data(0).toString();
             if(element != nullptr)
                 element->setData(Qt::DisplayRole, intervention);
             return;
@@ -216,6 +216,7 @@ void IHMEcoClassroom::selectionnerFiltrage(int indexFiltrage)
 
 void IHMEcoClassroom::selectionnerSalleSpecifique(int ligne, int colonne)
 {
+    Q_UNUSED(colonne)
     QTableWidgetItem* salleEco    = tableauSallesEco->item(ligne, COLONNE_SALLE_NOM);
     QString           nomSalleEco = salleEco->data(0).toString();
 
@@ -240,7 +241,10 @@ void IHMEcoClassroom::afficherSalleSpecifique(SalleEco* salleEco)
     fenetresSalle->setText(salleEco->getFenetres(salleEco->getEtatFenetres()));
     qualiteAirSalle->setText(salleEco->getIndiceCO2(salleEco->getIndiceCO2()));
     confortSalle->setText(salleEco->getIndiceTHI(salleEco->getIndiceTHI()));
-    // @todo ajouter alertes
+    if(salleEco->getMesureCO2().co2 > SEUIL_MAX_CO2_CLASSE)
+        alertesSalle->setText("Alerte CO2 !");
+    else
+        alertesSalle->setText("");
 }
 
 void IHMEcoClassroom::creerFenetrePrincipale()
@@ -329,7 +333,7 @@ void IHMEcoClassroom::creerSalleSpecifique()
 {
     this->setStyleSheet("QLabel { font-family: 'Open Sans'; font-size: 24px; }");
     nomSalle = new QLabel("---", cadreSalleSpecifique);
-    // nomSalle->setObjectName("nomSalle"); // QSS : QLabel#nomSalle { }
+    // nomSalle->setObjectName("nomSalle");
     nomSalle->setStyleSheet("font-size: 50px; color: red; font: bold;");
     superficieSalle = new QLabel(cadreSalleSpecifique);
     superficieSalle->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -353,6 +357,7 @@ void IHMEcoClassroom::creerSalleSpecifique()
     confortSalle->setAlignment(Qt::AlignCenter);
     alertesSalle = new QLabel(cadreSalleSpecifique);
     alertesSalle->setAlignment(Qt::AlignCenter);
+    alertesSalle->setObjectName("alertesSalle");
 }
 
 void IHMEcoClassroom::positionnerElementsFenetrePrincipale()
@@ -390,7 +395,7 @@ void IHMEcoClassroom::gererEvenements()
                 this,
                 SLOT(afficherIndiceQualiteAir(QString, QString)));
         connect(sallesEco.value(),
-                SIGNAL(nouvelIn diceTHI(QString, QString)),
+                SIGNAL(nouvelIndiceTHI(QString, QString)),
                 this,
                 SLOT(afficherIndiceTHI(QString, QString)));
         connect(sallesEco.value(),
@@ -405,6 +410,10 @@ void IHMEcoClassroom::gererEvenements()
                 SIGNAL(nouvelEtatPresence(QString, QString)),
                 this,
                 SLOT(afficherEtatPresence(QString, QString)));
+        connect(sallesEco.value(),
+                SIGNAL(nouvelleIntervention(QString, QString)),
+                this,
+                SLOT(afficherIntervention(QString, QString)));
         connect(tableauSallesEco,
                 SIGNAL(cellClicked(int, int)),
                 this,
@@ -479,6 +488,7 @@ void IHMEcoClassroom::ajouterSalleEcoTableau(const SalleEco& salle)
     QTableWidgetItem* elementInterventions = new QTableWidgetItem();
     elementInterventions->setFlags(Qt::ItemIsEnabled);
     elementInterventions->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    elementInterventions->setText(messageIntervention);
     tableauSallesEco->setItem(tableauSallesEco->rowCount() - 1,
                               COLONNE_SALLE_INTERVENTIONS,
                               elementInterventions);
