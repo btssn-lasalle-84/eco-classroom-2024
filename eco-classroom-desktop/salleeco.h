@@ -5,6 +5,7 @@
 #include <QString>
 #include <QVector>
 
+#include "ihmecoclassroom.h"
 #include "mesures.h"
 #include "etats.h"
 
@@ -76,7 +77,6 @@ class SalleEco : public QObject
         CHAMP_NOM,
         CHAMP_DESCRIPTION,
         CHAMP_SUPERFICIE
-        // @todo à complèter
     };
 
   private:
@@ -88,12 +88,15 @@ class SalleEco : public QObject
     int                        indiceIADI;
     int                        indiceTHI;
     int                        indiceConfinement;
+    bool                       intervention;
     QVector<MesureCO2>         mesuresCO2;
     QVector<MesureTemperature> mesuresTemperature;
     QVector<MesureHumidite>    mesuresHumidite;
     QVector<EtatPresence>      etatsPresence;
     QVector<EtatFenetres>      etatsFenetres;
     QVector<EtatLumieres>      etatsLumieres;
+    bool                       filtreeIntervention;
+    QString                    messageIntervention;
     BaseDeDonnees*             baseDeDonnees; //!< l'association vers la classe BaseDeDonnees
 
     void determinerIndiceQualiteAir();
@@ -102,6 +105,7 @@ class SalleEco : public QObject
     void determinerIndiceConfinement();
     void determinerIndiceIADI();
     void determinerIndiceTHI();
+    bool determinerIntervention();
 
   public:
     explicit SalleEco(QObject* parent = nullptr);
@@ -126,6 +130,9 @@ class SalleEco : public QObject
     EtatPresence      getEtatPresence() const;
     EtatFenetres      getEtatFenetres() const;
     EtatLumieres      getEtatLumieres() const;
+    bool              getFiltreeIntervention() const;
+    QString           getMessageIntervention() const;
+    bool              estFiltre(IHMEcoClassroom::Filtrage filtrage);
 
     void setIDSalle(QString idSalle);
     void setNom(QString nom);
@@ -146,6 +153,9 @@ class SalleEco : public QObject
     static QString getIndiceConfinement(int indiceConfinement);
     static QString getIndiceIADI(int indiceIADI);
     static QString getIndiceTHI(int indiceTHI);
+    static QString getFenetres(const EtatFenetres& etatFenetre);
+    static QString getLumieres(const EtatLumieres& etatLumiere);
+    static QString getPresence(const EtatPresence& etatPresence);
 
   public slots:
     void traiterNouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee);
@@ -155,6 +165,10 @@ class SalleEco : public QObject
     void nouvelIndiceConfinement(QString nomSalleEco, QString designationIndice);
     void nouvelIndiceIADI(QString nomSalleEco, QString designationIndice);
     void nouvelIndiceTHI(QString nomSalleEco, QString designationIndice);
+    void nouvelEtatFenetre(QString nomSalleEco, QString etat);
+    void nouvelEtatLumiere(QString nomSalleEco, QString etat);
+    void nouvelEtatPresence(QString nomSalleEco, QString etat);
+    void nouvelleIntervention(QString nomSalleEco, QString message);
 };
 
 #endif // SALLEECO_H

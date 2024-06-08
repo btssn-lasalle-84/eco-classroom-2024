@@ -1,24 +1,23 @@
-![C++ Badge](https://img.shields.io/badge/C%2B%2B-00599C?logo=cplusplus&logoColor=fff&style=plastic) ![Android Badge](https://img.shields.io/badge/Android-3DDC84?logo=android&logoColor=fff&style=plastic)
-
-[![qt-build](https://github.com/btssn-lasalle-84/eco-classroom-2024/actions/workflows/make-qt.yml/badge.svg)](https://github.com/btssn-lasalle-84/eco-classroom-2024/actions/workflows/make-qt.yml) [![android-build](https://github.com/btssn-lasalle-84/eco-classroom-2024/actions/workflows/android-build.yml/badge.svg)](https://github.com/btssn-lasalle-84/eco-classroom-2024/actions/workflows/android-build.yml) [![pages-build-deployment](https://github.com/btssn-lasalle-84/eco-classroom-2024/actions/workflows/pages/pages-build-deployment/badge.svg?branch=develop)](https://github.com/btssn-lasalle-84/eco-classroom-2024/actions/workflows/pages/pages-build-deployment)
+![C++ Badge](https://img.shields.io/badge/C%2B%2B-00599C?logo=cplusplus&logoColor=fff&style=plastic)
 
 # Le projet eco-classroom 2024
 
 - [Le projet eco-classroom 2024](#le-projet-eco-classroom-2024)
   - [Présentation](#présentation)
   - [Fonctionnalités](#fonctionnalités)
-  - [Documentation du code](#documentation-du-code)
+  - [Recette](#recette)
+  - [Screenshots](#screenshots)
   - [Diagramme de classes](#diagramme-de-classes)
   - [Protocole](#protocole)
   - [Itérations](#itérations)
     - [Itération 1](#itération-1)
     - [Itération 2](#itération-2)
     - [Itération 3](#itération-3)
-  - [Screenshots](#screenshots)
   - [Historique des versions](#historique-des-versions)
+    - [Version 1.0](#version-10)
     - [Version 0.2](#version-02)
     - [Version 0.1](#version-01)
-  - [Recette](#recette)
+  - [Documentation du code](#documentation-du-code)
   - [Auteurs](#auteurs)
 
 ---
@@ -33,13 +32,26 @@ Les informations seront accessibles à partir d’une tablette ou d’une applic
 
 ![Diagramme cas d'utilisation](images/diagramme_cas_utilisations_v0.1.png)
 
-## Documentation du code
+## Recette
 
-https://btssn-lasalle-84.github.io/eco-classroom-2024/
+| Fonctionnalités                 | Oui | Non |
+|---------------------------------|:---:|:---:|
+| Affichage IHM principale        |  X  |     |
+| Récuperer l'ensemble des salles |  X  |     |
+| Calcul des indices              |  X  |     |
+| Afficher les indices            |  X  |     |
+| Dialoguer avec les modules      |  X  |     |
+| Afficher une salle              |     |  X  |
+| Filtrer les salles              |     |  X  |
+| Editer une salle                |     |  X  |
+
+## Screenshots
+
+![](images/ecoclassroom-v1.0.gif)
 
 ## Diagramme de classes
 
-![Diagramme de classes](images/diagramme_classes_v0.2.png)
+![Diagramme de classes](images/diagramme_classes_v1.0.png)
 
 ## Protocole
 
@@ -80,14 +92,17 @@ Exemple : La donnée `20.5` associée au topic `salles/B20/sonde/temperature` se
 
 - **Afficher une salle spécifiquement** : L'utilisateur peut visualiser une salle spécifique
 - **Filtrer les salles** : L'utilisateur peut effectuer une recherche avec des critères précis
-- **Editer une salle** : L'utilisateur peut éditer des informations sur une salle spécifique
 - **Signaler les dépassements de seuils** : L'application affiche les dépassements de seuils des salles
 
-## Screenshots
-
-![](images/screenshot_desktop_v0.2.png)
 
 ## Historique des versions
+
+### Version 1.0
+
+- Afficher les informations et mesures d'une salle en cliquant sur le tableau général
+- Filtrer des salles
+
+![Tickets jira 1.0](images/tickets_jira_v1.0.png)
 
 ### Version 0.2
 
@@ -103,18 +118,10 @@ Exemple : La donnée `20.5` associée au topic `salles/B20/sonde/temperature` se
 
 ![Tickets jira 0.1](images/tickets_jira_v0.1.png)
 
-## Recette
 
-| Fonctionnalités                 | Oui | Non |
-|---------------------------------|:---:|:---:|
-| Affichage IHM principale        |  X  |     |
-| Récuperer l'ensemble des salles |  X  |     |
-| Calcul des indices              |  X  |     |
-| Afficher les indices            |  X  |     |
-| Dialoguer avec les modules      |  X  |     |
-| Afficher une salle              |     |  X  |
-| Filtrer les salles              |     |  X  |
-| Editer une salle                |     |  X  |
+## Documentation du code
+
+https://btssn-lasalle-84.github.io/eco-classroom-2024/
 
 ## Auteurs
 

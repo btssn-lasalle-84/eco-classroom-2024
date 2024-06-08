@@ -1,6 +1,6 @@
 #include "basededonnees.h"
 #include <QDebug>
-#include <QMessageBox>
+#include <QtWidgets/QMessageBox>
 
 /**
  * @file BaseDeDonnees.cpp
