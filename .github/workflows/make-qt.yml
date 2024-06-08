@@ -20,6 +20,7 @@ jobs:
       - name: Install Qt
         run: |
           sudo apt-get update >/dev/null && sudo apt-get install -y --no-install-recommends qt5-qmake qt5-qmake-bin qtbase5-dev qtbase5-private-dev qtbase5-dev-tools libqt5sql5-mysql >/dev/null
+          qmake -v
 
       - name: Install QtMqtt
         run: |
