@@ -6,7 +6,7 @@
  * @brief Programme principal
  * @details Crée et affiche la fenêtre principale de l'application EcoClassroom
  * @author Thomas VIGNAL
- * @version 0.1
+ * @version 1.0
  *
  * @param argc
  * @param argv[]
