@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>eco-classroom:  Fichier source de dialoguemqtt.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">eco-classroom
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2024</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('dialoguemqtt_8cpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">dialoguemqtt.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="dialoguemqtt_8cpp.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="dialoguemqtt_8h.html">dialoguemqtt.h</a>&quot;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;QMessageBox&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;QDebug&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="class_dialogue_m_q_t_t.html#a1dfa7931b44435d38b69eb67dfd7fba8">    5</a></span>&#160;<a class="code" href="class_dialogue_m_q_t_t.html#a1dfa7931b44435d38b69eb67dfd7fba8">DialogueMQTT::DialogueMQTT</a>(<a class="code" href="class_q_object.html">QObject</a>* parent) : <a class="code" href="class_q_object.html">QObject</a>(parent), clientMQTT(new QMqttClient(this))</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;{</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <a class="code" href="class_dialogue_m_q_t_t.html#a81e48673681b5fca5d441441f2092e13">demarrer</a>();</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;}</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_dialogue_m_q_t_t.html#aa3086348278ac0116188995ac338437f">   11</a></span>&#160;<a class="code" href="class_dialogue_m_q_t_t.html#aa3086348278ac0116188995ac338437f">DialogueMQTT::~DialogueMQTT</a>()</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="class_dialogue_m_q_t_t.html#a2f42d32dde7478b4ccf952cc94b64340">arreter</a>();</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;}</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_dialogue_m_q_t_t.html#a81e48673681b5fca5d441441f2092e13">   17</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_dialogue_m_q_t_t.html#a81e48673681b5fca5d441441f2092e13">DialogueMQTT::demarrer</a>(QString hostname, quint16 port)</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;hostname&quot;</span> &lt;&lt; hostname &lt;&lt; <span class="stringliteral">&quot;port&quot;</span> &lt;&lt; port;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_dialogue_m_q_t_t.html#a4800cfa2c616fa3a749c003fa9ad1591">clientMQTT</a>-&gt;setHostname(hostname);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_dialogue_m_q_t_t.html#a4800cfa2c616fa3a749c003fa9ad1591">clientMQTT</a>-&gt;setPort(port);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    connect(<a class="code" href="class_dialogue_m_q_t_t.html#a4800cfa2c616fa3a749c003fa9ad1591">clientMQTT</a>, SIGNAL(connected()), <span class="keyword">this</span>, SLOT(<a class="code" href="class_dialogue_m_q_t_t.html#aa5db0b5e70c03d40bbc088d3276d8865">gererConnexion</a>()));</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    connect(<a class="code" href="class_dialogue_m_q_t_t.html#a4800cfa2c616fa3a749c003fa9ad1591">clientMQTT</a>, SIGNAL(disconnected()), <span class="keyword">this</span>, SLOT(<a class="code" href="class_dialogue_m_q_t_t.html#aa39b8423b6fe2266b7a4aeafd7bc025b">gererDeconnexion</a>()));</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    connect(<a class="code" href="class_dialogue_m_q_t_t.html#a4800cfa2c616fa3a749c003fa9ad1591">clientMQTT</a>,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            SIGNAL(messageReceived(<span class="keyword">const</span> QByteArray&amp;, <span class="keyword">const</span> QMqttTopicName&amp;)),</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="keyword">this</span>,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            SLOT(<a class="code" href="class_dialogue_m_q_t_t.html#a11bc55442256cff2ad4d0553a4fa1bc3">recevoirMessage</a>(<span class="keyword">const</span> QByteArray&amp;, <span class="keyword">const</span> QMqttTopicName&amp;)));</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    connect(<a class="code" href="class_dialogue_m_q_t_t.html#a4800cfa2c616fa3a749c003fa9ad1591">clientMQTT</a>, SIGNAL(errorChanged(ClientError)), <span class="keyword">this</span>, SLOT(<a class="code" href="class_dialogue_m_q_t_t.html#aa9d0721e23a46d5f36ef38a382bb83ec">gererErreur</a>()));</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="class_dialogue_m_q_t_t.html#a4800cfa2c616fa3a749c003fa9ad1591">clientMQTT</a>-&gt;connectToHost();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="class_dialogue_m_q_t_t.html#a2f42d32dde7478b4ccf952cc94b64340">   35</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_dialogue_m_q_t_t.html#a2f42d32dde7478b4ccf952cc94b64340">DialogueMQTT::arreter</a>()</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="class_dialogue_m_q_t_t.html#a4800cfa2c616fa3a749c003fa9ad1591">clientMQTT</a>-&gt;disconnectFromHost();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="class_dialogue_m_q_t_t.html#af1a339e698a4ffb22260f09b5a690549">   41</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_dialogue_m_q_t_t.html#af1a339e698a4ffb22260f09b5a690549">DialogueMQTT::abonner</a>(QString topic)</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;topic&quot;</span> &lt;&lt; topic;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    QMqttSubscription* subscription;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    subscription = <a class="code" href="class_dialogue_m_q_t_t.html#a4800cfa2c616fa3a749c003fa9ad1591">clientMQTT</a>-&gt;subscribe(topic);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">if</span>(!subscription)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        QMessageBox::critical(<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;Erreur&quot;</span>, <span class="stringliteral">&quot;Impossible de s&#39;abonner au broker MQTT !&quot;</span>);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="class_dialogue_m_q_t_t.html#a00c29d41f679e7c247539b17b5c76902">   55</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_dialogue_m_q_t_t.html#a00c29d41f679e7c247539b17b5c76902">DialogueMQTT::desabonner</a>(QString topic)</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;{</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;topic&quot;</span> &lt;&lt; topic;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="class_dialogue_m_q_t_t.html#a4800cfa2c616fa3a749c003fa9ad1591">clientMQTT</a>-&gt;unsubscribe(topic);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="class_dialogue_m_q_t_t.html#a11bc55442256cff2ad4d0553a4fa1bc3">   62</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_dialogue_m_q_t_t.html#a11bc55442256cff2ad4d0553a4fa1bc3">DialogueMQTT::recevoirMessage</a>(<span class="keyword">const</span> QByteArray&amp; message, <span class="keyword">const</span> QMqttTopicName&amp; topic)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;{</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; QDateTime::currentDateTime().toString() &lt;&lt; <span class="stringliteral">&quot;topic&quot;</span> &lt;&lt; topic.name()</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;             &lt;&lt; <span class="stringliteral">&quot;message&quot;</span> &lt;&lt; message;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="comment">// Les données des modules sonde et détection sont publiées sur le topic : salles/nom/type</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">// cf. l&#39;enum StructureTopic</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    QStringList champs = topic.name().split(<span class="charliteral">&#39;/&#39;</span>);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;champs&quot;</span> &lt;&lt; champs;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    emit <a class="code" href="class_dialogue_m_q_t_t.html#a4c1f7fb97365e9e401f10e953c8431ff">nouvelleDonnee</a>(champs.at(StructureTopic::NOM_SALLE_ECO),</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                        champs.at(StructureTopic::TYPE_DONNEE_MODULE),</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                        message);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="class_dialogue_m_q_t_t.html#aa5db0b5e70c03d40bbc088d3276d8865">   77</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_dialogue_m_q_t_t.html#aa5db0b5e70c03d40bbc088d3276d8865">DialogueMQTT::gererConnexion</a>()</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    emit <a class="code" href="class_dialogue_m_q_t_t.html#a087f7332d2d4146f669b50c91f7f1c5f">brokerConnecte</a>();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <a class="code" href="class_dialogue_m_q_t_t.html#af1a339e698a4ffb22260f09b5a690549">abonner</a>(<a class="code" href="dialoguemqtt_8h.html#ad0f21c8a162d0fcd5e86fc8ac404386c">RACINE_DES_TOPICS</a>);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="class_dialogue_m_q_t_t.html#aa39b8423b6fe2266b7a4aeafd7bc025b">   84</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_dialogue_m_q_t_t.html#aa39b8423b6fe2266b7a4aeafd7bc025b">DialogueMQTT::gererDeconnexion</a>()</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;{</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    emit <a class="code" href="class_dialogue_m_q_t_t.html#a6a6feeede4686f1f36b4dd645564630c">brokerDeconnecte</a>();</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <a class="code" href="class_dialogue_m_q_t_t.html#a00c29d41f679e7c247539b17b5c76902">desabonner</a>(<a class="code" href="dialoguemqtt_8h.html#ad0f21c8a162d0fcd5e86fc8ac404386c">RACINE_DES_TOPICS</a>);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;}</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="class_dialogue_m_q_t_t.html#aa9d0721e23a46d5f36ef38a382bb83ec">   91</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_dialogue_m_q_t_t.html#aa9d0721e23a46d5f36ef38a382bb83ec">DialogueMQTT::gererErreur</a>()</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;{</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="comment">// pour le débuggage</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;erreur&quot;</span> &lt;&lt; <a class="code" href="class_dialogue_m_q_t_t.html#a4800cfa2c616fa3a749c003fa9ad1591">clientMQTT</a>-&gt;error();</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;}</div>
+<div class="ttc" id="aclass_dialogue_m_q_t_t_html_a00c29d41f679e7c247539b17b5c76902"><div class="ttname"><a href="class_dialogue_m_q_t_t.html#a00c29d41f679e7c247539b17b5c76902">DialogueMQTT::desabonner</a></div><div class="ttdeci">void desabonner(QString topic)</div><div class="ttdef"><b>Definition:</b> <a href="dialoguemqtt_8cpp_source.html#l00055">dialoguemqtt.cpp:55</a></div></div>
+<div class="ttc" id="aclass_dialogue_m_q_t_t_html_a087f7332d2d4146f669b50c91f7f1c5f"><div class="ttname"><a href="class_dialogue_m_q_t_t.html#a087f7332d2d4146f669b50c91f7f1c5f">DialogueMQTT::brokerConnecte</a></div><div class="ttdeci">void brokerConnecte()</div></div>
+<div class="ttc" id="aclass_dialogue_m_q_t_t_html_a11bc55442256cff2ad4d0553a4fa1bc3"><div class="ttname"><a href="class_dialogue_m_q_t_t.html#a11bc55442256cff2ad4d0553a4fa1bc3">DialogueMQTT::recevoirMessage</a></div><div class="ttdeci">void recevoirMessage(const QByteArray &amp;message, const QMqttTopicName &amp;topic)</div><div class="ttdef"><b>Definition:</b> <a href="dialoguemqtt_8cpp_source.html#l00062">dialoguemqtt.cpp:62</a></div></div>
+<div class="ttc" id="aclass_dialogue_m_q_t_t_html_a1dfa7931b44435d38b69eb67dfd7fba8"><div class="ttname"><a href="class_dialogue_m_q_t_t.html#a1dfa7931b44435d38b69eb67dfd7fba8">DialogueMQTT::DialogueMQTT</a></div><div class="ttdeci">DialogueMQTT(QObject *parent=nullptr)</div><div class="ttdef"><b>Definition:</b> <a href="dialoguemqtt_8cpp_source.html#l00005">dialoguemqtt.cpp:5</a></div></div>
+<div class="ttc" id="aclass_dialogue_m_q_t_t_html_a2f42d32dde7478b4ccf952cc94b64340"><div class="ttname"><a href="class_dialogue_m_q_t_t.html#a2f42d32dde7478b4ccf952cc94b64340">DialogueMQTT::arreter</a></div><div class="ttdeci">void arreter()</div><div class="ttdef"><b>Definition:</b> <a href="dialoguemqtt_8cpp_source.html#l00035">dialoguemqtt.cpp:35</a></div></div>
+<div class="ttc" id="aclass_dialogue_m_q_t_t_html_a4800cfa2c616fa3a749c003fa9ad1591"><div class="ttname"><a href="class_dialogue_m_q_t_t.html#a4800cfa2c616fa3a749c003fa9ad1591">DialogueMQTT::clientMQTT</a></div><div class="ttdeci">QMqttClient * clientMQTT</div><div class="ttdoc">Le client MQTT.</div><div class="ttdef"><b>Definition:</b> <a href="dialoguemqtt_8h_source.html#l00043">dialoguemqtt.h:43</a></div></div>
+<div class="ttc" id="aclass_dialogue_m_q_t_t_html_a4c1f7fb97365e9e401f10e953c8431ff"><div class="ttname"><a href="class_dialogue_m_q_t_t.html#a4c1f7fb97365e9e401f10e953c8431ff">DialogueMQTT::nouvelleDonnee</a></div><div class="ttdeci">void nouvelleDonnee(QString nomSalleEco, QString typeDonnee, QString donnee)</div></div>
+<div class="ttc" id="aclass_dialogue_m_q_t_t_html_a6a6feeede4686f1f36b4dd645564630c"><div class="ttname"><a href="class_dialogue_m_q_t_t.html#a6a6feeede4686f1f36b4dd645564630c">DialogueMQTT::brokerDeconnecte</a></div><div class="ttdeci">void brokerDeconnecte()</div></div>
+<div class="ttc" id="aclass_dialogue_m_q_t_t_html_a81e48673681b5fca5d441441f2092e13"><div class="ttname"><a href="class_dialogue_m_q_t_t.html#a81e48673681b5fca5d441441f2092e13">DialogueMQTT::demarrer</a></div><div class="ttdeci">void demarrer(QString hostname=ADRESSE_IP_BROKER_MQTT, quint16 port=NUMERO_PORT_BROKER_MQTT)</div><div class="ttdef"><b>Definition:</b> <a href="dialoguemqtt_8cpp_source.html#l00017">dialoguemqtt.cpp:17</a></div></div>
+<div class="ttc" id="aclass_dialogue_m_q_t_t_html_aa3086348278ac0116188995ac338437f"><div class="ttname"><a href="class_dialogue_m_q_t_t.html#aa3086348278ac0116188995ac338437f">DialogueMQTT::~DialogueMQTT</a></div><div class="ttdeci">~DialogueMQTT()</div><div class="ttdef"><b>Definition:</b> <a href="dialoguemqtt_8cpp_source.html#l00011">dialoguemqtt.cpp:11</a></div></div>
+<div class="ttc" id="aclass_dialogue_m_q_t_t_html_aa39b8423b6fe2266b7a4aeafd7bc025b"><div class="ttname"><a href="class_dialogue_m_q_t_t.html#aa39b8423b6fe2266b7a4aeafd7bc025b">DialogueMQTT::gererDeconnexion</a></div><div class="ttdeci">void gererDeconnexion()</div><div class="ttdef"><b>Definition:</b> <a href="dialoguemqtt_8cpp_source.html#l00084">dialoguemqtt.cpp:84</a></div></div>
+<div class="ttc" id="aclass_dialogue_m_q_t_t_html_aa5db0b5e70c03d40bbc088d3276d8865"><div class="ttname"><a href="class_dialogue_m_q_t_t.html#aa5db0b5e70c03d40bbc088d3276d8865">DialogueMQTT::gererConnexion</a></div><div class="ttdeci">void gererConnexion()</div><div class="ttdef"><b>Definition:</b> <a href="dialoguemqtt_8cpp_source.html#l00077">dialoguemqtt.cpp:77</a></div></div>
+<div class="ttc" id="aclass_dialogue_m_q_t_t_html_aa9d0721e23a46d5f36ef38a382bb83ec"><div class="ttname"><a href="class_dialogue_m_q_t_t.html#aa9d0721e23a46d5f36ef38a382bb83ec">DialogueMQTT::gererErreur</a></div><div class="ttdeci">void gererErreur()</div><div class="ttdef"><b>Definition:</b> <a href="dialoguemqtt_8cpp_source.html#l00091">dialoguemqtt.cpp:91</a></div></div>
+<div class="ttc" id="aclass_dialogue_m_q_t_t_html_af1a339e698a4ffb22260f09b5a690549"><div class="ttname"><a href="class_dialogue_m_q_t_t.html#af1a339e698a4ffb22260f09b5a690549">DialogueMQTT::abonner</a></div><div class="ttdeci">void abonner(QString topic)</div><div class="ttdef"><b>Definition:</b> <a href="dialoguemqtt_8cpp_source.html#l00041">dialoguemqtt.cpp:41</a></div></div>
+<div class="ttc" id="aclass_q_object_html"><div class="ttname"><a href="class_q_object.html">QObject</a></div></div>
+<div class="ttc" id="adialoguemqtt_8h_html"><div class="ttname"><a href="dialoguemqtt_8h.html">dialoguemqtt.h</a></div></div>
+<div class="ttc" id="adialoguemqtt_8h_html_ad0f21c8a162d0fcd5e86fc8ac404386c"><div class="ttname"><a href="dialoguemqtt_8h.html#ad0f21c8a162d0fcd5e86fc8ac404386c">RACINE_DES_TOPICS</a></div><div class="ttdeci">#define RACINE_DES_TOPICS</div><div class="ttdoc">La racine des topics pour les abonnements (subscribe)</div><div class="ttdef"><b>Definition:</b> <a href="dialoguemqtt_8h_source.html#l00028">dialoguemqtt.h:28</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_bc7f3c21278e60441a8650a1b23bb4dd.html">eco-classroom-desktop</a></li><li class="navelem"><a class="el" href="dialoguemqtt_8cpp.html">dialoguemqtt.cpp</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Samedi 8 Juin 2024 20:35:14 pour eco-classroom par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>

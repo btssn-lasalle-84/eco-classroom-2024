@@ -9,7 +9,7 @@
  *
  * @brief Définition de la classe IHMEcoClassroom
  * @author Thomas VIGNAL
- * @version 0.1
+ * @version 1.0
  */
 
 /**

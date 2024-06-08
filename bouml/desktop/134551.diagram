@@ -15,169 +15,108 @@ classcanvas 128002 class_ref 134570 // BaseDeDonnees
     operation_ref 135594 // recuperer
     operation_ref 135722 // BaseDeDonnees
     operation_ref 135850 // ~BaseDeDonnees
-  xyz 768.5 368 3005
-end
-classcanvas 128023 class_ref 134679 // IHMEcoClassroom
-  classdiagramsettings member_max_width 0 end
-  xyz 28.4 296.2 2000
+  xyz 86.4 1367.7 3005
 end
 classcanvas 128170 class_ref 134914 // MesureCO2
   classdiagramsettings member_max_width 0 end
   color lightmagenta
-  xyz 216.6 844.9 3005
+  xyz 1637.2 1863.6 3005
 end
 classcanvas 128426 class_ref 134786 // EtatPresence
   classdiagramsettings member_max_width 0 end
   color lightmagenta
-  xyz 686.9 539.7 2006
-end
-classcanvas 128642 class_ref 134530 // DialogueMQTT
-  classdiagramsettings member_max_width 0 end
-  color darkgray
-  hidden_operations
-    operation_ref 128002 // DialogueMQTT
-    operation_ref 128130 // ~DialogueMQTT
-    operation_ref 128258 // demarrer
-    operation_ref 128386 // arreter
-    operation_ref 128514 // abonner
-    operation_ref 128642 // desabonner
-    operation_ref 128770 // recevoirMessage
-    operation_ref 128898 // gererConnexion
-    operation_ref 129026 // gererDeconnexion
-    operation_ref 129154 // gererErreur
-    operation_ref 129282 // brokerConnecte
-    operation_ref 129410 // brokerDeconnecte
-    operation_ref 129538 // nouvelleDonnee
-  xyz 228.6 183.2 3005
+  xyz 2174.8 1863.6 2006
 end
 classcanvas 128682 class_ref 148010 // MesureTemperature
   classdiagramsettings member_max_width 0 end
   color lightmagenta
-  xyz 9.2 844.9 2000
+  xyz 1371.8 1863.6 2000
 end
 classcanvas 128810 class_ref 148138 // MesureHumidite
   classdiagramsettings member_max_width 0 end
   color lightmagenta
-  xyz 424.6 844.9 2011
+  xyz 1906.4 1863.6 2011
 end
 classcanvas 128938 class_ref 147754 // EtatFenetres
   classdiagramsettings member_max_width 0 end
   color lightmagenta
-  xyz 686.9 787 2000
+  xyz 2712.2 1863.6 2000
 end
 classcanvas 129066 class_ref 147882 // EtatLumieres
   classdiagramsettings member_max_width 0 end
   color lightmagenta
-  xyz 686.9 665.6 2000
+  xyz 2443 1863.6 2000
 end
-classcanvas 129194 class_ref 135063 // SalleEco
+classcanvas 129834 class_ref 135063 // SalleEco
   classdiagramsettings member_max_width 0 end
   color lightmagenta
-  hidden_operations
-    operation_ref 158378 // determinerIndiceQualiteAir
-    operation_ref 158506 // calculProportionBasse
-    operation_ref 158634 // calculProportionHaute
-    operation_ref 158762 // determinerIndiceConfinement
-    operation_ref 158890 // determinerIndiceIADI
-    operation_ref 159018 // determinerIndiceTHI
-    operation_ref 135319 // SalleEco
-    operation_ref 136106 // SalleEco
-    operation_ref 136234 // ~SalleEco
-    operation_ref 149674 // getIdSalle
-    operation_ref 143146 // getNom
-    operation_ref 149802 // getDescription
-    operation_ref 149930 // getSuperficie
-    operation_ref 150058 // getIndiceCO2
-    operation_ref 150186 // getIndiceIADI
-    operation_ref 150314 // getIndiceTHI
-    operation_ref 150442 // getIndiceConfinement
-    operation_ref 129666 // getMesureCO2
-    operation_ref 129794 // getTemperature
-    operation_ref 129922 // getHumidite
-    operation_ref 130050 // getEtatPresence
-    operation_ref 130178 // getEtatFenetres
-    operation_ref 130306 // getEtatLumieres
-    operation_ref 150570 // setIDSalle
-    operation_ref 150698 // setNom
-    operation_ref 150826 // setDescription
-    operation_ref 150954 // setSuperficie
-    operation_ref 151082 // setIndiceCO2
-    operation_ref 151210 // setIndiceIADI
-    operation_ref 151338 // setIndiceTHI
-    operation_ref 151466 // setIndiceConfinement
-    operation_ref 130434 // ajouterMesureCO2
-    operation_ref 130562 // ajouterMesureTemperature
-    operation_ref 130690 // ajouterMesureHumidite
-    operation_ref 130818 // ajouterEtatPresence
-    operation_ref 130946 // ajouterEtatFenetres
-    operation_ref 131074 // ajouterEtatLumieres
-    operation_ref 159146 // getIndiceCO2
-    operation_ref 159274 // getIndiceConfinement
-    operation_ref 159402 // getIndiceIADI
-    operation_ref 159530 // getIndiceTHI
-    operation_ref 159658 // traiterNouvelleDonnee
-    operation_ref 159786 // nouvelIndiceQualiteAir
-    operation_ref 159914 // nouvelIndiceConfinement
-    operation_ref 160042 // nouvelIndiceIADI
-    operation_ref 160170 // nouvelIndiceTHI
-  xyz 248.9 610.1 3011
+  xyz 1598 20 3010
+end
+classcanvas 129962 class_ref 134679 // IHMEcoClassroom
+  classdiagramsettings member_max_width 0 end
+  xyz 27 219.6 2000
+end
+classcanvas 131370 class_ref 134530 // DialogueMQTT
+  classdiagramsettings member_max_width 0 end
+  color lightgray
+  xyz 142.9 1660.6 3016
 end
 relationcanvas 128130 relation_ref 134570 // <unidirectional association>
-  from ref 128002 z 3006 to point 722.3 374.4
-  line 128258 z 3006 to point 722.3 424.4
+  decenter_begin 169
+  from ref 128002 z 3006 to point 12 1378.2
+  line 128258 z 3006 to point 12 1399
   line 128386 z 3006 to ref 128002
-  role_a_pos 711 389 3000 no_role_b
+  role_a_pos 40 1407 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 128514 relation_ref 134698 // <unidirectional association>
-  from ref 128023 z 3006 to ref 128002
-  role_a_pos 642 378 3000 no_role_b
+relationcanvas 130090 relation_ref 134698 // <unidirectional association>
+  from ref 129962 z 3006 to ref 128002
+  role_a_pos 209 1339 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 128770 relation_ref 128130 // <unidirectional association>
-  from ref 128023 z 3006 to ref 128642
-  role_a_pos 337 239 3000 no_role_b
+relationcanvas 130346 relation_ref 135063 // <unidirectional association>
+  from ref 129962 z 3011 stereotype "<<QMap>>" xyz 1197 749 3000 to ref 129834
+  role_a_pos 1534 722 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 129450 relation_ref 128642 // <directional composition>
-  from ref 129194 z 3012 stereotype "<<QVector>>" xyz 508 643.5 3012 to ref 128426
-  role_a_pos 574 587 3000 no_role_b
+relationcanvas 130474 relation_ref 128258 // <directional composition>
+  from ref 129834 z 3011 stereotype "<<QVector>>" xyz 1782.5 1653.5 3000 to ref 128170
+  role_a_pos 1784 1834 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 129578 relation_ref 141226 // <unidirectional association>
-  from ref 129194 z 3012 to ref 128002
-  role_a_pos 654 407 3000 no_role_b
+relationcanvas 130602 relation_ref 128642 // <directional composition>
+  from ref 129834 z 3011 stereotype "<<QVector>>" xyz 2196.5 1653 3000 to ref 128426
+  role_a_pos 2290 1834 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 129706 relation_ref 135063 // <unidirectional association>
-  decenter_begin 520
-  from ref 128023 z 3012 stereotype "<<QMap>>" xyz 304.5 573 3012 to ref 129194
-  role_a_pos 348 587 3000 no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 129794 relation_ref 135682 // <directional composition>
-  from ref 129194 z 3012 stereotype "<<QVector>>" xyz 275.5 811 3000 to ref 128170
+relationcanvas 130730 relation_ref 135682 // <directional composition>
+  from ref 129834 z 3011 stereotype "<<QVector>>" xyz 1782.5 1653.5 3000 to ref 128170
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 129922 relation_ref 135810 // <directional composition>
-  from ref 129194 z 3012 stereotype "<<QVector>>" xyz 398.5 811.5 3000 to ref 128810
-  no_role_a no_role_b
+relationcanvas 130858 relation_ref 135810 // <directional composition>
+  from ref 129834 z 3011 stereotype "<<QVector>>" xyz 1988.5 1653.5 3000 to ref 128810
+  role_a_pos 2039 1834 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 130050 relation_ref 135938 // <directional composition>
-  from ref 129194 z 3012 stereotype "<<QVector>>" xyz 158.5 804.5 3000 to ref 128682
-  no_role_a no_role_b
+relationcanvas 130986 relation_ref 135938 // <directional composition>
+  from ref 129834 z 3011 stereotype "<<QVector>>" xyz 1575.5 1653 3000 to ref 128682
+  role_a_pos 1533 1834 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 130178 relation_ref 136066 // <directional composition>
-  from ref 129194 z 3012 stereotype "<<QVector>>" xyz 511 703.5 3000 to ref 129066
-  no_role_a no_role_b
+relationcanvas 131114 relation_ref 136066 // <directional composition>
+  from ref 129834 z 3011 stereotype "<<QVector>>" xyz 2402.5 1653.5 3000 to ref 129066
+  role_a_pos 2543 1834 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 130306 relation_ref 136194 // <directional composition>
-  from ref 129194 z 3012 stereotype "<<QVector>>" xyz 511.5 762.5 3000 to ref 128938
-  no_role_a no_role_b
+relationcanvas 131242 relation_ref 136194 // <directional composition>
+  from ref 129834 z 3011 stereotype "<<QVector>>" xyz 2610.5 1653 3000 to ref 128938
+  role_a_pos 2797 1834 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 131498 relation_ref 128130 // <unidirectional association>
+  from ref 129962 z 3017 to ref 131370
+  role_a_pos 654 1632 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 end
