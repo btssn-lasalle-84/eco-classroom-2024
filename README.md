@@ -1,4 +1,4 @@
-![C++ Badge](https://img.shields.io/badge/C%2B%2B-00599C?logo=cplusplus&logoColor=fff&style=plastic)
+![C++ Badge](https://img.shields.io/badge/C%2B%2B-00599C?logo=cplusplus&logoColor=fff&style=plastic) [Qt Badge](https://img.shields.io/badge/Qt-41CD52?logo=qt&logoColor=fff&style=plastic)
 
 # Le projet eco-classroom 2024
 
@@ -7,6 +7,7 @@
   - [Fonctionnalités](#fonctionnalités)
   - [Recette](#recette)
   - [Screenshots](#screenshots)
+  - [Diaporama de présentation](#diaporama-de-présentation)
   - [Diagramme de classes](#diagramme-de-classes)
   - [Protocole](#protocole)
   - [Itérations](#itérations)
@@ -48,6 +49,10 @@ Les informations seront accessibles à partir d’une tablette ou d’une applic
 ## Screenshots
 
 ![](images/ecoclassroom-v1.0.gif)
+
+## Diaporama de présentation
+
+- [Oral projet - VIGNAL.pptx](diaporamas/Oral%20projet%20-%20VIGNAL.pptx)
 
 ## Diagramme de classes
 
