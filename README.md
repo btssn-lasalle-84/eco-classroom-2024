@@ -1,4 +1,4 @@
-![C++ Badge](https://img.shields.io/badge/C%2B%2B-00599C?logo=cplusplus&logoColor=fff&style=plastic) [Qt Badge](https://img.shields.io/badge/Qt-41CD52?logo=qt&logoColor=fff&style=plastic)
+![C++ Badge](https://img.shields.io/badge/C%2B%2B-00599C?logo=cplusplus&logoColor=fff&style=plastic) ![Qt Badge](https://img.shields.io/badge/Qt-41CD52?logo=qt&logoColor=fff&style=plastic)
 
 # Le projet eco-classroom 2024
 
