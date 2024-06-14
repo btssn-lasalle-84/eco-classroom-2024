@@ -42,8 +42,8 @@ Les informations seront accessibles à partir d’une tablette ou d’une applic
 | Calcul des indices              |  X  |     |
 | Afficher les indices            |  X  |     |
 | Dialoguer avec les modules      |  X  |     |
-| Afficher une salle              |     |  X  |
-| Filtrer les salles              |     |  X  |
+| Afficher une salle              |  X  |     |
+| Filtrer les salles              |  X  |     |
 | Editer une salle                |     |  X  |
 
 ## Screenshots
